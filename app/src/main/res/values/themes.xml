@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.GitHubRepositories" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.GitHubRepositories" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/green</item>
+    </style>
 </resources>

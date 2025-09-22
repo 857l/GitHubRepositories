@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/authenticationContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="190dp"
+        android:layout_height="190dp"
+        android:layout_gravity="top|center"
+        android:contentDescription="@string/github_logo"
+        android:src="@drawable/github_logo" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:hint="@string/token_hint"
+        android:textColorHint="@color/darkened_white"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:backgroundTint="@color/grey" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sing_in"
+        android:textColor="@color/white"
+        android:background="@drawable/rounded_button"
+        android:layout_margin="16dp"/>
+
+</LinearLayout>
