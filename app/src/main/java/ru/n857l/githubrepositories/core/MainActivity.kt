@@ -13,15 +13,15 @@ import ru.n857l.githubrepositories.load.presentation.LoadScreen
 import ru.n857l.githubrepositories.load.presentation.NavigateToLoad
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), Navigate {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         androidx.core.view.WindowCompat.setDecorFitsSystemWindows(window, false)
-        setContentView(R.layout.fragment_authentication)
+        setContentView(R.layout.activity_main)
 
-        val rootView = findViewById<View>(R.id.authenticationContainer)
+        val rootView = findViewById<View>(R.id.container)
         ViewCompat.setOnApplyWindowInsetsListener(rootView) { view, insets ->
             val systemInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             view.updatePadding(
@@ -33,6 +33,8 @@ class MainActivity : AppCompatActivity() {
             WindowInsetsCompat.CONSUMED
         }
     }
+
+    override fun navigate(screen: Screen) = screen.show(R.id.container, supportFragmentManager)
 }
 
 interface Navigate : NavigateToAuthentication, NavigateToLoad {

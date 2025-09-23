@@ -18,13 +18,21 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
         android:layout_width="match_parent"
-        android:hint="@string/token_hint"
-        android:textColorHint="@color/darkened_white"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:backgroundTint="@color/grey" />
+        android:hint="@string/token_hint"
+        android:textColorHint="@color/darkened_white">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/edittext_line_color" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <Space
         android:layout_width="match_parent"
@@ -34,9 +42,9 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/sing_in"
-        android:textColor="@color/white"
+        android:layout_margin="16dp"
         android:background="@drawable/rounded_button"
-        android:layout_margin="16dp"/>
+        android:text="@string/sing_in"
+        android:textColor="@color/white" />
 
 </LinearLayout>
