@@ -1,4 +1,4 @@
-package ru.n857l.githubrepositories
+package ru.n857l.githubrepositories.core
 
 import android.os.Bundle
 import android.view.View
@@ -6,6 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
+import ru.n857l.githubrepositories.R
+import ru.n857l.githubrepositories.authentication.presentation.AuthenticationScreen
+import ru.n857l.githubrepositories.authentication.presentation.NavigateToAuthentication
+import ru.n857l.githubrepositories.load.presentation.LoadScreen
+import ru.n857l.githubrepositories.load.presentation.NavigateToLoad
 
 
 class MainActivity : AppCompatActivity() {
@@ -28,4 +33,13 @@ class MainActivity : AppCompatActivity() {
             WindowInsetsCompat.CONSUMED
         }
     }
+}
+
+interface Navigate : NavigateToAuthentication, NavigateToLoad {
+
+    fun navigate(screen: Screen)
+
+    override fun navigateToAuthentication() = navigate(AuthenticationScreen)
+
+    override fun navigateToLoad() = navigate(LoadScreen)
 }
