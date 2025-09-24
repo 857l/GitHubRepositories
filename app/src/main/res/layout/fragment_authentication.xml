@@ -18,25 +18,23 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <EditText
+    <ru.n857l.githubrepositories.views.input.TokenInputView
+        android:id="@+id/tokenInputLayout"
         android:layout_width="match_parent"
-        android:hint="@string/token_hint"
-        android:textColorHint="@color/darkened_white"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:backgroundTint="@color/grey" />
+        android:layout_height="wrap_content"/>
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3" />
 
-    <Button
+    <ru.n857l.githubrepositories.views.signInButton.VisibilityButton
+        android:id="@+id/singInButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/sing_in"
-        android:textColor="@color/white"
+        android:layout_margin="16dp"
         android:background="@drawable/rounded_button"
-        android:layout_margin="16dp"/>
+        android:text="@string/sing_in"
+        android:textColor="@color/white" />
 
 </LinearLayout>
