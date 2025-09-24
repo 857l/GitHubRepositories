@@ -18,20 +18,21 @@ class MainActivity : AppCompatActivity(), Navigate {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        androidx.core.view.WindowCompat.setDecorFitsSystemWindows(window, false)
+//        androidx.core.view.WindowCompat.setDecorFitsSystemWindows(window, false)
         setContentView(R.layout.activity_main)
 
-        val rootView = findViewById<View>(R.id.container)
-        ViewCompat.setOnApplyWindowInsetsListener(rootView) { view, insets ->
-            val systemInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            view.updatePadding(
-                left = systemInsets.left,
-                top = systemInsets.top,
-                right = systemInsets.right,
-                bottom = systemInsets.bottom
-            )
-            WindowInsetsCompat.CONSUMED
-        }
+//        val rootView = findViewById<View>(R.id.container)
+//        ViewCompat.setOnApplyWindowInsetsListener(rootView) { view, insets ->
+//            val systemInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+//            view.updatePadding(
+//                left = systemInsets.left,
+//                top = systemInsets.top,
+//                right = systemInsets.right,
+//                bottom = systemInsets.bottom
+//            )
+//            WindowInsetsCompat.CONSUMED
+//        }
+        navigateToAuthentication()
     }
 
     override fun navigate(screen: Screen) = screen.show(R.id.container, supportFragmentManager)

@@ -18,28 +18,18 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
+    <ru.n857l.githubrepositories.views.edit.TokenInputView
+        android:id="@+id/tokenInputLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:hint="@string/token_hint"
-        android:textColorHint="@color/darkened_white">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/edittext_line_color" />
-    </com.google.android.material.textfield.TextInputLayout>
-
+        android:layout_height="wrap_content"/>
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/singInButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"

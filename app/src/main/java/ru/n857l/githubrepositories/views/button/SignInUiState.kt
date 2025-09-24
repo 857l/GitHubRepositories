@@ -4,4 +4,15 @@ import java.io.Serializable
 
 interface SignInUiState : Serializable {
 
+    abstract class Abstract(
+
+    ) : SignInUiState{
+
+    }
+
+    object Progress
+
+    object Success
+
+    object Error
 }

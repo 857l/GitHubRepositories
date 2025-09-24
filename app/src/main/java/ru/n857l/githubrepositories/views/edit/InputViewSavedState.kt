@@ -5,18 +5,18 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.view.View
 
-class EditSavedState : View.BaseSavedState {
+class InputViewSavedState : View.BaseSavedState {
 
-    private lateinit var state : EditUiState
+    private lateinit var state : InputUiState
 
     constructor(superState: Parcelable) : super(superState)
 
     private constructor(parcelIn: Parcel) : super(parcelIn){
         state = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            parcelIn.readSerializable(EditUiState::class.java.classLoader, EditUiState::class.java) as EditUiState
+            parcelIn.readSerializable(InputUiState::class.java.classLoader, InputUiState::class.java) as InputUiState
         }
         else {
-            parcelIn.readSerializable() as EditUiState
+            parcelIn.readSerializable() as InputUiState
         }
     }
 
@@ -25,20 +25,20 @@ class EditSavedState : View.BaseSavedState {
         out.writeSerializable(state)
     }
 
-    fun restore(): EditUiState = state
+    fun restore(): InputUiState = state
 
-    fun save(uiState: EditUiState) {
+    fun save(uiState: InputUiState) {
         state = uiState
     }
 
     override fun describeContents() = 0
 
-    companion object CREATOR : Parcelable.Creator<EditSavedState> {
-        override fun createFromParcel(parcel: Parcel): EditSavedState =
-            EditSavedState(parcel)
+    companion object CREATOR : Parcelable.Creator<InputViewSavedState> {
+        override fun createFromParcel(parcel: Parcel): InputViewSavedState =
+            InputViewSavedState(parcel)
 
 
-        override fun newArray(size: Int): Array<EditSavedState?> =
+        override fun newArray(size: Int): Array<InputViewSavedState?> =
             arrayOfNulls(size)
 
     }
