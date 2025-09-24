@@ -24,7 +24,7 @@ interface InputUiState : Serializable {
         }
     }
 
-    object NotEnable : Abstract(false, false)
+    object NotEnabled : Abstract(false, false)
 
     object Correct : Abstract(false, true)
 

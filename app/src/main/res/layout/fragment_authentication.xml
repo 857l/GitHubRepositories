@@ -28,7 +28,7 @@
         android:layout_height="0dp"
         android:layout_weight="3" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <ru.n857l.githubrepositories.views.button.SignInButton
         android:id="@+id/singInButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
