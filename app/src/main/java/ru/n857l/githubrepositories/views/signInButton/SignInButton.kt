@@ -8,7 +8,7 @@ import ru.n857l.githubrepositories.views.visibility.UpdateVisibility
 import ru.n857l.githubrepositories.views.visibility.VisibilitySavedState
 import ru.n857l.githubrepositories.views.visibility.VisibilityUiState
 
-class VisibilityButton : AppCompatButton, UpdateVisibility {
+class SignInButton : AppCompatButton, UpdateVisibility {
 
     private lateinit var state: VisibilityUiState
 
@@ -43,4 +43,3 @@ class VisibilityButton : AppCompatButton, UpdateVisibility {
         this.visibility = visibility
     }
 }
-

@@ -39,9 +39,7 @@ class VisibilitySavedState : View.BaseSavedState {
         override fun createFromParcel(parcel: Parcel): VisibilitySavedState =
             VisibilitySavedState(parcel)
 
-
         override fun newArray(size: Int): Array<VisibilitySavedState?> =
             arrayOfNulls(size)
-
     }
 }

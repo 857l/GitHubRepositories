@@ -39,9 +39,7 @@ class InputViewSavedState : View.BaseSavedState {
         override fun createFromParcel(parcel: Parcel): InputViewSavedState =
             InputViewSavedState(parcel)
 
-
         override fun newArray(size: Int): Array<InputViewSavedState?> =
             arrayOfNulls(size)
-
     }
 }

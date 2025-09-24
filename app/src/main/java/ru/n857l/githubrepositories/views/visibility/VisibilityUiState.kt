@@ -1,6 +1,7 @@
 package ru.n857l.githubrepositories.views.visibility
 
 import android.view.View
+import ru.n857l.githubrepositories.views.UpdateUiState
 import java.io.Serializable
 
 interface VisibilityUiState : Serializable {
@@ -19,4 +20,8 @@ interface VisibilityUiState : Serializable {
     object Visible : Abstract(View.VISIBLE)
 
     object Gone : Abstract(View.GONE)
+}
+
+interface UpdateVisibility : UpdateUiState<VisibilityUiState> {
+    fun update(visible: Int)
 }
