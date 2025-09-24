@@ -1,4 +1,4 @@
-package ru.n857l.githubrepositories.views.edit
+package ru.n857l.githubrepositories.views.input
 
 import android.content.Context
 import android.os.Parcelable

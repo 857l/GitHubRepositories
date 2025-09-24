@@ -1,4 +1,4 @@
-package ru.n857l.githubrepositories.views.edit
+package ru.n857l.githubrepositories.views.input
 
 import android.os.Build
 import android.os.Parcel
@@ -7,15 +7,17 @@ import android.view.View
 
 class InputViewSavedState : View.BaseSavedState {
 
-    private lateinit var state : InputUiState
+    private lateinit var state: InputUiState
 
     constructor(superState: Parcelable) : super(superState)
 
-    private constructor(parcelIn: Parcel) : super(parcelIn){
+    private constructor(parcelIn: Parcel) : super(parcelIn) {
         state = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            parcelIn.readSerializable(InputUiState::class.java.classLoader, InputUiState::class.java) as InputUiState
-        }
-        else {
+            parcelIn.readSerializable(
+                InputUiState::class.java.classLoader,
+                InputUiState::class.java
+            ) as InputUiState
+        } else {
             parcelIn.readSerializable() as InputUiState
         }
     }
@@ -42,5 +44,4 @@ class InputViewSavedState : View.BaseSavedState {
             arrayOfNulls(size)
 
     }
-
 }

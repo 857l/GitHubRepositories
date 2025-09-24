@@ -18,7 +18,7 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <ru.n857l.githubrepositories.views.edit.TokenInputView
+    <ru.n857l.githubrepositories.views.input.TokenInputView
         android:id="@+id/tokenInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -28,7 +28,7 @@
         android:layout_height="0dp"
         android:layout_weight="3" />
 
-    <ru.n857l.githubrepositories.views.button.SignInButton
+    <ru.n857l.githubrepositories.views.signInButton.VisibilityButton
         android:id="@+id/singInButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
