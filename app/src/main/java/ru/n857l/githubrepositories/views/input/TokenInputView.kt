@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import ru.n857l.githubrepositories.databinding.InputBinding
+import ru.n857l.githubrepositories.views.UpdateUiState
 
 class TokenInputView : FrameLayout, UpdateInput {
 
@@ -51,9 +52,7 @@ class TokenInputView : FrameLayout, UpdateInput {
     }
 }
 
-interface UpdateInput {
-
-    fun update(uiState: InputUiState)
+interface UpdateInput : UpdateUiState<InputUiState> {
 
     fun update(userInput: String)
 

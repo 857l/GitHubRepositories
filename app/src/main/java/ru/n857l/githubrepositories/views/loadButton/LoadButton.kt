@@ -4,13 +4,11 @@ import android.content.Context
 import android.os.Parcelable
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatButton
-import ru.n857l.githubrepositories.views.visibility.VisibilitySavedState
-import ru.n857l.githubrepositories.views.visibility.UpdateVisibility
-import ru.n857l.githubrepositories.views.visibility.VisibilityUiState
+import ru.n857l.githubrepositories.views.UpdateUiState
 
-class LoadButton : AppCompatButton, UpdateVisibility {
+class LoadButton : AppCompatButton, UpdateLoadButton {
 
-    private lateinit var state: VisibilityUiState
+    private lateinit var state: LoadButtonUiState
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
@@ -22,24 +20,28 @@ class LoadButton : AppCompatButton, UpdateVisibility {
 
     override fun onSaveInstanceState(): Parcelable? {
         return super.onSaveInstanceState()?.let {
-            val savedState = VisibilitySavedState(it)
+            val savedState = LoadButtonSavedState(it)
             savedState.save(state)
             return savedState
         }
     }
 
     override fun onRestoreInstanceState(state: Parcelable?) {
-        val restoredState = state as VisibilitySavedState
+        val restoredState = state as LoadButtonSavedState
         super.onRestoreInstanceState(restoredState.superState)
         update(restoredState.restore())
     }
 
-    override fun update(visibility: Int) {
+    override fun update(enable: Boolean, visibility: Int) {
         this.visibility = visibility
     }
 
-    override fun update(state: VisibilityUiState) {
+    override fun update(state: LoadButtonUiState) {
         this.state = state
         this.state.update(this)
     }
+}
+
+interface UpdateLoadButton : UpdateUiState<LoadButtonUiState> {
+    fun update(enable: Boolean, visibility: Int)
 }

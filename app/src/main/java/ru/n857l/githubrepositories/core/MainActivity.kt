@@ -11,6 +11,8 @@ import ru.n857l.githubrepositories.authentication.presentation.AuthenticationScr
 import ru.n857l.githubrepositories.authentication.presentation.NavigateToAuthentication
 import ru.n857l.githubrepositories.load.presentation.LoadScreen
 import ru.n857l.githubrepositories.load.presentation.NavigateToLoad
+import ru.n857l.githubrepositories.repositories.presentation.NavigateToRepositories
+import ru.n857l.githubrepositories.repositories.presentation.RepositoriesScreen
 
 
 class MainActivity : AppCompatActivity(), Navigate {
@@ -38,11 +40,13 @@ class MainActivity : AppCompatActivity(), Navigate {
     override fun navigate(screen: Screen) = screen.show(R.id.container, supportFragmentManager)
 }
 
-interface Navigate : NavigateToAuthentication, NavigateToLoad {
+interface Navigate : NavigateToAuthentication, NavigateToLoad, NavigateToRepositories {
 
     fun navigate(screen: Screen)
 
     override fun navigateToAuthentication() = navigate(AuthenticationScreen)
 
     override fun navigateToLoad() = navigate(LoadScreen)
+
+    override fun navigateToRepositories() = navigate(RepositoriesScreen)
 }
