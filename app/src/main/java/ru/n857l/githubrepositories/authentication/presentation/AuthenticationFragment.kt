@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import ru.n857l.githubrepositories.core.App
 import ru.n857l.githubrepositories.databinding.FragmentAuthenticationBinding
+import ru.n857l.githubrepositories.repositories.presentation.NavigateToRepositories
 
 class AuthenticationFragment : Fragment() {
 
@@ -26,7 +28,15 @@ class AuthenticationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val viewModel: AuthenticationViewModel =
+            (requireActivity().application as App).authenticationViewModel
 
+        binding.singInButton.setOnClickListener {
+            (requireActivity() as NavigateToRepositories).navigateToRepositories()
+        }
+
+        val uiState = viewModel.init(savedInstanceState == null)
+        uiState.update(binding.tokenInputLayout, binding.singInButton, binding.progressBar)
     }
 
     override fun onDestroyView() {
