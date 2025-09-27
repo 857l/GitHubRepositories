@@ -1,6 +1,7 @@
 package ru.n857l.githubrepositories.authentication.presentation
 
 import ru.n857l.githubrepositories.repositories.presentation.NavigateToRepositories
+import ru.n857l.githubrepositories.views.input.InputUiState
 import ru.n857l.githubrepositories.views.input.UpdateInput
 import ru.n857l.githubrepositories.views.signInButton.SignInUiState
 import ru.n857l.githubrepositories.views.signInButton.UpdateSignInButton
@@ -30,6 +31,28 @@ interface AuthenticationUiState : Serializable {
             tokenInputView.update(inputText)
             singInButton.update(SignInUiState.Enabled)
             progressBar.update(VisibilityUiState.Gone)
+        }
+    }
+
+    object WrongInput : AuthenticationUiState {
+        override fun update(
+            tokenInputView: UpdateInput,
+            singInButton: UpdateSignInButton,
+            progressBar: UpdateVisibility
+        ) {
+            tokenInputView.update(InputUiState.Incorrect)
+            singInButton.update(SignInUiState.NotEnabled)
+        }
+    }
+
+    object SuccessInput : AuthenticationUiState {
+        override fun update(
+            tokenInputView: UpdateInput,
+            singInButton: UpdateSignInButton,
+            progressBar: UpdateVisibility
+        ) {
+            tokenInputView.update(InputUiState.Correct)
+            singInButton.update(SignInUiState.Enabled)
         }
     }
 
