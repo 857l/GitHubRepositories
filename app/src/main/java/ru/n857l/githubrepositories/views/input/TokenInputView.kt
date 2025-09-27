@@ -5,12 +5,13 @@ import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
+import ru.n857l.githubrepositories.authentication.presentation.AuthenticationUiState
 import ru.n857l.githubrepositories.databinding.InputBinding
 import ru.n857l.githubrepositories.views.UpdateUiState
 
 class TokenInputView : FrameLayout, UpdateInput {
 
-    private lateinit var state: InputUiState
+    private var state: InputUiState = InputUiState.Initial("")
     private val binding = InputBinding.inflate(LayoutInflater.from(context), this, true)
 
     constructor(context: Context) : super(context)
