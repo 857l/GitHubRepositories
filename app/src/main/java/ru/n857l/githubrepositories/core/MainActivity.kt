@@ -1,16 +1,11 @@
 package ru.n857l.githubrepositories.core
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updatePadding
 import ru.n857l.githubrepositories.R
 import ru.n857l.githubrepositories.authentication.presentation.AuthenticationScreen
 import ru.n857l.githubrepositories.authentication.presentation.NavigateToAuthentication
-import ru.n857l.githubrepositories.load.presentation.LoadScreen
-import ru.n857l.githubrepositories.load.presentation.NavigateToLoad
+
 import ru.n857l.githubrepositories.repositories.presentation.NavigateToRepositories
 import ru.n857l.githubrepositories.repositories.presentation.RepositoriesScreen
 
@@ -40,13 +35,11 @@ class MainActivity : AppCompatActivity(), Navigate {
     override fun navigate(screen: Screen) = screen.show(R.id.container, supportFragmentManager)
 }
 
-interface Navigate : NavigateToAuthentication, NavigateToLoad, NavigateToRepositories {
+interface Navigate : NavigateToAuthentication, NavigateToRepositories {
 
     fun navigate(screen: Screen)
 
     override fun navigateToAuthentication() = navigate(AuthenticationScreen)
-
-    override fun navigateToLoad() = navigate(LoadScreen)
 
     override fun navigateToRepositories() = navigate(RepositoriesScreen)
 }

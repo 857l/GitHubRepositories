@@ -28,5 +28,5 @@ interface InputUiState : Serializable {
 
     object Correct : Abstract(false, true)
 
-    object Incorrect : Abstract(true, false)
+    object Incorrect : Abstract(true, true)
 }

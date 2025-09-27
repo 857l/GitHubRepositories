@@ -1,14 +1,16 @@
-package ru.n857l.githubrepositories.views.loadButton
+package ru.n857l.githubrepositories.views.progress
 
 import android.content.Context
 import android.os.Parcelable
 import android.util.AttributeSet
-import androidx.appcompat.widget.AppCompatButton
-import ru.n857l.githubrepositories.views.UpdateUiState
+import android.widget.ProgressBar
+import ru.n857l.githubrepositories.views.visibility.UpdateVisibility
+import ru.n857l.githubrepositories.views.visibility.VisibilitySavedState
+import ru.n857l.githubrepositories.views.visibility.VisibilityUiState
 
-class LoadButton : AppCompatButton, UpdateLoadButton {
+class LoadView : ProgressBar, UpdateVisibility {
 
-    private lateinit var state: LoadButtonUiState
+    private lateinit var state: VisibilityUiState
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
@@ -20,28 +22,24 @@ class LoadButton : AppCompatButton, UpdateLoadButton {
 
     override fun onSaveInstanceState(): Parcelable? {
         return super.onSaveInstanceState()?.let {
-            val savedState = LoadButtonSavedState(it)
+            val savedState = VisibilitySavedState(it)
             savedState.save(state)
             return savedState
         }
     }
 
     override fun onRestoreInstanceState(state: Parcelable?) {
-        val restoredState = state as LoadButtonSavedState
+        val restoredState = state as VisibilitySavedState
         super.onRestoreInstanceState(restoredState.superState)
         update(restoredState.restore())
     }
 
-    override fun update(enable: Boolean, visibility: Int) {
+    override fun update(visibility: Int) {
         this.visibility = visibility
     }
 
-    override fun update(state: LoadButtonUiState) {
+    override fun update(state: VisibilityUiState) {
         this.state = state
-        this.state.update(this)
+        state.update(this)
     }
-}
-
-interface UpdateLoadButton : UpdateUiState<LoadButtonUiState> {
-    fun update(enable: Boolean, visibility: Int)
 }

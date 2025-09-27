@@ -2,15 +2,17 @@ package ru.n857l.githubrepositories.views.input
 
 import android.content.Context
 import android.os.Parcelable
+import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
+import ru.n857l.githubrepositories.R
 import ru.n857l.githubrepositories.databinding.InputBinding
 import ru.n857l.githubrepositories.views.UpdateUiState
 
 class TokenInputView : FrameLayout, UpdateInput {
 
-    private lateinit var state: InputUiState
+    private var state: InputUiState = InputUiState.Initial("")
     private val binding = InputBinding.inflate(LayoutInflater.from(context), this, true)
 
     constructor(context: Context) : super(context)
@@ -47,9 +49,19 @@ class TokenInputView : FrameLayout, UpdateInput {
     override fun update(errorVisible: Boolean, enabled: Boolean) = with(binding) {
         inputLayout.isErrorEnabled = errorVisible
         if (errorVisible)
-            inputLayout.error = "Invalid token"
+            inputLayout.error = inputLayout.context.getString(R.string.incorrect_message)
         inputLayout.isEnabled = enabled
     }
+
+    fun addTextChangedListener(textWatcher: TextWatcher) {
+        binding.tokenInputEditText.addTextChangedListener(textWatcher)
+    }
+
+    fun removeTextChangedListener(textWatcher: TextWatcher) {
+        binding.tokenInputEditText.removeTextChangedListener(textWatcher)
+    }
+
+    fun text(): String = binding.tokenInputEditText.text.toString()
 }
 
 interface UpdateInput : UpdateUiState<InputUiState> {

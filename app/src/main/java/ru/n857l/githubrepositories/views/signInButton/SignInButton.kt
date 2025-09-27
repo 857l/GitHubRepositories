@@ -4,13 +4,14 @@ import android.content.Context
 import android.os.Parcelable
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatButton
+import ru.n857l.githubrepositories.views.UpdateUiState
 import ru.n857l.githubrepositories.views.visibility.UpdateVisibility
 import ru.n857l.githubrepositories.views.visibility.VisibilitySavedState
 import ru.n857l.githubrepositories.views.visibility.VisibilityUiState
 
-class SignInButton : AppCompatButton, UpdateVisibility {
+class SignInButton : AppCompatButton, UpdateSignInButton {
 
-    private lateinit var state: VisibilityUiState
+    private lateinit var state: SignInUiState
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
@@ -22,24 +23,28 @@ class SignInButton : AppCompatButton, UpdateVisibility {
 
     override fun onSaveInstanceState(): Parcelable? {
         return super.onSaveInstanceState()?.let {
-            val savedState = VisibilitySavedState(it)
+            val savedState = SingInButtonSavedState(it)
             savedState.save(state)
             return savedState
         }
     }
 
     override fun onRestoreInstanceState(state: Parcelable?) {
-        val restoredState = state as VisibilitySavedState
+        val restoredState = state as SingInButtonSavedState
         super.onRestoreInstanceState(restoredState.superState)
         update(restoredState.restore())
     }
 
-    override fun update(uiState: VisibilityUiState) {
+    override fun update(uiState: SignInUiState) {
         state = uiState
         state.update(this)
     }
 
-    override fun update(visibility: Int) {
-        this.visibility = visibility
+    override fun update(enable: Boolean) {
+        isEnabled = enable
     }
+}
+
+interface UpdateSignInButton : UpdateUiState<SignInUiState> {
+    fun update(enable: Boolean)
 }
