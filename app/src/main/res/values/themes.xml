@@ -2,6 +2,6 @@
 <resources>
 
     <style name="Theme.GitHubRepositories" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/green</item>
+        <item name="colorPrimary">@color/dark_grey</item>
     </style>
 </resources>
