@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.GitHubRepositories" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/green</item>
+    <style name="Theme.GitHubRepositories" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/dark_grey</item>
+        <item name="colorPrimaryVariant">@color/dark_grey</item>
+        <item name="colorOnPrimary">@color/dark_grey</item>
+        <item name="colorSecondary">@color/dark_grey</item>
+        <item name="colorSecondaryVariant">@color/dark_grey</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:navigationBarColor">@color/black</item>
     </style>
 </resources>
