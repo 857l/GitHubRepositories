@@ -8,8 +8,9 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.MenuProvider
-import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import ru.n857l.githubrepositories.R
 import ru.n857l.githubrepositories.authentication.presentation.NavigateToAuthentication
 import ru.n857l.githubrepositories.core.AbstractFragment
@@ -25,15 +26,20 @@ class RepositoriesFragment : AbstractFragment<FragmentRepositoriesBinding>(), Me
     ): FragmentRepositoriesBinding =
         FragmentRepositoriesBinding.inflate(inflater, container, false)
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
         requireActivity().addMenuProvider(this, viewLifecycleOwner)
 
         val list = ArrayList<RepositoryItem>()
         list.add(RepositoryItem("moko-web3", "Kotlin", "Ethereum Web3 implementation"))
+        list.add(RepositoryItem("moko-web3", "Kotlin", "Ethereum Web3 implementation"))
         itemsAdapter.update(list)
         binding.repositoriesList.adapter = itemsAdapter
+        val divider = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+        ContextCompat.getDrawable(requireContext(), R.drawable.divider)?.let {
+            divider.setDrawable(it)
+        }
+        binding.repositoriesList.addItemDecoration(divider)
     }
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {

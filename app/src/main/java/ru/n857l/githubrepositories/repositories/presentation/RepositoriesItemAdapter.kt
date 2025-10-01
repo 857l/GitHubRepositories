@@ -11,7 +11,12 @@ class RepositoriesItemAdapter : RecyclerView.Adapter<RepositoriesItemViewHolder>
     private val itemList = ArrayList<RepositoryItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoriesItemViewHolder {
-        return RepositoriesItemViewHolder(ItemRepositoryBinding.inflate(LayoutInflater.from(parent.context)))
+        val binding = ItemRepositoryBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return RepositoriesItemViewHolder(binding)
     }
 
     override fun getItemCount() = itemList.size
