@@ -12,23 +12,19 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import ru.n857l.githubrepositories.R
 import ru.n857l.githubrepositories.authentication.presentation.NavigateToAuthentication
+import ru.n857l.githubrepositories.core.AbstractFragment
 import ru.n857l.githubrepositories.databinding.FragmentRepositoriesBinding
 
-class RepositoriesFragment : Fragment(), MenuProvider {
+class RepositoriesFragment : AbstractFragment<FragmentRepositoriesBinding>(), MenuProvider {
 
-    private val itemsAdapter = ItemAdapter()
-    private var _binding: FragmentRepositoriesBinding? = null
-    private val binding
-        get() = _binding!!
+    private val itemsAdapter = RepositoriesItemAdapter()
 
-    override fun onCreateView(
+    override fun bind(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentRepositoriesBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+        container: ViewGroup?
+    ): FragmentRepositoriesBinding =
+        FragmentRepositoriesBinding.inflate(inflater, container, false)
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
@@ -45,16 +41,7 @@ class RepositoriesFragment : Fragment(), MenuProvider {
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-        when (menuItem.itemId){
-            R.id.action_logout -> {
-                (requireActivity() as NavigateToAuthentication).navigateToAuthentication()
-            }
-        }
+        if (menuItem.itemId == R.id.action_logout) (requireActivity() as NavigateToAuthentication).navigateToAuthentication()
         return true
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

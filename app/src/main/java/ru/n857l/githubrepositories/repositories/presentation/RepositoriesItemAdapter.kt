@@ -6,17 +6,17 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import ru.n857l.githubrepositories.databinding.ItemRepositoryBinding
 
-class ItemAdapter : RecyclerView.Adapter<ItemViewHolder>() {
+class RepositoriesItemAdapter : RecyclerView.Adapter<RepositoriesItemViewHolder>() {
 
     private val itemList = ArrayList<RepositoryItem>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        return ItemViewHolder(ItemRepositoryBinding.inflate(LayoutInflater.from(parent.context)))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoriesItemViewHolder {
+        return RepositoriesItemViewHolder(ItemRepositoryBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun getItemCount() = itemList.size
 
-    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RepositoriesItemViewHolder, position: Int) {
         holder.bind(itemList[position])
     }
 
@@ -27,7 +27,7 @@ class ItemAdapter : RecyclerView.Adapter<ItemViewHolder>() {
     }
 }
 
-class ItemViewHolder(private val binding: ItemRepositoryBinding) : ViewHolder(binding.root) {
+class RepositoriesItemViewHolder(private val binding: ItemRepositoryBinding) : ViewHolder(binding.root) {
 
     fun bind(repositoryItem: RepositoryItem) {
         binding.repositoryName.text = repositoryItem.repositoryName

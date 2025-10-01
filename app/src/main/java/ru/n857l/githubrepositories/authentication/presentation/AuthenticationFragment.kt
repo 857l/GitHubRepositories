@@ -6,19 +6,15 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import ru.n857l.githubrepositories.core.AbstractFragment
 import ru.n857l.githubrepositories.core.App
 import ru.n857l.githubrepositories.databinding.FragmentAuthenticationBinding
 import ru.n857l.githubrepositories.repositories.presentation.NavigateToRepositories
 
-class AuthenticationFragment : Fragment() {
+class AuthenticationFragment : AbstractFragment<FragmentAuthenticationBinding>() {
 
-    private var _binding: FragmentAuthenticationBinding? = null
     private lateinit var viewModel: AuthenticationViewModel
     private lateinit var uiState: AuthenticationUiState
-
-    private val binding
-        get() = _binding!!
 
     private val textWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
@@ -31,14 +27,11 @@ class AuthenticationFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(
+    override fun bind(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentAuthenticationBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+        container: ViewGroup?
+    ): FragmentAuthenticationBinding =
+        FragmentAuthenticationBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -61,10 +54,5 @@ class AuthenticationFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         binding.tokenInputLayout.removeTextChangedListener(textWatcher)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
