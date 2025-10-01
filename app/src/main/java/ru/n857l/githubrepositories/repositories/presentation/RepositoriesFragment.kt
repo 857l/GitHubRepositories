@@ -1,7 +1,6 @@
 package ru.n857l.githubrepositories.repositories.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -17,8 +16,8 @@ import ru.n857l.githubrepositories.databinding.FragmentRepositoriesBinding
 
 class RepositoriesFragment : Fragment(), MenuProvider {
 
+    private val itemsAdapter = ItemAdapter()
     private var _binding: FragmentRepositoriesBinding? = null
-
     private val binding
         get() = _binding!!
 
@@ -34,6 +33,11 @@ class RepositoriesFragment : Fragment(), MenuProvider {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
         requireActivity().addMenuProvider(this, viewLifecycleOwner)
+
+        val list = ArrayList<RepositoryItem>()
+        list.add(RepositoryItem("moko-web3", "Kotlin", "Ethereum Web3 implementation"))
+        itemsAdapter.update(list)
+        binding.repositoriesList.adapter = itemsAdapter
     }
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
