@@ -32,14 +32,18 @@ class RepositoriesFragment : AbstractFragment<FragmentRepositoriesBinding>(), Me
 
         val list = ArrayList<RepositoryItem>()
         list.add(RepositoryItem("moko-web3", "Kotlin", "Ethereum Web3 implementation"))
-        list.add(RepositoryItem("moko-web3", "Kotlin", "Ethereum Web3 implementation"))
+        list.add(
+            RepositoryItem(
+                "moko-web3",
+                "Kotlin",
+                "Template project of a Mobile (Android & iOS) Kotlin MultiPlatform project with the MOKO libraries and modularized architecture"
+            )
+        )
+
         itemsAdapter.update(list)
         binding.repositoriesList.adapter = itemsAdapter
-        val divider = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
-        ContextCompat.getDrawable(requireContext(), R.drawable.divider)?.let {
-            divider.setDrawable(it)
-        }
-        binding.repositoriesList.addItemDecoration(divider)
+
+        binding.repositoriesList.addItemDecoration(addDivider())
     }
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -49,5 +53,13 @@ class RepositoriesFragment : AbstractFragment<FragmentRepositoriesBinding>(), Me
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         if (menuItem.itemId == R.id.action_logout) (requireActivity() as NavigateToAuthentication).navigateToAuthentication()
         return true
+    }
+
+    private fun addDivider(): DividerItemDecoration {
+        val divider = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+        ContextCompat.getDrawable(requireContext(), R.drawable.divider)?.let {
+            divider.setDrawable(it)
+        }
+        return divider
     }
 }
