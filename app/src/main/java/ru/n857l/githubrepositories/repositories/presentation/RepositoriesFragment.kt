@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.MenuProvider
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import ru.n857l.githubrepositories.R
 import ru.n857l.githubrepositories.authentication.presentation.NavigateToAuthentication
 import ru.n857l.githubrepositories.core.AbstractFragment
@@ -30,10 +31,10 @@ class RepositoriesFragment : AbstractFragment<FragmentRepositoriesBinding>(), Me
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
         requireActivity().addMenuProvider(this, viewLifecycleOwner)
 
-        val list = ArrayList<RepositoryItem>()
-        list.add(RepositoryItem("moko-web3", "Kotlin", "Ethereum Web3 implementation"))
+        val list = ArrayList<RepositoryItemUiState>()
+        list.add(RepositoryItemUiState("moko-web3", "Kotlin", "Ethereum Web3 implementation"))
         list.add(
-            RepositoryItem(
+            RepositoryItemUiState(
                 "moko-web3",
                 "Kotlin",
                 "Template project of a Mobile (Android & iOS) Kotlin MultiPlatform project with the MOKO libraries and modularized architecture"
@@ -63,3 +64,5 @@ class RepositoriesFragment : AbstractFragment<FragmentRepositoriesBinding>(), Me
         return divider
     }
 }
+
+//TODO BackStackNavigation
