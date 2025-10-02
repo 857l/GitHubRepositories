@@ -11,15 +11,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.MenuProvider
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import ru.n857l.githubrepositories.R
 import ru.n857l.githubrepositories.authentication.presentation.NavigateToAuthentication
 import ru.n857l.githubrepositories.core.AbstractFragment
+import ru.n857l.githubrepositories.core.App
 import ru.n857l.githubrepositories.databinding.FragmentRepositoriesBinding
 
 class RepositoriesFragment : AbstractFragment<FragmentRepositoriesBinding>(), MenuProvider {
 
     private val itemsAdapter = RepositoriesItemAdapter()
+    private lateinit var viewModel: RepositoriesViewModel
 
     override fun bind(
         inflater: LayoutInflater,
@@ -28,20 +29,13 @@ class RepositoriesFragment : AbstractFragment<FragmentRepositoriesBinding>(), Me
         FragmentRepositoriesBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        viewModel = (requireActivity().application as App).repositoriesViewModel
+
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
         requireActivity().addMenuProvider(this, viewLifecycleOwner)
 
-        val list = ArrayList<RepositoryItemUiState>()
-        list.add(RepositoryItemUiState("moko-web3", "Kotlin", "Ethereum Web3 implementation"))
-        list.add(
-            RepositoryItemUiState(
-                "moko-web3",
-                "Kotlin",
-                "Template project of a Mobile (Android & iOS) Kotlin MultiPlatform project with the MOKO libraries and modularized architecture"
-            )
-        )
-
-        itemsAdapter.update(list)
+        itemsAdapter.update(viewModel.repositoriesList())
         binding.repositoriesList.adapter = itemsAdapter
 
         binding.repositoriesList.addItemDecoration(addDivider())

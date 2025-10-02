@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import ru.n857l.githubrepositories.authentication.presentation.AuthenticationRepository
 import ru.n857l.githubrepositories.authentication.presentation.AuthenticationViewModel
+import ru.n857l.githubrepositories.repositories.presentation.RepositoriesRepository
 import ru.n857l.githubrepositories.repositories.presentation.RepositoriesViewModel
 
 class App : Application() {
@@ -19,7 +20,7 @@ class App : Application() {
             AuthenticationRepository.Base(StringCache.Base(sharedPreferences, "token", ""))
         )
         repositoriesViewModel = RepositoriesViewModel(
-
+            RepositoriesRepository.Base()
         )
     }
 }

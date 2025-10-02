@@ -34,7 +34,8 @@ class MainActivity : AppCompatActivity(), Navigate {
             WindowInsetsCompat.CONSUMED
         }
 
-        navigateToAuthentication()
+        if (savedInstanceState == null)
+            navigateToAuthentication()
     }
 
     override fun navigate(screen: Screen) = screen.show(R.id.container, supportFragmentManager)
