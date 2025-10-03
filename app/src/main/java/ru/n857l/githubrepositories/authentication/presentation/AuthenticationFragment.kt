@@ -14,7 +14,7 @@ import ru.n857l.githubrepositories.repositories.presentation.NavigateToRepositor
 class AuthenticationFragment : AbstractFragment<FragmentAuthenticationBinding>() {
 
     private lateinit var viewModel: AuthenticationViewModel
-    private lateinit var uiState: AuthenticationUiState
+    private var uiState: AuthenticationUiState = AuthenticationUiState.Empty
 
     private val textWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit

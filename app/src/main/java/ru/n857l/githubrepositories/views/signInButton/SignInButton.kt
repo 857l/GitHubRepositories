@@ -5,13 +5,10 @@ import android.os.Parcelable
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatButton
 import ru.n857l.githubrepositories.views.UpdateUiState
-import ru.n857l.githubrepositories.views.visibility.UpdateVisibility
-import ru.n857l.githubrepositories.views.visibility.VisibilitySavedState
-import ru.n857l.githubrepositories.views.visibility.VisibilityUiState
 
 class SignInButton : AppCompatButton, UpdateSignInButton {
 
-    private lateinit var state: SignInUiState
+    private var state: SignInUiState = SignInUiState.Enabled
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)

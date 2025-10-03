@@ -14,11 +14,14 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import ru.n857l.githubrepositories.R
 import ru.n857l.githubrepositories.authentication.presentation.NavigateToAuthentication
 import ru.n857l.githubrepositories.core.AbstractFragment
+import ru.n857l.githubrepositories.core.App
 import ru.n857l.githubrepositories.databinding.FragmentRepositoriesBinding
+import ru.n857l.githubrepositories.errorrepositories.presentation.NavigateToErrorRepositories
 
 class RepositoriesFragment : AbstractFragment<FragmentRepositoriesBinding>(), MenuProvider {
 
-    private val itemsAdapter = RepositoriesItemAdapter()
+    private lateinit var viewModel: RepositoriesViewModel
+    private lateinit var uiState: RepositoriesUiState
 
     override fun bind(
         inflater: LayoutInflater,
@@ -27,27 +30,23 @@ class RepositoriesFragment : AbstractFragment<FragmentRepositoriesBinding>(), Me
         FragmentRepositoriesBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        viewModel = (requireActivity().application as App).repositoriesViewModel
+
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
         requireActivity().addMenuProvider(this, viewLifecycleOwner)
 
-        val list = ArrayList<RepositoryItem>()
-        list.add(RepositoryItem("moko-web3", "Kotlin", "Ethereum Web3 implementation"))
-        list.add(
-            RepositoryItem(
-                "moko-web3",
-                "Kotlin",
-                "Template project of a Mobile (Android & iOS) Kotlin MultiPlatform project with the MOKO libraries and modularized architecture"
-            )
-        )
-
-        itemsAdapter.update(list)
-        binding.repositoriesList.adapter = itemsAdapter
+        setAdapter(RepositoriesItemAdapter())
 
         binding.repositoriesList.addItemDecoration(addDivider())
+
+        val uiState = viewModel.init(savedInstanceState == null)
+
+        uiState.navigate(requireActivity() as NavigateToErrorRepositories)
     }
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-        menuInflater.inflate(R.menu.fragment_repositories, menu)
+        menuInflater.inflate(R.menu.logout_menu, menu)
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -62,4 +61,11 @@ class RepositoriesFragment : AbstractFragment<FragmentRepositoriesBinding>(), Me
         }
         return divider
     }
+
+    fun setAdapter(adapter: RepositoriesItemAdapter) {
+        adapter.update(viewModel.repositoriesList())
+        binding.repositoriesList.adapter = adapter
+    }
 }
+
+//TODO BackStackNavigation
