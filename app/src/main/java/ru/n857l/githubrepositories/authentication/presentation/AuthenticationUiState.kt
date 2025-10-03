@@ -21,19 +21,6 @@ interface AuthenticationUiState : Serializable {
 
     object Empty : AuthenticationUiState
 
-    data class Initial(private val inputText: String) : AuthenticationUiState {
-
-        override fun update(
-            tokenInputView: UpdateInput,
-            singInButton: UpdateSignInButton,
-            progressBar: UpdateVisibility
-        ) {
-            tokenInputView.update(inputText)
-            singInButton.update(SignInUiState.Enabled)
-            progressBar.update(VisibilityUiState.Gone)
-        }
-    }
-
     object WrongInput : AuthenticationUiState {
         override fun update(
             tokenInputView: UpdateInput,

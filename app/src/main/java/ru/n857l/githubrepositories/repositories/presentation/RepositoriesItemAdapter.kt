@@ -8,7 +8,7 @@ import ru.n857l.githubrepositories.databinding.ItemRepositoryBinding
 
 class RepositoriesItemAdapter : RecyclerView.Adapter<RepositoriesItemViewHolder>() {
 
-    private val itemList = ArrayList<RepositoryItemUiState>()
+    private val itemList = ArrayList<RepositoryItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoriesItemViewHolder {
         val binding = ItemRepositoryBinding.inflate(
@@ -25,7 +25,7 @@ class RepositoriesItemAdapter : RecyclerView.Adapter<RepositoriesItemViewHolder>
         holder.bind(itemList[position])
     }
 
-    fun update(newList: List<RepositoryItemUiState>) {
+    fun update(newList: List<RepositoryItem>) {
         itemList.clear()
         itemList.addAll(newList)
         notifyDataSetChanged()
@@ -34,10 +34,10 @@ class RepositoriesItemAdapter : RecyclerView.Adapter<RepositoriesItemViewHolder>
 
 class RepositoriesItemViewHolder(private val binding: ItemRepositoryBinding) : ViewHolder(binding.root) {
 
-    fun bind(repositoryItemUiState: RepositoryItemUiState) {
-        binding.repositoryName.text = repositoryItemUiState.repositoryName
-        binding.programmingLanguage.text = repositoryItemUiState.programmingLanguage
-        binding.repositoryDescription.text = repositoryItemUiState.repositoryDescription
+    fun bind(repositoryItem: RepositoryItem) {
+        binding.repositoryName.text = repositoryItem.repositoryName
+        binding.programmingLanguage.text = repositoryItem.programmingLanguage
+        binding.repositoryDescription.text = repositoryItem.repositoryDescription
     }
 }
 

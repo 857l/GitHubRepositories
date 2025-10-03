@@ -21,7 +21,6 @@ import ru.n857l.githubrepositories.errorrepositories.presentation.NavigateToErro
 class RepositoriesFragment : AbstractFragment<FragmentRepositoriesBinding>(), MenuProvider {
 
     private lateinit var viewModel: RepositoriesViewModel
-    private lateinit var uiState: RepositoriesUiState
 
     override fun bind(
         inflater: LayoutInflater,

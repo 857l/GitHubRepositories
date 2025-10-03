@@ -2,16 +2,18 @@ package ru.n857l.githubrepositories.repositories.presentation
 
 interface RepositoriesRepository {
 
-    fun repositoriesList(): List<RepositoryItemUiState>
+    fun repositoriesList(): MutableList<RepositoryItem>
+
+    fun updateRepositoriesList(repositoriesList: MutableList<RepositoryItem>)
 
     class Base(
-        private val repositoriesList: List<RepositoryItemUiState> = listOf(
-            RepositoryItemUiState(
+        private var repositoriesList: MutableList<RepositoryItem> = mutableListOf(
+            RepositoryItem(
                 "moko-web3",
                 "Kotlin",
                 "Ethereum Web3 implementation"
             ),
-            RepositoryItemUiState(
+            RepositoryItem(
                 "moko-web3",
                 "Kotlin",
                 "Template project of a Mobile (Android & iOS) Kotlin MultiPlatform project with the MOKO libraries and modularized architecture"
@@ -19,6 +21,10 @@ interface RepositoriesRepository {
         )
     ) : RepositoriesRepository {
 
-        override fun repositoriesList(): List<RepositoryItemUiState> = repositoriesList
+        override fun repositoriesList(): MutableList<RepositoryItem> = repositoriesList
+
+        override fun updateRepositoriesList(repositoriesList: MutableList<RepositoryItem>) {
+            this.repositoriesList = repositoriesList
+        }
     }
 }
