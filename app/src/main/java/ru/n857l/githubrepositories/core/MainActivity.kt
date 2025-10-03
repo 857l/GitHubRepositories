@@ -9,6 +9,8 @@ import androidx.core.view.updatePadding
 import ru.n857l.githubrepositories.R
 import ru.n857l.githubrepositories.authentication.presentation.AuthenticationScreen
 import ru.n857l.githubrepositories.authentication.presentation.NavigateToAuthentication
+import ru.n857l.githubrepositories.errorrepositories.presentation.ErrorRepositoriesScreen
+import ru.n857l.githubrepositories.errorrepositories.presentation.NavigateToErrorRepositories
 
 import ru.n857l.githubrepositories.repositories.presentation.NavigateToRepositories
 import ru.n857l.githubrepositories.repositories.presentation.RepositoriesScreen
@@ -41,11 +43,13 @@ class MainActivity : AppCompatActivity(), Navigate {
     override fun navigate(screen: Screen) = screen.show(R.id.container, supportFragmentManager)
 }
 
-interface Navigate : NavigateToAuthentication, NavigateToRepositories {
+interface Navigate : NavigateToAuthentication, NavigateToRepositories, NavigateToErrorRepositories {
 
     fun navigate(screen: Screen)
 
     override fun navigateToAuthentication() = navigate(AuthenticationScreen)
 
     override fun navigateToRepositories() = navigate(RepositoriesScreen)
+
+    override fun navigateToErrorRepositories() = navigate(ErrorRepositoriesScreen)
 }

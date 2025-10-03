@@ -4,4 +4,13 @@
     <string name="github_logo">GitHubLogo</string>
     <string name="sing_in">Sing In</string>
     <string name="token_hint">Personal access token</string>
+    <string name="retry">Retry</string>
+    <string name="refresh">Refresh</string>
+    <string name="connection_error">Connection error</string>
+    <string name="empty">Empty</string>
+    <string name="something_error">Something error</string>
+    <string name="internet_connection">Check your Internet connection</string>
+    <string name="no_repositories">No repositories at the moment</string>
+    <string name="check_something">Check your something</string>
+    <string name="error_image">Error image</string>
 </resources>

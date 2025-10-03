@@ -16,11 +16,12 @@ import ru.n857l.githubrepositories.authentication.presentation.NavigateToAuthent
 import ru.n857l.githubrepositories.core.AbstractFragment
 import ru.n857l.githubrepositories.core.App
 import ru.n857l.githubrepositories.databinding.FragmentRepositoriesBinding
+import ru.n857l.githubrepositories.errorrepositories.presentation.NavigateToErrorRepositories
 
 class RepositoriesFragment : AbstractFragment<FragmentRepositoriesBinding>(), MenuProvider {
 
-    private val itemsAdapter = RepositoriesItemAdapter()
     private lateinit var viewModel: RepositoriesViewModel
+    private lateinit var uiState: RepositoriesUiState
 
     override fun bind(
         inflater: LayoutInflater,
@@ -35,14 +36,17 @@ class RepositoriesFragment : AbstractFragment<FragmentRepositoriesBinding>(), Me
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
         requireActivity().addMenuProvider(this, viewLifecycleOwner)
 
-        itemsAdapter.update(viewModel.repositoriesList())
-        binding.repositoriesList.adapter = itemsAdapter
+        setAdapter(RepositoriesItemAdapter())
 
         binding.repositoriesList.addItemDecoration(addDivider())
+
+        val uiState = viewModel.init(savedInstanceState == null)
+
+        uiState.navigate(requireActivity() as NavigateToErrorRepositories)
     }
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-        menuInflater.inflate(R.menu.fragment_repositories, menu)
+        menuInflater.inflate(R.menu.logout_menu, menu)
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -56,6 +60,11 @@ class RepositoriesFragment : AbstractFragment<FragmentRepositoriesBinding>(), Me
             divider.setDrawable(it)
         }
         return divider
+    }
+
+    fun setAdapter(adapter: RepositoriesItemAdapter) {
+        adapter.update(viewModel.repositoriesList())
+        binding.repositoriesList.adapter = adapter
     }
 }
 

@@ -4,11 +4,16 @@ class RepositoriesViewModel(
     private val repositoriesRepository: RepositoriesRepository.Base
 ) {
 
-    fun initial(isFirstRun: Boolean = true): RepositoriesUiState {
-        if (isFirstRun) {
-            return RepositoriesUiState.Show
+    fun init(isFirstRun: Boolean = true): RepositoriesUiState {
+        return if (isFirstRun) {
+            val data = repositoriesRepository.repositoriesList()
+            return if (data.isEmpty()) {
+                RepositoriesUiState.EmptyRepositories
+            } else {
+                RepositoriesUiState.Show(repositoriesRepository)
+            }
         } else {
-            return RepositoriesUiState.Empty
+            RepositoriesUiState.Empty
         }
     }
 
