@@ -10,6 +10,8 @@ interface AuthenticationRepository {
 
     fun saveUserInput(value: String)
 
+    fun tokenIsValid(text: String): Boolean
+
     class Base(
         private val token: StringCache
     ) : AuthenticationRepository {
@@ -20,6 +22,11 @@ interface AuthenticationRepository {
 
         override fun saveUserInput(value: String) {
             token.save(value)
+        }
+
+        override fun tokenIsValid(text: String): Boolean {
+            val regex = Regex("^[A-Za-z0-9_]+$")
+            return regex.matches(text)
         }
 
         override fun clear() {

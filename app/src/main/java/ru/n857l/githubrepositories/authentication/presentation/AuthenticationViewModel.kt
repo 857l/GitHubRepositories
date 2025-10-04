@@ -4,23 +4,17 @@ class AuthenticationViewModel(
     private val repository: AuthenticationRepository.Base
 ) {
 
-    fun tokenIsValid(text: String): Boolean {
-        val regex = Regex("^[A-Za-z0-9]+$")
-        return regex.matches(text)
-    }
-
     fun handleUserInput(text: String): AuthenticationUiState {
         repository.saveUserInput(text)
-        return if (tokenIsValid(text))
+        return if (repository.tokenIsValid(text))
             AuthenticationUiState.SuccessInput
         else
             AuthenticationUiState.WrongInput
     }
 
-    fun init(isFirstRun: Boolean): AuthenticationUiState {
+    fun init(isFirstRun: Boolean = true): AuthenticationUiState {
         return if (isFirstRun) {
             val inputText = repository.data()
-            repository.clear()
             AuthenticationUiState.Initial(inputText)
         } else {
             AuthenticationUiState.Empty
