@@ -1,7 +1,7 @@
 package ru.n857l.githubrepositories.repositories.presentation
 
 class RepositoriesViewModel(
-    private val repositoriesRepository: RepositoriesRepository.Base
+    private val repositoriesRepository: RepositoriesRepository
 ) {
 
     fun init(isFirstRun: Boolean = true): RepositoriesUiState {
