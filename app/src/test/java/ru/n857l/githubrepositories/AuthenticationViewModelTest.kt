@@ -21,7 +21,7 @@ class AuthenticationViewModelTest {
     @Test
     fun case1() {
         var actual: AuthenticationUiState = viewModel.init()
-        var expected: AuthenticationUiState = AuthenticationUiState.WrongInput
+        var expected: AuthenticationUiState = AuthenticationUiState.Initial("")
         Assert.assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput("1234567890")
