@@ -29,7 +29,10 @@ interface AuthenticationUiState : Serializable {
             progressBar: UpdateVisibility
         ) {
             tokenInputView.update(inputText)
-            singInButton.update(SignInUiState.Enabled)
+            if (inputText.isNotEmpty())
+                singInButton.update(SignInUiState.Enabled)
+            else
+                singInButton.update(SignInUiState.NotEnabled)
             progressBar.update(VisibilityUiState.Gone)
         }
     }
