@@ -1,7 +1,7 @@
 package ru.n857l.githubrepositories.authentication.presentation
 
 class AuthenticationViewModel(
-    private val repository: AuthenticationRepository.Base
+    private val repository: AuthenticationRepository
 ) {
 
     fun handleUserInput(text: String): AuthenticationUiState {

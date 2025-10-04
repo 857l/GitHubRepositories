@@ -21,7 +21,6 @@ import ru.n857l.githubrepositories.errorrepositories.presentation.NavigateToErro
 class RepositoriesFragment : AbstractFragment<FragmentRepositoriesBinding>(), MenuProvider {
 
     private lateinit var viewModel: RepositoriesViewModel
-    private lateinit var uiState: RepositoriesUiState
 
     override fun bind(
         inflater: LayoutInflater,
@@ -36,7 +35,7 @@ class RepositoriesFragment : AbstractFragment<FragmentRepositoriesBinding>(), Me
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
         requireActivity().addMenuProvider(this, viewLifecycleOwner)
 
-        setAdapter(RepositoriesItemAdapter())
+        setAdapter(RepositoriesItemAdapter(LanguageColorProvider(requireContext())))
 
         binding.repositoriesList.addItemDecoration(addDivider())
 

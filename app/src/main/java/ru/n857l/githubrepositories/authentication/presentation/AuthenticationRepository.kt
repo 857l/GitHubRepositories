@@ -32,5 +32,10 @@ interface AuthenticationRepository {
         override fun clear() {
             token.save("")
         }
+
+        override fun tokenIsValid(text: String): Boolean {
+            val regex = Regex("^[A-Za-z0-9_]+$")
+            return regex.matches(text)
+        }
     }
 }
