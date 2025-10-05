@@ -2,23 +2,18 @@ package ru.n857l.githubrepositories.repositories.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.MenuProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import ru.n857l.githubrepositories.R
-import ru.n857l.githubrepositories.authentication.presentation.NavigateToAuthentication
-import ru.n857l.githubrepositories.core.AbstractFragment
+import ru.n857l.githubrepositories.core.AbstractFragmentWithMenu
 import ru.n857l.githubrepositories.core.App
 import ru.n857l.githubrepositories.databinding.FragmentRepositoriesBinding
 import ru.n857l.githubrepositories.errorrepositories.presentation.NavigateToErrorRepositories
 
-class RepositoriesFragment : AbstractFragment<FragmentRepositoriesBinding>(), MenuProvider {
+class RepositoriesFragment : AbstractFragmentWithMenu<FragmentRepositoriesBinding>() {
 
     private lateinit var viewModel: RepositoriesViewModel
 
@@ -33,7 +28,7 @@ class RepositoriesFragment : AbstractFragment<FragmentRepositoriesBinding>(), Me
         viewModel = (requireActivity().application as App).repositoriesViewModel
 
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        requireActivity().addMenuProvider(this, viewLifecycleOwner)
+        super.onViewCreated(view, savedInstanceState)
 
         setAdapter(RepositoriesItemAdapter(LanguageColorProvider(requireContext())))
 
@@ -42,15 +37,6 @@ class RepositoriesFragment : AbstractFragment<FragmentRepositoriesBinding>(), Me
         val uiState = viewModel.init(savedInstanceState == null)
 
         uiState.navigate(requireActivity() as NavigateToErrorRepositories)
-    }
-
-    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-        menuInflater.inflate(R.menu.logout_menu, menu)
-    }
-
-    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-        if (menuItem.itemId == R.id.action_logout) (requireActivity() as NavigateToAuthentication).navigateToAuthentication()
-        return true
     }
 
     private fun addDivider(): DividerItemDecoration {

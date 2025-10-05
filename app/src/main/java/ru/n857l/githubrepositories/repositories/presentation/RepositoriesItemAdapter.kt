@@ -2,6 +2,7 @@ package ru.n857l.githubrepositories.repositories.presentation
 
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -47,6 +48,10 @@ class RepositoriesItemViewHolder(private val binding: ItemRepositoryBinding) : V
             colorProvider.getColor(repositoryItem.programmingLanguage)
         )
         repositoryDescription.text = repositoryItem.repositoryDescription
+
+        root.setOnClickListener {
+            Log.d("857ll", root.toString())
+        }
     }
 }
 
