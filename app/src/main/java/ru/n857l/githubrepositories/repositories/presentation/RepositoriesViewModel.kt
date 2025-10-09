@@ -6,7 +6,7 @@ class RepositoriesViewModel(
 
     fun init(isFirstRun: Boolean = true): RepositoriesUiState {
         return if (isFirstRun) {
-            val data = repositoriesRepository.repositoriesList()
+            val data = repositoriesRepository.data()
             return if (data.isEmpty()) {
                 RepositoriesUiState.EmptyRepositories
             } else {
@@ -17,5 +17,5 @@ class RepositoriesViewModel(
         }
     }
 
-    fun repositoriesList() = repositoriesRepository.repositoriesList()
+    fun repositoriesList() = repositoriesRepository.data()
 }

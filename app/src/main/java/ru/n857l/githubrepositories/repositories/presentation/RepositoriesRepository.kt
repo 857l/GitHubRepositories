@@ -2,8 +2,7 @@ package ru.n857l.githubrepositories.repositories.presentation
 
 interface RepositoriesRepository {
 
-    fun repositoriesList(): List<RepositoryItem>
-
+    fun data(): List<RepositoryItem>
 
     class Base(
         private val repositoriesList: List<RepositoryItem> = listOf(
@@ -20,6 +19,6 @@ interface RepositoriesRepository {
         )
     ) : RepositoriesRepository {
 
-        override fun repositoriesList(): List<RepositoryItem> = repositoriesList
+        override fun data(): List<RepositoryItem> = repositoriesList
     }
 }
