@@ -1,8 +1,12 @@
 package ru.n857l.githubrepositories.repositories.presentation
 
+import ru.n857l.githubrepositories.core.ClearViewModel
+import ru.n857l.githubrepositories.di.MyViewModel
+
 class RepositoriesViewModel(
-    private val repositoriesRepository: RepositoriesRepository
-) {
+    private val repositoriesRepository: RepositoriesRepository,
+    private val clearViewModel: ClearViewModel
+) : MyViewModel {
 
     fun init(isFirstRun: Boolean = true): RepositoriesUiState {
         return if (isFirstRun) {
@@ -15,6 +19,10 @@ class RepositoriesViewModel(
         } else {
             RepositoriesUiState.Empty
         }
+    }
+
+    fun clear() {
+        clearViewModel.clear(RepositoriesViewModel::class.java)
     }
 
     fun repositoriesList() = repositoriesRepository.data()

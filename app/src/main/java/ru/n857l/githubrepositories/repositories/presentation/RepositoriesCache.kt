@@ -1,11 +1,9 @@
 package ru.n857l.githubrepositories.repositories.presentation
 
+import ru.n857l.githubrepositories.core.All
 import ru.n857l.githubrepositories.core.PreferencesProvider
 
-interface RepositoriesCache {
-
-    fun read(): Triple<String, String, String>
-    fun save(data: Triple<String, String, String>)
+interface RepositoriesCache : All<Triple<String, String, String>> {
 
     class Base(
         preferencesProvider: PreferencesProvider
