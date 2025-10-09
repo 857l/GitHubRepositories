@@ -2,8 +2,10 @@ package ru.n857l.githubrepositories.repositories.presentation
 
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import org.json.JSONObject
@@ -47,6 +49,28 @@ class RepositoriesItemViewHolder(private val binding: ItemRepositoryBinding) : V
             colorProvider.getColor(repositoryItem.programmingLanguage)
         )
         repositoryDescription.text = repositoryItem.repositoryDescription
+
+        root.setOnClickListener {
+            Log.d("857ll", root.toString())
+        }
+    }
+}
+
+class DiffUtilCallback(
+    private val oldList: List<RepositoryItem>,
+    private val newList: List<RepositoryItem>
+) : DiffUtil.Callback() {
+
+    override fun getOldListSize(): Int = oldList.size
+
+    override fun getNewListSize(): Int = newList.size
+
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        TODO("Not yet implemented")
     }
 }
 

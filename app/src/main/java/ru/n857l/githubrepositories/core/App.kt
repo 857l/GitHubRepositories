@@ -20,7 +20,9 @@ class App : Application() {
             AuthenticationRepository.Base(StringCache.Base(sharedPreferences, "token", ""))
         )
         repositoriesViewModel = RepositoriesViewModel(
-            RepositoriesRepository.Base()
+            RepositoriesRepository.Base(
+
+            )
         )
     }
 }
