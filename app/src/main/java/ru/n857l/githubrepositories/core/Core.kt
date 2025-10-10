@@ -1,15 +1,13 @@
 package ru.n857l.githubrepositories.core
 
 import android.content.Context
+import ru.n857l.githubrepositories.authentication.presentation.TokenCache
 import ru.n857l.githubrepositories.repositories.presentation.RepositoriesCache
 
-class Core {
+class Core(context: Context, var clearViewModel: ClearViewModel) {
 
-    lateinit var resourceProvider: ResourceProvider
-    lateinit var repositoriesCache: RepositoriesCache
+    var resourceProvider = ResourceProvider.Base(context)
+    var repositoriesCache = RepositoriesCache.Base(resourceProvider)
+    var tokenCache = TokenCache.Base(resourceProvider)
 
-    fun init(context: Context) {
-        resourceProvider = ResourceProvider.Base(context)
-        repositoriesCache = RepositoriesCache.Base(resourceProvider)
-    }
 }

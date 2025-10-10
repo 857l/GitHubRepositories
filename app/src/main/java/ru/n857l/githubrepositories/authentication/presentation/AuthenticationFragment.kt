@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ru.n857l.githubrepositories.core.AbstractFragment
-import ru.n857l.githubrepositories.core.App
 import ru.n857l.githubrepositories.databinding.FragmentAuthenticationBinding
+import ru.n857l.githubrepositories.di.ProvideViewModel
 import ru.n857l.githubrepositories.repositories.presentation.NavigateToRepositories
 
 class AuthenticationFragment : AbstractFragment<FragmentAuthenticationBinding>() {
@@ -36,7 +36,8 @@ class AuthenticationFragment : AbstractFragment<FragmentAuthenticationBinding>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = (requireActivity().application as App).authenticationViewModel
+        viewModel = (requireActivity().application as ProvideViewModel)
+            .makeViewModel(AuthenticationViewModel::class.java)
 
         binding.singInButton.setOnClickListener {
             (requireActivity() as NavigateToRepositories).navigateToRepositories()

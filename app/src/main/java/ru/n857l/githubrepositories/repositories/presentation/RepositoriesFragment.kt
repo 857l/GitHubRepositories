@@ -9,8 +9,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import ru.n857l.githubrepositories.R
 import ru.n857l.githubrepositories.core.AbstractFragmentWithMenu
-import ru.n857l.githubrepositories.core.App
 import ru.n857l.githubrepositories.databinding.FragmentRepositoriesBinding
+import ru.n857l.githubrepositories.di.ProvideViewModel
 import ru.n857l.githubrepositories.errorrepositories.presentation.NavigateToErrorRepositories
 
 class RepositoriesFragment : AbstractFragmentWithMenu<FragmentRepositoriesBinding>() {
@@ -25,7 +25,8 @@ class RepositoriesFragment : AbstractFragmentWithMenu<FragmentRepositoriesBindin
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        viewModel = (requireActivity().application as App).repositoriesViewModel
+        viewModel =
+            (requireActivity().application as ProvideViewModel).makeViewModel(RepositoriesViewModel::class.java)
 
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
         super.onViewCreated(view, savedInstanceState)

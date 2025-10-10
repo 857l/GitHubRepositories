@@ -1,7 +1,5 @@
 package ru.n857l.githubrepositories.authentication.presentation
 
-import ru.n857l.githubrepositories.core.StringCache
-
 interface AuthenticationRepository {
 
     fun clear()
@@ -13,7 +11,7 @@ interface AuthenticationRepository {
     fun tokenIsValid(text: String): Boolean
 
     class Base(
-        private val token: StringCache
+        private val token: TokenCache,
     ) : AuthenticationRepository {
 
         override fun data(): String {

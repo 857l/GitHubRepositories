@@ -1,8 +1,12 @@
 package ru.n857l.githubrepositories.authentication.presentation
 
+import ru.n857l.githubrepositories.core.ClearViewModel
+import ru.n857l.githubrepositories.di.MyViewModel
+
 class AuthenticationViewModel(
-    private val repository: AuthenticationRepository
-) {
+    private val repository: AuthenticationRepository,
+    private val clearViewModel: ClearViewModel
+) : MyViewModel {
 
     fun handleUserInput(text: String): AuthenticationUiState {
         repository.saveUserInput(text)
@@ -19,5 +23,9 @@ class AuthenticationViewModel(
         } else {
             AuthenticationUiState.Empty
         }
+    }
+
+    fun clear() {
+        clearViewModel.clear(AuthenticationViewModel::class.java)
     }
 }
