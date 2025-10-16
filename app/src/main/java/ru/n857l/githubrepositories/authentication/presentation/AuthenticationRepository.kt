@@ -1,5 +1,7 @@
 package ru.n857l.githubrepositories.authentication.presentation
 
+import ru.n857l.githubrepositories.authentication.presentation.data.LoadResult
+
 interface AuthenticationRepository {
 
     fun clear()
@@ -9,6 +11,8 @@ interface AuthenticationRepository {
     fun saveUserInput(value: String)
 
     fun tokenIsValid(text: String): Boolean
+
+    fun load(resultCallback: (LoadResult) -> Unit)
 
     class Base(
         private val token: TokenCache,
@@ -29,6 +33,10 @@ interface AuthenticationRepository {
         override fun tokenIsValid(text: String): Boolean {
             val regex = Regex("^[A-Za-z0-9_]+$")
             return regex.matches(text)
+        }
+
+        override fun load(resultCallback: (LoadResult) -> Unit) {
+            TODO("Not yet implemented")
         }
     }
 }
