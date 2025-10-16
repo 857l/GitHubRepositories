@@ -19,6 +19,22 @@ interface AuthenticationUiState : Serializable {
 
     fun navigate(navigate: NavigateToRepositories) = Unit
 
+    abstract class Abstract(
+        private val tokenInputUiState: InputUiState,
+        private val singInUiState: SignInUiState,
+        private val progressBarUiState: VisibilityUiState
+    ) : AuthenticationUiState {
+        override fun update(
+            tokenInputView: UpdateInput,
+            singInButton: UpdateSignInButton,
+            progressBar: UpdateVisibility
+        ) {
+            tokenInputView.update(tokenInputUiState)
+            singInButton.update(singInUiState)
+            progressBar.update(progressBarUiState)
+        }
+    }
+
     object Empty : AuthenticationUiState
 
     data class Initial(private val inputText: String) : AuthenticationUiState {
@@ -37,41 +53,16 @@ interface AuthenticationUiState : Serializable {
         }
     }
 
-    object WrongInput : AuthenticationUiState {
-        override fun update(
-            tokenInputView: UpdateInput,
-            singInButton: UpdateSignInButton,
-            progressBar: UpdateVisibility
-        ) {
-            tokenInputView.update(InputUiState.Incorrect)
-            singInButton.update(SignInUiState.NotEnabled)
-        }
-    }
+    object WrongInput :
+        Abstract(InputUiState.Incorrect, SignInUiState.NotEnabled, VisibilityUiState.Gone)
 
-    object SuccessInput : AuthenticationUiState {
-        override fun update(
-            tokenInputView: UpdateInput,
-            singInButton: UpdateSignInButton,
-            progressBar: UpdateVisibility
-        ) {
-            tokenInputView.update(InputUiState.Correct)
-            singInButton.update(SignInUiState.Enabled)
-        }
-    }
+    object SuccessInput :
+        Abstract(InputUiState.Correct, SignInUiState.Enabled, VisibilityUiState.Gone)
 
     object Finish : AuthenticationUiState {
         override fun navigate(navigate: NavigateToRepositories) = navigate.navigateToRepositories()
     }
 
-    object Load : AuthenticationUiState {
-
-        override fun update(
-            tokenInputView: UpdateInput,
-            singInButton: UpdateSignInButton,
-            progressBar: UpdateVisibility
-        ) {
-            singInButton.update(SignInUiState.NotEnabled)
-            progressBar.update(VisibilityUiState.Visible)
-        }
-    }
+    object Load :
+        Abstract(InputUiState.Correct, SignInUiState.NotEnabled, VisibilityUiState.Visible)
 }
