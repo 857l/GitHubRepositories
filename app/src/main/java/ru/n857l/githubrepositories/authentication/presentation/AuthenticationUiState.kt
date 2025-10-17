@@ -59,10 +59,13 @@ interface AuthenticationUiState : Serializable {
     object SuccessInput :
         Abstract(InputUiState.Correct, SignInUiState.Enabled, VisibilityUiState.Gone)
 
-    object Finish : AuthenticationUiState {
+    object Success : AuthenticationUiState {
         override fun navigate(navigate: NavigateToRepositories) = navigate.navigateToRepositories()
     }
 
     object Load :
         Abstract(InputUiState.Correct, SignInUiState.NotEnabled, VisibilityUiState.Visible)
+
+    data class Error(private val message: String) :
+        Abstract(InputUiState.Correct, SignInUiState.Enabled, VisibilityUiState.Gone)
 }
