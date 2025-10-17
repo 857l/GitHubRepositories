@@ -1,5 +1,7 @@
 package ru.n857l.githubrepositories
 
+//TODO TEST
+
 //class AuthenticationViewModelTest {
 //
 //    private lateinit var viewModel: AuthenticationViewModel

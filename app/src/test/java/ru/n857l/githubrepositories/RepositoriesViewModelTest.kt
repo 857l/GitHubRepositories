@@ -1,5 +1,6 @@
 package ru.n857l.githubrepositories
 
+//TODO TEST
 //class RepositoriesViewModelTest {
 //
 //    private lateinit var viewModel: RepositoriesViewModel
