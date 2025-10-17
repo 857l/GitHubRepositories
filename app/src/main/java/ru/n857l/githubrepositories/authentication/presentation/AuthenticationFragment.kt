@@ -14,7 +14,6 @@ import ru.n857l.githubrepositories.repositories.presentation.NavigateToRepositor
 class AuthenticationFragment : AbstractFragment<FragmentAuthenticationBinding>() {
 
     private lateinit var viewModel: AuthenticationViewModel
-    //private var uiState: AuthenticationUiState = AuthenticationUiState.Empty
 
     private val update: (AuthenticationUiState) -> Unit = { uiState ->
         uiState.update(
