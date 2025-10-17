@@ -14,7 +14,16 @@ import ru.n857l.githubrepositories.repositories.presentation.NavigateToRepositor
 class AuthenticationFragment : AbstractFragment<FragmentAuthenticationBinding>() {
 
     private lateinit var viewModel: AuthenticationViewModel
-    private var uiState: AuthenticationUiState = AuthenticationUiState.Empty
+    //private var uiState: AuthenticationUiState = AuthenticationUiState.Empty
+
+    private val update: (AuthenticationUiState) -> Unit = { uiState ->
+        uiState.update(
+            binding.tokenInputLayout,
+            binding.singInButton,
+            binding.progressBar
+        )
+        uiState.navigate((requireActivity() as NavigateToRepositories))
+    }
 
     private val textWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
@@ -22,8 +31,7 @@ class AuthenticationFragment : AbstractFragment<FragmentAuthenticationBinding>()
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) = Unit
 
         override fun afterTextChanged(s: Editable?) {
-            uiState = viewModel.handleUserInput(s.toString())
-            uiState.update(binding.tokenInputLayout, binding.singInButton, binding.progressBar)
+            viewModel.handleUserInput(s.toString())
         }
     }
 
@@ -40,21 +48,21 @@ class AuthenticationFragment : AbstractFragment<FragmentAuthenticationBinding>()
             .makeViewModel(AuthenticationViewModel::class.java)
 
         binding.singInButton.setOnClickListener {
-            viewModel.clear()
-            (requireActivity() as NavigateToRepositories).navigateToRepositories()
+            viewModel.load()
         }
 
-        val uiState = viewModel.init(savedInstanceState == null)
-        uiState.update(binding.tokenInputLayout, binding.singInButton, binding.progressBar)
+        viewModel.init(savedInstanceState == null)
     }
 
     override fun onResume() {
         super.onResume()
         binding.tokenInputLayout.addTextChangedListener(textWatcher)
+        viewModel.startUpdates(observer = update)
     }
 
     override fun onPause() {
         super.onPause()
         binding.tokenInputLayout.removeTextChangedListener(textWatcher)
+        viewModel.stopUpdates()
     }
 }

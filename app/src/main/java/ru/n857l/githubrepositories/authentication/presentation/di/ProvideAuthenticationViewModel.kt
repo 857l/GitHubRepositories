@@ -1,9 +1,11 @@
 package ru.n857l.githubrepositories.authentication.presentation.di
 
 import ru.n857l.githubrepositories.authentication.presentation.AuthenticationRepository
+import ru.n857l.githubrepositories.authentication.presentation.AuthenticationUiState
 import ru.n857l.githubrepositories.authentication.presentation.AuthenticationViewModel
 import ru.n857l.githubrepositories.core.Core
 import ru.n857l.githubrepositories.core.Module
+import ru.n857l.githubrepositories.core.UiObservable
 import ru.n857l.githubrepositories.di.AbstractProvideViewModel
 import ru.n857l.githubrepositories.di.ProvideViewModel
 
@@ -20,5 +22,9 @@ class AuthenticationModule(
 ) : Module<AuthenticationViewModel> {
 
     override fun viewModel() =
-        AuthenticationViewModel(AuthenticationRepository.Base(core.tokenCache), core.clearViewModel)
+        AuthenticationViewModel(
+            repository = AuthenticationRepository.Base(core.tokenCache),
+            clearViewModel = core.clearViewModel,
+            observable = UiObservable.Base<AuthenticationUiState>()
+        )
 }
