@@ -40,6 +40,7 @@ class AuthenticationFragment : AbstractFragment<FragmentAuthenticationBinding>()
             .makeViewModel(AuthenticationViewModel::class.java)
 
         binding.singInButton.setOnClickListener {
+            viewModel.clear()
             (requireActivity() as NavigateToRepositories).navigateToRepositories()
         }
 
