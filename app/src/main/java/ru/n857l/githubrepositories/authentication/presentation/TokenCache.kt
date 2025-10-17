@@ -1,9 +1,9 @@
 package ru.n857l.githubrepositories.authentication.presentation
 
-import ru.n857l.githubrepositories.core.All
 import ru.n857l.githubrepositories.core.PreferencesProvider
+import ru.n857l.githubrepositories.core.SaveRead
 
-interface TokenCache : All<String> {
+interface TokenCache : SaveRead<String> {
 
     class Base(
         preferencesProvider: PreferencesProvider
