@@ -12,6 +12,7 @@ constraintlayout = "2.2.1"
 retrofit = "2.9.0"
 
 [libraries]
+gson = { module = "com.google.code.gson:gson", version = "2.11.0" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
