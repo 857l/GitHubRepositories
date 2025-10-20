@@ -12,6 +12,7 @@ class RepositoriesViewModel(
         return if (isFirstRun) {
             val data = repositoriesRepository.data()
             return if (data.isEmpty()) {
+                clearViewModel.clear(RepositoriesViewModel::class.java)
                 RepositoriesUiState.EmptyRepositories
             } else {
                 RepositoriesUiState.Show(repositoriesRepository)
@@ -19,10 +20,6 @@ class RepositoriesViewModel(
         } else {
             RepositoriesUiState.Empty
         }
-    }
-
-    fun clear() {
-        clearViewModel.clear(RepositoriesViewModel::class.java)
     }
 
     fun repositoriesList() = repositoriesRepository.data()
