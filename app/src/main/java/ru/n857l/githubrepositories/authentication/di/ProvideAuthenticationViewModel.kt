@@ -5,6 +5,7 @@ import ru.n857l.githubrepositories.authentication.presentation.AuthenticationUiS
 import ru.n857l.githubrepositories.authentication.presentation.AuthenticationViewModel
 import ru.n857l.githubrepositories.core.Core
 import ru.n857l.githubrepositories.core.Module
+import ru.n857l.githubrepositories.core.RunAsync
 import ru.n857l.githubrepositories.core.UiObservable
 import ru.n857l.githubrepositories.di.AbstractProvideViewModel
 import ru.n857l.githubrepositories.di.ProvideViewModel
@@ -25,6 +26,7 @@ class AuthenticationModule(
         AuthenticationViewModel(
             repository = AuthenticationRepository.Base(core.tokenCache),
             clearViewModel = core.clearViewModel,
-            observable = UiObservable.Base<AuthenticationUiState>()
+            observable = UiObservable.Base<AuthenticationUiState>(),
+            runAsync = RunAsync.Base()
         )
 }

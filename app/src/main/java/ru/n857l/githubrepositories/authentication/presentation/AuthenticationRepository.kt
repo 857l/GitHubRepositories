@@ -12,7 +12,7 @@ interface AuthenticationRepository {
 
     fun tokenIsValid(text: String): Boolean
 
-    fun load(resultCallback: (LoadResult) -> Unit)
+    suspend fun load(): LoadResult
 
     class Base(
         private val token: TokenCache,
@@ -35,7 +35,7 @@ interface AuthenticationRepository {
             return regex.matches(text)
         }
 
-        override fun load(resultCallback: (LoadResult) -> Unit) {
+        override suspend fun load(): LoadResult {
             TODO("Not yet implemented")
         }
     }
