@@ -1,9 +1,9 @@
 package ru.n857l.githubrepositories.authentication.presentation
 
+import ru.n857l.githubrepositories.core.Mutable
 import ru.n857l.githubrepositories.core.PreferencesProvider
-import ru.n857l.githubrepositories.core.SaveRead
 
-interface TokenCache : SaveRead<String> {
+interface TokenCache : Mutable<String> {
 
     class Base(
         preferencesProvider: PreferencesProvider
@@ -18,6 +18,12 @@ interface TokenCache : SaveRead<String> {
         override fun save(data: String) {
             sharedPreferences.edit()
                 .putString(TOKEN, data)
+                .apply()
+        }
+
+        override fun clear() {
+            sharedPreferences.edit()
+                .putString(TOKEN, "")
                 .apply()
         }
 

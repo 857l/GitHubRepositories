@@ -6,19 +6,19 @@ interface AuthenticationRepository {
 
     fun clear()
 
-    fun data(): String
+    fun token(): String
 
     fun saveUserInput(value: String)
 
     fun tokenIsValid(text: String): Boolean
 
-    fun load(resultCallback: (LoadResult) -> Unit)
+    suspend fun load(): LoadResult
 
     class Base(
         private val token: TokenCache,
     ) : AuthenticationRepository {
 
-        override fun data(): String {
+        override fun token(): String {
             return token.read()
         }
 
@@ -27,7 +27,7 @@ interface AuthenticationRepository {
         }
 
         override fun clear() {
-            token.save("")
+            token.clear()
         }
 
         override fun tokenIsValid(text: String): Boolean {
@@ -35,7 +35,7 @@ interface AuthenticationRepository {
             return regex.matches(text)
         }
 
-        override fun load(resultCallback: (LoadResult) -> Unit) {
+        override suspend fun load(): LoadResult {
             TODO("Not yet implemented")
         }
     }

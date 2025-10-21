@@ -1,36 +1,45 @@
 package ru.n857l.githubrepositories.repositories.presentation
 
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import ru.n857l.githubrepositories.cloud_datasource.RepositoryCloud
+import ru.n857l.githubrepositories.core.Mutable
 import ru.n857l.githubrepositories.core.PreferencesProvider
-import ru.n857l.githubrepositories.core.SaveRead
 
-interface RepositoriesCache : SaveRead<Triple<String, String, String>> {
+interface RepositoriesCache : Mutable<List<RepositoryCloud>> {
 
     class Base(
-        preferencesProvider: PreferencesProvider
+        preferencesProvider: PreferencesProvider,
+        private val gson: Gson
     ) : RepositoriesCache {
 
         private val sharedPreferences =
             preferencesProvider.provideSharedPreferences(REPOSITORIES_FILENAME)
 
-        override fun read(): Triple<String, String, String> = Triple(
-            sharedPreferences.getString(REPOSITORY_NAME, "") ?: "",
-            sharedPreferences.getString(LANGUAGE_NAME, "") ?: "",
-            sharedPreferences.getString(REPOSITORY_DESCRIPTION, "") ?: ""
-        )
+        override fun read(): List<RepositoryCloud> {
+            val json = sharedPreferences.getString(REPOSITORIES_KEY, null)
+            return if (json != null) {
+                val type = object : TypeToken<List<RepositoryCloud>>() {}.type
+                gson.fromJson(json, type)
+            } else {
+                emptyList()
+            }
+        }
 
-        override fun save(data: Triple<String, String, String>) {
+        override fun save(data: List<RepositoryCloud>) {
+            val json = gson.toJson(data)
             sharedPreferences.edit()
-                .putString(REPOSITORY_NAME, data.first)
-                .putString(LANGUAGE_NAME, data.second)
-                .putString(REPOSITORY_DESCRIPTION, data.third)
+                .putString(REPOSITORIES_KEY, json)
                 .apply()
+        }
+
+        override fun clear() {
+            sharedPreferences.edit().remove(REPOSITORIES_KEY).apply()
         }
     }
 
     private companion object {
         const val REPOSITORIES_FILENAME = "repositories"
-        const val REPOSITORY_NAME = "repositoryName"
-        const val LANGUAGE_NAME = "languageName"
-        const val REPOSITORY_DESCRIPTION = "repositoryDescription"
+        const val REPOSITORIES_KEY = "repositories_list"
     }
 }
