@@ -12,14 +12,4 @@ interface GitHubApiService {
         @Query("sort") sort: String = "updated",
         @Query("per_page") amount: Int = 10
     ): List<RepositoryCloud>
-
-    class Base() : GitHubApiService {
-        override suspend fun fetchRepositories(
-            token: String,
-            sort: String,
-            amount: Int
-        ): List<RepositoryCloud> {
-            TODO("Not yet implemented")
-        }
-    }
 }

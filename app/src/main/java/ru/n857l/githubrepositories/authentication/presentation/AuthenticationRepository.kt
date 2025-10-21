@@ -3,6 +3,7 @@ package ru.n857l.githubrepositories.authentication.presentation
 import android.util.Log
 import ru.n857l.githubrepositories.authentication.presentation.data.LoadResult
 import ru.n857l.githubrepositories.cloud_datasource.GitHubApiService
+import ru.n857l.githubrepositories.repositories.presentation.RepositoriesCache
 
 interface AuthenticationRepository {
 
@@ -18,6 +19,7 @@ interface AuthenticationRepository {
 
     class Base(
         private val token: TokenCache,
+        private val repositoriesCache: RepositoriesCache,
         private val service: GitHubApiService
     ) : AuthenticationRepository {
 
@@ -42,7 +44,13 @@ interface AuthenticationRepository {
             try {
                 val tokenHeader = "Bearer ${token.read()}"
                 val result = service.fetchRepositories(token = tokenHeader)
-                Log.d("857ll", result.toString())
+
+                if (result.isEmpty())
+                    Log.d("857ll", result.toString())
+                else {
+                    //repositoriesCache.save(result)
+                    Log.d("857ll", result.toString())
+                }
             } catch (e: Exception) {
                 Log.d("857ll", e.message.toString())
             }
