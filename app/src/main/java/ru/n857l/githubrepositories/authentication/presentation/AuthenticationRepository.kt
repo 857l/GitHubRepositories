@@ -1,6 +1,8 @@
 package ru.n857l.githubrepositories.authentication.presentation
 
+import android.util.Log
 import ru.n857l.githubrepositories.authentication.presentation.data.LoadResult
+import ru.n857l.githubrepositories.cloud_datasource.GitHubApiService
 
 interface AuthenticationRepository {
 
@@ -16,6 +18,7 @@ interface AuthenticationRepository {
 
     class Base(
         private val token: TokenCache,
+        private val service: GitHubApiService
     ) : AuthenticationRepository {
 
         override fun token(): String {
@@ -36,7 +39,14 @@ interface AuthenticationRepository {
         }
 
         override suspend fun load(): LoadResult {
-            TODO("Not yet implemented")
+            try {
+                val tokenHeader = "Bearer ${token.read()}"
+                val result = service.fetchRepositories(token = tokenHeader)
+                Log.d("857ll", result.toString())
+            } catch (e: Exception) {
+                Log.d("857ll", e.message.toString())
+            }
+            return LoadResult.Success
         }
     }
 }
