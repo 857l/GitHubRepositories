@@ -27,7 +27,7 @@ interface AuthenticationRepository {
         }
 
         override fun clear() {
-            token.save("")
+            token.clear()
         }
 
         override fun tokenIsValid(text: String): Boolean {
