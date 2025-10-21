@@ -1,5 +1,7 @@
 package ru.n857l.githubrepositories.authentication.presentation
 
+import ru.n857l.githubrepositories.core.NavigateToFrame
+import ru.n857l.githubrepositories.errorrepositories.presentation.NavigateToErrorRepositories
 import ru.n857l.githubrepositories.repositories.presentation.NavigateToRepositories
 import ru.n857l.githubrepositories.views.input.InputUiState
 import ru.n857l.githubrepositories.views.input.UpdateInput
@@ -17,7 +19,7 @@ interface AuthenticationUiState : Serializable {
         progressBar: UpdateVisibility
     ) = Unit
 
-    fun navigate(navigate: NavigateToRepositories) = Unit
+    fun navigate(navigate: NavigateToFrame) = Unit
 
     abstract class Abstract(
         private val tokenInputUiState: InputUiState,
@@ -60,7 +62,17 @@ interface AuthenticationUiState : Serializable {
         Abstract(InputUiState.Correct, SignInUiState.Enabled, VisibilityUiState.Gone)
 
     object Success : AuthenticationUiState {
-        override fun navigate(navigate: NavigateToRepositories) = navigate.navigateToRepositories()
+        override fun navigate(navigate: NavigateToFrame) {
+            if (navigate is NavigateToRepositories)
+                navigate.navigateToRepositories()
+        }
+    }
+
+    object EmptyRepos : AuthenticationUiState {
+        override fun navigate(navigate: NavigateToFrame) {
+            if (navigate is NavigateToErrorRepositories)
+                navigate.navigateToErrorRepositories()
+        }
     }
 
     object Load :

@@ -1,5 +1,8 @@
 package ru.n857l.githubrepositories.errorrepositories.presentation
 
-interface NavigateToErrorRepositories {
+import ru.n857l.githubrepositories.core.NavigateToFrame
+
+interface NavigateToErrorRepositories : NavigateToFrame {
     fun navigateToErrorRepositories()
 }
+
