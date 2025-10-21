@@ -46,15 +46,16 @@ interface AuthenticationRepository {
                 val result = service.fetchRepositories(token = tokenHeader)
 
                 if (result.isEmpty())
-                    Log.d("857ll", result.toString())
+                    return LoadResult.Success
                 else {
-                    //repositoriesCache.save(result)
+                    repositoriesCache.save(result)
                     Log.d("857ll", result.toString())
+                    return LoadResult.Success
                 }
             } catch (e: Exception) {
                 Log.d("857ll", e.message.toString())
+                return LoadResult.Error(e.message.toString())
             }
-            return LoadResult.Success
         }
     }
 }
