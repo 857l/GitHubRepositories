@@ -6,7 +6,7 @@ interface AuthenticationRepository {
 
     fun clear()
 
-    fun data(): String
+    fun token(): String
 
     fun saveUserInput(value: String)
 
@@ -18,7 +18,7 @@ interface AuthenticationRepository {
         private val token: TokenCache,
     ) : AuthenticationRepository {
 
-        override fun data(): String {
+        override fun token(): String {
             return token.read()
         }
 

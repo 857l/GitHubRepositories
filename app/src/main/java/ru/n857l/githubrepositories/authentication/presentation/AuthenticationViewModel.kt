@@ -28,7 +28,7 @@ class AuthenticationViewModel(
     fun init(isFirstRun: Boolean = true) {
         observable.postUiState(
             if (isFirstRun)
-                AuthenticationUiState.Initial(repository.data())
+                AuthenticationUiState.Initial(repository.token())
             else
                 AuthenticationUiState.Empty
         )
