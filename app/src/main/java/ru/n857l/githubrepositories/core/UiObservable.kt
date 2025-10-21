@@ -27,7 +27,6 @@ interface UiObservable<T : Serializable> {
             observerCached = null
         }
 
-
         override fun postUiState(uiState: T) {
             if (observerCached == null) {
                 uiStateCached = uiState
