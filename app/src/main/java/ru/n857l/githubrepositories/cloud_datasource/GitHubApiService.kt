@@ -10,6 +10,7 @@ interface GitHubApiService {
     suspend fun fetchRepositories(
         @Header("Authorization") token: String,
         @Query("sort") sort: String = "updated",
-        @Query("per_page") amount: Int = 10
+        @Query("per_page") amount: Int = 10,
+        @Query("affiliation") affiliation: String = "owner"
     ): List<RepositoryCloud>
 }
