@@ -1,5 +1,7 @@
 package ru.n857l.githubrepositories.repositories.presentation
 
-interface NavigateToRepositories {
+import ru.n857l.githubrepositories.core.NavigateToFrame
+
+interface NavigateToRepositories : NavigateToFrame {
     fun navigateToRepositories()
 }

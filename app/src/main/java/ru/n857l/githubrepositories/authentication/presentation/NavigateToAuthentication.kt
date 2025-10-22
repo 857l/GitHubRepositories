@@ -1,5 +1,7 @@
 package ru.n857l.githubrepositories.authentication.presentation
 
-interface NavigateToAuthentication {
+import ru.n857l.githubrepositories.core.NavigateToFrame
+
+interface NavigateToAuthentication : NavigateToFrame {
     fun navigateToAuthentication()
 }
