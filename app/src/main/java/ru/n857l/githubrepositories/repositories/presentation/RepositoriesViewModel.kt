@@ -23,4 +23,8 @@ class RepositoriesViewModel(
     }
 
     fun repositoriesList() = repositoriesRepository.data()
+
+    override fun clear() {
+        clearViewModel.clear(RepositoriesViewModel::class.java)
+    }
 }

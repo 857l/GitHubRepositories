@@ -13,9 +13,8 @@ import ru.n857l.githubrepositories.databinding.FragmentRepositoriesBinding
 import ru.n857l.githubrepositories.di.ProvideViewModel
 import ru.n857l.githubrepositories.errorrepositories.presentation.NavigateToErrorRepositories
 
-class RepositoriesFragment : AbstractFragmentWithMenu<FragmentRepositoriesBinding>() {
-
-    private lateinit var viewModel: RepositoriesViewModel
+class RepositoriesFragment :
+    AbstractFragmentWithMenu<FragmentRepositoriesBinding, RepositoriesViewModel>() {
 
     override fun bind(
         inflater: LayoutInflater,

@@ -53,7 +53,7 @@ class AuthenticationViewModel(
         }
     }
 
-    fun clear() {
+    override fun clear() {
         clearViewModel.clear(AuthenticationViewModel::class.java)
     }
 
