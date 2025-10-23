@@ -34,12 +34,12 @@ class LoadView : ProgressBar, UpdateVisibility {
         update(restoredState.restore())
     }
 
-    override fun update(visibility: Int) {
-        this.visibility = visibility
+    override fun update(visible: Int) {
+        this.visibility = visible
     }
 
-    override fun update(state: VisibilityUiState) {
-        this.state = state
-        state.update(this)
+    override fun update(uiState: VisibilityUiState) {
+        this.state = uiState
+        uiState.update(this)
     }
 }

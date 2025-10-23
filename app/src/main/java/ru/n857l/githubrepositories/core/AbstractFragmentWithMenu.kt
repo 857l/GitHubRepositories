@@ -9,8 +9,10 @@ import androidx.core.view.MenuProvider
 import androidx.viewbinding.ViewBinding
 import ru.n857l.githubrepositories.R
 import ru.n857l.githubrepositories.authentication.presentation.NavigateToAuthentication
+import ru.n857l.githubrepositories.di.MyViewModel
 
-abstract class AbstractFragmentWithMenu<B : ViewBinding> : AbstractFragment<B>(), MenuProvider {
+abstract class AbstractFragmentWithMenu<B : ViewBinding, V : MyViewModel> :
+    AbstractFragment<B, V>(), MenuProvider {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         requireActivity().addMenuProvider(this, viewLifecycleOwner)
@@ -22,6 +24,7 @@ abstract class AbstractFragmentWithMenu<B : ViewBinding> : AbstractFragment<B>()
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         if (menuItem.itemId == R.id.action_logout) (requireActivity() as NavigateToAuthentication).navigateToAuthentication()
+        viewModel.clear()
         return true
     }
 }

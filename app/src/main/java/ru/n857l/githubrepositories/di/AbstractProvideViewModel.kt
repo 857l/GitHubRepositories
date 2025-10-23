@@ -19,4 +19,6 @@ abstract class AbstractProvideViewModel(
     protected abstract fun module(): Module<*>
 }
 
-interface MyViewModel
+interface MyViewModel {
+    fun clear()
+}

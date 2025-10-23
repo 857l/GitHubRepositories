@@ -27,7 +27,7 @@ interface RepositoriesUiState : Serializable {
             navigate.navigateToErrorRepositories()
     }
 
-    object SomthingError : RepositoriesUiState {
+    object SomethingError : RepositoriesUiState {
         override fun navigate(navigate: NavigateToErrorRepositories) =
             navigate.navigateToErrorRepositories()
     }

@@ -8,7 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import ru.n857l.githubrepositories.core.AbstractFragmentWithMenu
 import ru.n857l.githubrepositories.databinding.FragmentErrorRepositoriesBinding
 
-class ErrorRepositoriesFragment : AbstractFragmentWithMenu<FragmentErrorRepositoriesBinding>() {
+class ErrorRepositoriesFragment :
+    AbstractFragmentWithMenu<FragmentErrorRepositoriesBinding, ErrorRepositoriesViewModel>() {
+
     override fun bind(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -19,5 +21,7 @@ class ErrorRepositoriesFragment : AbstractFragmentWithMenu<FragmentErrorReposito
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel = ErrorRepositoriesViewModel()
     }
 }

@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import ru.n857l.githubrepositories.di.MyViewModel
 
-abstract class AbstractFragment<B : ViewBinding> : Fragment() {
+abstract class AbstractFragment<B : ViewBinding, V : MyViewModel> : Fragment() {
+
+    protected lateinit var viewModel: V
 
     protected var _binding: B? = null
     protected val binding: B

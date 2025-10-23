@@ -13,9 +13,15 @@ import ru.n857l.githubrepositories.databinding.FragmentRepositoriesBinding
 import ru.n857l.githubrepositories.di.ProvideViewModel
 import ru.n857l.githubrepositories.errorrepositories.presentation.NavigateToErrorRepositories
 
-class RepositoriesFragment : AbstractFragmentWithMenu<FragmentRepositoriesBinding>() {
+class RepositoriesFragment :
+    AbstractFragmentWithMenu<FragmentRepositoriesBinding, RepositoriesViewModel>() {
 
-    private lateinit var viewModel: RepositoriesViewModel
+    private val update: (RepositoriesUiState) -> Unit = { uiState ->
+        uiState.update()
+        uiState.navigate(requireActivity() as NavigateToErrorRepositories)
+    }
+
+    private lateinit var adapter: RepositoriesItemAdapter
 
     override fun bind(
         inflater: LayoutInflater,
@@ -31,13 +37,11 @@ class RepositoriesFragment : AbstractFragmentWithMenu<FragmentRepositoriesBindin
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
         super.onViewCreated(view, savedInstanceState)
 
-        setAdapter(RepositoriesItemAdapter(LanguageColorProvider(requireContext())))
-
+        adapter = RepositoriesItemAdapter(LanguageColorProvider(requireContext()))
+        binding.repositoriesList.adapter = adapter
         binding.repositoriesList.addItemDecoration(addDivider())
 
-        val uiState = viewModel.init(savedInstanceState == null)
-
-        uiState.navigate(requireActivity() as NavigateToErrorRepositories)
+        viewModel.init(savedInstanceState == null)
     }
 
     private fun addDivider(): DividerItemDecoration {
@@ -48,9 +52,15 @@ class RepositoriesFragment : AbstractFragmentWithMenu<FragmentRepositoriesBindin
         return divider
     }
 
-    fun setAdapter(adapter: RepositoriesItemAdapter) {
+    override fun onResume() {
+        super.onResume()
+        viewModel.startUpdates(observer = update)
         adapter.update(viewModel.repositoriesList())
-        binding.repositoriesList.adapter = adapter
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.stopUpdates()
     }
 }
 

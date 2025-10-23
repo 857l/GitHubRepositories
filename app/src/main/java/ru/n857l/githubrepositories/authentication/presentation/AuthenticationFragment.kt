@@ -11,9 +11,8 @@ import ru.n857l.githubrepositories.databinding.FragmentAuthenticationBinding
 import ru.n857l.githubrepositories.di.ProvideViewModel
 import ru.n857l.githubrepositories.repositories.presentation.NavigateToRepositories
 
-class AuthenticationFragment : AbstractFragment<FragmentAuthenticationBinding>() {
-
-    private lateinit var viewModel: AuthenticationViewModel
+class AuthenticationFragment :
+    AbstractFragment<FragmentAuthenticationBinding, AuthenticationViewModel>() {
 
     private val update: (AuthenticationUiState) -> Unit = { uiState ->
         uiState.update(
