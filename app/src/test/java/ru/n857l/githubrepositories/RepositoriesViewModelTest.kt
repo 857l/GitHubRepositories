@@ -10,7 +10,6 @@ import ru.n857l.githubrepositories.repositories.presentation.RepositoriesUiState
 import ru.n857l.githubrepositories.repositories.presentation.RepositoriesViewModel
 import ru.n857l.githubrepositories.repositories.presentation.RepositoryItem
 
-//TODO TEST
 class RepositoriesViewModelTest {
 
     private lateinit var viewModel: RepositoriesViewModel

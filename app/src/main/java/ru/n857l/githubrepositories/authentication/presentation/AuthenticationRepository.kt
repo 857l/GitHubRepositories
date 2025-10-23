@@ -19,21 +19,21 @@ interface AuthenticationRepository {
     suspend fun load(): LoadResult
 
     class Base(
-        private val token: TokenCache,
+        private val tokenCache: TokenCache,
         private val repositoriesCache: RepositoriesCache,
         private val service: GitHubApiService
     ) : AuthenticationRepository {
 
         override fun token(): String {
-            return token.read()
+            return tokenCache.read()
         }
 
         override fun saveUserInput(value: String) {
-            token.save(value)
+            tokenCache.save(value)
         }
 
         override fun clear() {
-            token.clear()
+            tokenCache.clear()
         }
 
         override fun tokenIsValid(text: String): Boolean {
@@ -43,7 +43,7 @@ interface AuthenticationRepository {
 
         override suspend fun load(): LoadResult {
             try {
-                val tokenHeader = "Bearer ${token.read()}"
+                val tokenHeader = "Bearer ${tokenCache.read()}"
                 val result = service.fetchRepositories(token = tokenHeader)
 
                 if (result.isEmpty())
