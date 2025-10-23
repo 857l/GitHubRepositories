@@ -41,7 +41,7 @@ class AuthenticationViewModelTest {
     }
 
     @Test
-    fun case1() {
+    fun handleInput() {
         repository.expectResult(LoadResult.Success)
 
         viewModel.init()
@@ -100,7 +100,7 @@ class AuthenticationViewModelTest {
     }
 
     @Test
-    fun case2() {
+    fun sameFragment() {
         repository.expectResult(LoadResult.Success)
 
         viewModel.load(isFirstRun = true)
@@ -123,8 +123,40 @@ class AuthenticationViewModelTest {
     }
 
     @Test
-    fun case3() {
+    fun recreateActivity() {
+        repository.expectResult(LoadResult.Error("invalid token"))
 
+        viewModel.load(isFirstRun = true)
+        assertEquals(AuthenticationUiState.Load, observable.postUiStateCalledList.first())
+        assertEquals(1, repository.loadCalledCount)
+
+        viewModel.startUpdates(observer = fragment)
+        assertEquals(AuthenticationUiState.Load, fragment.statesList.first())
+        assertEquals(1, fragment.statesList.size)
+
+        viewModel.stopUpdates()
+        assertEquals(1, observable.unregisterCalledCount)
+
+        runAsync.returnResult()
+        assertEquals(
+            AuthenticationUiState.Error("invalid token"),
+            observable.postUiStateCalledList.last()
+        )
+        assertEquals(2, observable.postUiStateCalledList.size)
+        assertEquals(1, fragment.statesList.size)
+
+        val newFragment = FakeFragment()
+
+        viewModel.load(isFirstRun = false)
+        assertEquals(1, repository.loadCalledCount)
+
+        viewModel.startUpdates(observer = newFragment)
+        assertEquals(2, observable.registerCalledCount)
+        assertEquals(
+            AuthenticationUiState.Error("invalid token"),
+            newFragment.statesList.first()
+        )
+        assertEquals(1, newFragment.statesList.size)
     }
 }
 
