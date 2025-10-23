@@ -9,9 +9,9 @@ import ru.n857l.githubrepositories.authentication.presentation.AuthenticationRep
 import ru.n857l.githubrepositories.authentication.presentation.AuthenticationUiState
 import ru.n857l.githubrepositories.authentication.presentation.AuthenticationViewModel
 import ru.n857l.githubrepositories.authentication.presentation.data.LoadResult
-import ru.n857l.githubrepositories.core.di.ClearViewModel
 import ru.n857l.githubrepositories.core.RunAsync
 import ru.n857l.githubrepositories.core.UiObservable
+import ru.n857l.githubrepositories.core.di.ClearViewModel
 import ru.n857l.githubrepositories.di.MyViewModel
 
 //TODO TEST
@@ -21,7 +21,7 @@ class AuthenticationViewModelTest {
     private lateinit var viewModel: AuthenticationViewModel
     private lateinit var repository: FakeAuthenticationRepository
     private lateinit var clearViewModel: FakeClearViewModel
-    private lateinit var observable: FakeUiObservable
+    private lateinit var observable: FakeUiObservableAuthentication
     private lateinit var runAsync: FakeRunAsync
     private lateinit var fragment: FakeFragment
 
@@ -29,7 +29,7 @@ class AuthenticationViewModelTest {
     fun setup() {
         repository = FakeAuthenticationRepository()
         clearViewModel = FakeClearViewModel()
-        observable = FakeUiObservable()
+        observable = FakeUiObservableAuthentication()
         runAsync = FakeRunAsync()
         viewModel = AuthenticationViewModel(
             repository = repository,
@@ -141,7 +141,7 @@ class FakeClearViewModel : ClearViewModel {
     }
 }
 
-private class FakeUiObservable : UiObservable<AuthenticationUiState> {
+private class FakeUiObservableAuthentication : UiObservable<AuthenticationUiState> {
 
     private var uiStateCached: AuthenticationUiState? = null
     private var observerCached: ((AuthenticationUiState) -> Unit)? = null

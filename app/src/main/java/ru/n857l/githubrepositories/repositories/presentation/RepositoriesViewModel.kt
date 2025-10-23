@@ -1,7 +1,7 @@
 package ru.n857l.githubrepositories.repositories.presentation
 
-import ru.n857l.githubrepositories.core.di.ClearViewModel
 import ru.n857l.githubrepositories.core.UiObservable
+import ru.n857l.githubrepositories.core.di.ClearViewModel
 import ru.n857l.githubrepositories.di.MyViewModel
 
 class RepositoriesViewModel(
@@ -18,7 +18,7 @@ class RepositoriesViewModel(
                     clearViewModel.clear(RepositoriesViewModel::class.java)
                     RepositoriesUiState.EmptyRepositories
                 } else
-                    RepositoriesUiState.Show(repository)
+                    RepositoriesUiState.Empty
             } else
                 RepositoriesUiState.Empty
         )

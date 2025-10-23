@@ -11,23 +11,7 @@ interface RepositoriesUiState : Serializable {
 
     object Empty : RepositoriesUiState
 
-    data class Show(
-        private val repository: RepositoriesRepository
-    ) : RepositoriesUiState {
-
-    }
-
-    object ConnectionError : RepositoriesUiState {
-        override fun navigate(navigate: NavigateToErrorRepositories) =
-            navigate.navigateToErrorRepositories()
-    }
-
     object EmptyRepositories : RepositoriesUiState {
-        override fun navigate(navigate: NavigateToErrorRepositories) =
-            navigate.navigateToErrorRepositories()
-    }
-
-    object SomethingError : RepositoriesUiState {
         override fun navigate(navigate: NavigateToErrorRepositories) =
             navigate.navigateToErrorRepositories()
     }
