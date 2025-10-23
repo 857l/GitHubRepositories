@@ -5,18 +5,7 @@ interface RepositoriesRepository {
     fun data(): List<RepositoryItem>
 
     class Base(
-        private val repositoriesList: List<RepositoryItem> = listOf(
-            RepositoryItem(
-                "moko-web3",
-                "Kotlin",
-                "Ethereum Web3 implementation"
-            ),
-            RepositoryItem(
-                "moko-web3",
-                "Objective-C++",
-                "Template project of a Mobile (Android & iOS) Kotlin MultiPlatform project with the MOKO libraries and modularized architecture"
-            )
-        )
+        private val repositoriesList: List<RepositoryItem>
     ) : RepositoriesRepository {
 
         override fun data(): List<RepositoryItem> = repositoriesList

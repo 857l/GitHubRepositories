@@ -35,9 +35,11 @@ class RepositoriesItemAdapter(
     }
 
     fun update(newList: List<RepositoryItem>) {
+        val diffCallback = DiffUtilCallback(itemList, newList)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
         itemList.clear()
         itemList.addAll(newList)
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 }
 
@@ -66,13 +68,11 @@ class DiffUtilCallback(
 
     override fun getNewListSize(): Int = newList.size
 
-    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+        oldList[oldItemPosition].repositoryName == newList[newItemPosition].repositoryName
 
-    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+        oldList[oldItemPosition] == newList[newItemPosition]
 }
 
 class LanguageColorProvider(context: Context) {
@@ -96,6 +96,3 @@ class LanguageColorProvider(context: Context) {
         return colorMap[language] ?: Color.WHITE
     }
 }
-
-//TODO DIffUtil
-//TODO SaveStateScroll
