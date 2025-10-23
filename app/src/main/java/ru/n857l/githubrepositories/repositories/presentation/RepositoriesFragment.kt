@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import ru.n857l.githubrepositories.R
+import ru.n857l.githubrepositories.core.adapter.LanguageColorProvider
+import ru.n857l.githubrepositories.core.adapter.RepositoriesItemAdapter
 import ru.n857l.githubrepositories.core.di.AbstractFragmentWithMenu
 import ru.n857l.githubrepositories.databinding.FragmentRepositoriesBinding
 import ru.n857l.githubrepositories.di.ProvideViewModel
