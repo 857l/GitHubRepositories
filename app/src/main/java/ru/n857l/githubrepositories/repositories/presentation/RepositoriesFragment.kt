@@ -16,6 +16,13 @@ import ru.n857l.githubrepositories.errorrepositories.presentation.NavigateToErro
 class RepositoriesFragment :
     AbstractFragmentWithMenu<FragmentRepositoriesBinding, RepositoriesViewModel>() {
 
+    private val update: (RepositoriesUiState) -> Unit = { uiState ->
+        uiState.update()
+        uiState.navigate(requireActivity() as NavigateToErrorRepositories)
+    }
+
+    private lateinit var adapter: RepositoriesItemAdapter
+
     override fun bind(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -30,13 +37,11 @@ class RepositoriesFragment :
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
         super.onViewCreated(view, savedInstanceState)
 
-        setAdapter(RepositoriesItemAdapter(LanguageColorProvider(requireContext())))
-
+        adapter = RepositoriesItemAdapter(LanguageColorProvider(requireContext()))
+        binding.repositoriesList.adapter = adapter
         binding.repositoriesList.addItemDecoration(addDivider())
 
-        val uiState = viewModel.init(savedInstanceState == null)
-
-        uiState.navigate(requireActivity() as NavigateToErrorRepositories)
+        viewModel.init(savedInstanceState == null)
     }
 
     private fun addDivider(): DividerItemDecoration {
@@ -47,9 +52,15 @@ class RepositoriesFragment :
         return divider
     }
 
-    fun setAdapter(adapter: RepositoriesItemAdapter) {
+    override fun onResume() {
+        super.onResume()
+        viewModel.startUpdates(observer = update)
         adapter.update(viewModel.repositoriesList())
-        binding.repositoriesList.adapter = adapter
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.stopUpdates()
     }
 }
 

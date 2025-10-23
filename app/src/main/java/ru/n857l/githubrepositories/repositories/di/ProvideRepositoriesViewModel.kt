@@ -3,9 +3,11 @@ package ru.n857l.githubrepositories.repositories.presentation.di
 import ru.n857l.githubrepositories.core.Core
 import ru.n857l.githubrepositories.core.Module
 import ru.n857l.githubrepositories.core.ParseRepositories
+import ru.n857l.githubrepositories.core.UiObservable
 import ru.n857l.githubrepositories.di.AbstractProvideViewModel
 import ru.n857l.githubrepositories.di.ProvideViewModel
 import ru.n857l.githubrepositories.repositories.presentation.RepositoriesRepository
+import ru.n857l.githubrepositories.repositories.presentation.RepositoriesUiState
 import ru.n857l.githubrepositories.repositories.presentation.RepositoriesViewModel
 
 class ProvideRepositoriesViewModel(
@@ -22,8 +24,10 @@ class RepositoriesModule(
 
     override fun viewModel() =
         RepositoriesViewModel(
-            RepositoriesRepository.Base(
+            repository = RepositoriesRepository.Base(
                 ParseRepositories.Base().map(core.repositoriesCache.read())
-            ), core.clearViewModel
+            ),
+            clearViewModel = core.clearViewModel,
+            observable = UiObservable.Base<RepositoriesUiState>(),
         )
 }
