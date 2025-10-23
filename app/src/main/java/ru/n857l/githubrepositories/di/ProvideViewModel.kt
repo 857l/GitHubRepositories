@@ -1,7 +1,7 @@
 package ru.n857l.githubrepositories.di
 
 import ru.n857l.githubrepositories.authentication.presentation.di.ProvideAuthenticationViewModel
-import ru.n857l.githubrepositories.core.Core
+import ru.n857l.githubrepositories.core.di.Core
 import ru.n857l.githubrepositories.repositories.presentation.di.ProvideRepositoriesViewModel
 
 interface ProvideViewModel {

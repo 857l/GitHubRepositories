@@ -8,8 +8,8 @@ import ru.n857l.githubrepositories.authentication.presentation.AuthenticationRep
 import ru.n857l.githubrepositories.authentication.presentation.AuthenticationUiState
 import ru.n857l.githubrepositories.authentication.presentation.AuthenticationViewModel
 import ru.n857l.githubrepositories.cloud_datasource.GitHubApiService
-import ru.n857l.githubrepositories.core.Core
-import ru.n857l.githubrepositories.core.Module
+import ru.n857l.githubrepositories.core.di.Core
+import ru.n857l.githubrepositories.core.di.Module
 import ru.n857l.githubrepositories.core.RunAsync
 import ru.n857l.githubrepositories.core.UiObservable
 import ru.n857l.githubrepositories.di.AbstractProvideViewModel

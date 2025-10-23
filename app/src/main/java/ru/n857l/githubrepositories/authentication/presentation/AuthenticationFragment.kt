@@ -6,7 +6,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import ru.n857l.githubrepositories.core.AbstractFragment
+import ru.n857l.githubrepositories.core.di.AbstractFragment
 import ru.n857l.githubrepositories.databinding.FragmentAuthenticationBinding
 import ru.n857l.githubrepositories.di.ProvideViewModel
 import ru.n857l.githubrepositories.repositories.presentation.NavigateToRepositories

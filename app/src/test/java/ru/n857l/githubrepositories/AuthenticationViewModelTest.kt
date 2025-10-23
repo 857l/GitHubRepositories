@@ -9,7 +9,7 @@ import ru.n857l.githubrepositories.authentication.presentation.AuthenticationRep
 import ru.n857l.githubrepositories.authentication.presentation.AuthenticationUiState
 import ru.n857l.githubrepositories.authentication.presentation.AuthenticationViewModel
 import ru.n857l.githubrepositories.authentication.presentation.data.LoadResult
-import ru.n857l.githubrepositories.core.ClearViewModel
+import ru.n857l.githubrepositories.core.di.ClearViewModel
 import ru.n857l.githubrepositories.core.RunAsync
 import ru.n857l.githubrepositories.core.UiObservable
 import ru.n857l.githubrepositories.di.MyViewModel
