@@ -1,4 +1,4 @@
-package ru.n857l.githubrepositories.repositories.presentation
+package ru.n857l.githubrepositories.core.cache
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken

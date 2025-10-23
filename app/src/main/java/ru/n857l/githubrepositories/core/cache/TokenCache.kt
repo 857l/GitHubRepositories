@@ -1,4 +1,4 @@
-package ru.n857l.githubrepositories.authentication.presentation
+package ru.n857l.githubrepositories.core.cache
 
 import ru.n857l.githubrepositories.core.Mutable
 import ru.n857l.githubrepositories.core.PreferencesProvider
