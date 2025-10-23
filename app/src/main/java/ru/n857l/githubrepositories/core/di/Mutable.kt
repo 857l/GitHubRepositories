@@ -1,4 +1,4 @@
-package ru.n857l.githubrepositories.core
+package ru.n857l.githubrepositories.core.di
 
 interface Mutable<T : Any> : Read<T>, Save<T>, Clear
 

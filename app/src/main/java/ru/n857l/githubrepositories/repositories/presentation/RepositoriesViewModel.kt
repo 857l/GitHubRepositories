@@ -1,6 +1,6 @@
 package ru.n857l.githubrepositories.repositories.presentation
 
-import ru.n857l.githubrepositories.core.ClearViewModel
+import ru.n857l.githubrepositories.core.di.ClearViewModel
 import ru.n857l.githubrepositories.core.UiObservable
 import ru.n857l.githubrepositories.di.MyViewModel
 

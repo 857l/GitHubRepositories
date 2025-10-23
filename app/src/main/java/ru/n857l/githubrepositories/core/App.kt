@@ -1,6 +1,9 @@
 package ru.n857l.githubrepositories.core
 
 import android.app.Application
+import ru.n857l.githubrepositories.core.di.ClearViewModel
+import ru.n857l.githubrepositories.core.di.Core
+import ru.n857l.githubrepositories.core.di.ManageViewModels
 import ru.n857l.githubrepositories.di.MyViewModel
 import ru.n857l.githubrepositories.di.ProvideViewModel
 

@@ -3,7 +3,8 @@ package ru.n857l.githubrepositories.authentication.presentation
 import android.util.Log
 import ru.n857l.githubrepositories.authentication.presentation.data.LoadResult
 import ru.n857l.githubrepositories.cloud_datasource.GitHubApiService
-import ru.n857l.githubrepositories.repositories.presentation.RepositoriesCache
+import ru.n857l.githubrepositories.core.cache.RepositoriesCache
+import ru.n857l.githubrepositories.core.cache.TokenCache
 
 interface AuthenticationRepository {
 

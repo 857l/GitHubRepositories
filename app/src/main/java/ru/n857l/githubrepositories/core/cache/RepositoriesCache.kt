@@ -1,10 +1,10 @@
-package ru.n857l.githubrepositories.repositories.presentation
+package ru.n857l.githubrepositories.core.cache
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import ru.n857l.githubrepositories.cloud_datasource.RepositoryCloud
-import ru.n857l.githubrepositories.core.Mutable
-import ru.n857l.githubrepositories.core.PreferencesProvider
+import ru.n857l.githubrepositories.core.di.Mutable
+import ru.n857l.githubrepositories.core.di.PreferencesProvider
 
 interface RepositoriesCache : Mutable<List<RepositoryCloud>> {
 

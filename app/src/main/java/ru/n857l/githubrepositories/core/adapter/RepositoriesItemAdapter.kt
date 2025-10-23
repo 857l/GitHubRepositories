@@ -1,4 +1,4 @@
-package ru.n857l.githubrepositories.repositories.presentation
+package ru.n857l.githubrepositories.core.adapter
 
 import android.content.Context
 import android.graphics.Color
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import org.json.JSONObject
 import ru.n857l.githubrepositories.databinding.ItemRepositoryBinding
+import ru.n857l.githubrepositories.repositories.presentation.RepositoryItem
 import java.nio.charset.Charset
 
 class RepositoriesItemAdapter(

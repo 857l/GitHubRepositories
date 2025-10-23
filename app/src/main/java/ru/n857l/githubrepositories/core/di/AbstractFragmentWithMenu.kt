@@ -1,4 +1,4 @@
-package ru.n857l.githubrepositories.core
+package ru.n857l.githubrepositories.core.di
 
 import android.os.Bundle
 import android.view.Menu

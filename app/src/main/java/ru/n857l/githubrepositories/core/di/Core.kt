@@ -1,9 +1,9 @@
-package ru.n857l.githubrepositories.core
+package ru.n857l.githubrepositories.core.di
 
 import android.content.Context
 import com.google.gson.Gson
-import ru.n857l.githubrepositories.authentication.presentation.TokenCache
-import ru.n857l.githubrepositories.repositories.presentation.RepositoriesCache
+import ru.n857l.githubrepositories.core.cache.RepositoriesCache
+import ru.n857l.githubrepositories.core.cache.TokenCache
 
 class Core(context: Context, var clearViewModel: ClearViewModel) {
 

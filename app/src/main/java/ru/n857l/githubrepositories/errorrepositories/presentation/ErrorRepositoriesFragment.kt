@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import ru.n857l.githubrepositories.core.AbstractFragmentWithMenu
+import ru.n857l.githubrepositories.core.di.AbstractFragmentWithMenu
 import ru.n857l.githubrepositories.databinding.FragmentErrorRepositoriesBinding
 
 class ErrorRepositoriesFragment :
