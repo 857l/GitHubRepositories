@@ -96,5 +96,3 @@ class LanguageColorProvider(context: Context) {
         return colorMap[language] ?: Color.WHITE
     }
 }
-
-//TODO SaveStateScroll
