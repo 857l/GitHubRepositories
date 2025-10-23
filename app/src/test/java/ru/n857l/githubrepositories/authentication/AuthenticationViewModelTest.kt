@@ -1,4 +1,4 @@
-package ru.n857l.githubrepositories
+package ru.n857l.githubrepositories.authentication
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.runBlocking
@@ -42,14 +42,13 @@ class AuthenticationViewModelTest {
 
     @Test
     fun case1() {
-        viewModel.init()//onViewCreatedFirstTime
+        repository.expectResult(LoadResult.Success)
+
+        viewModel.init()
         assertEquals(
             AuthenticationUiState.Initial(""),
             observable.postUiStateCalledList.last()
         )
-
-        viewModel.startUpdates(observer = fragment)//onResume
-        assertEquals(1, observable.registerCalledCount)
 
         viewModel.handleUserInput("1234567890")
         assertEquals(
@@ -98,6 +97,34 @@ class AuthenticationViewModelTest {
             AuthenticationUiState.SuccessInput,
             observable.postUiStateCalledList.last()
         )
+    }
+
+    @Test
+    fun case2() {
+        repository.expectResult(LoadResult.Success)
+
+        viewModel.load(isFirstRun = true)
+        assertEquals(1, observable.postUiStateCalledList.size)
+        assertEquals(AuthenticationUiState.Load, observable.postUiStateCalledList.first())
+        assertEquals(1, repository.loadCalledCount)
+
+        viewModel.startUpdates(observer = fragment)
+        assertEquals(1, observable.registerCalledCount)
+        assertEquals(AuthenticationUiState.Load, fragment.statesList.first())
+        assertEquals(1, fragment.statesList.size)
+
+        runAsync.returnResult()
+        assertEquals(AuthenticationUiState.Success, observable.postUiStateCalledList.last())
+        assertEquals(2, observable.postUiStateCalledList.size)
+        assertEquals(AuthenticationUiState.Success, fragment.statesList.last())
+        assertEquals(2, fragment.statesList.size)
+
+        assertEquals(1, clearViewModel.clearCalledCount)
+    }
+
+    @Test
+    fun case3() {
+
     }
 }
 

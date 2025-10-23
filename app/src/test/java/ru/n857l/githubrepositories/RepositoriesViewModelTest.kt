@@ -3,6 +3,7 @@ package ru.n857l.githubrepositories
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import ru.n857l.githubrepositories.authentication.FakeClearViewModel
 import ru.n857l.githubrepositories.core.UiObservable
 import ru.n857l.githubrepositories.repositories.presentation.RepositoriesRepository
 import ru.n857l.githubrepositories.repositories.presentation.RepositoriesUiState
