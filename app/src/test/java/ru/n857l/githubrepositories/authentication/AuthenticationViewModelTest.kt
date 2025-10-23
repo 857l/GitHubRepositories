@@ -14,8 +14,6 @@ import ru.n857l.githubrepositories.core.UiObservable
 import ru.n857l.githubrepositories.core.di.ClearViewModel
 import ru.n857l.githubrepositories.di.MyViewModel
 
-//TODO TEST
-
 class AuthenticationViewModelTest {
 
     private lateinit var viewModel: AuthenticationViewModel
