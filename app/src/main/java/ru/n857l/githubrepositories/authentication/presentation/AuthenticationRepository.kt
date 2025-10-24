@@ -5,6 +5,7 @@ import ru.n857l.githubrepositories.authentication.presentation.data.LoadResult
 import ru.n857l.githubrepositories.cloud_datasource.GitHubApiService
 import ru.n857l.githubrepositories.core.cache.RepositoriesCache
 import ru.n857l.githubrepositories.core.cache.TokenCache
+import java.io.IOException
 
 interface AuthenticationRepository {
 
@@ -37,25 +38,44 @@ interface AuthenticationRepository {
         }
 
         override fun tokenIsValid(text: String): Boolean {
-            val regex = Regex("^[A-Za-z0-9_]+$")
+            val regex = Regex("^[A-Za-z0-9_-]+$")
             return regex.matches(text)
         }
 
         override suspend fun load(): LoadResult {
-            try {
+            return try {
                 val tokenHeader = "Bearer ${tokenCache.read()}"
                 val result = service.fetchRepositories(token = tokenHeader)
+                repositoriesCache.save(result)
 
-                if (result.isEmpty())
-                    return LoadResult.Success
-                else {
-                    repositoriesCache.save(result)
-                    Log.d("857ll", result.toString())
-                    return LoadResult.Success
-                }
+                Log.d("GitHubApi", "Loaded ${result.size} repositories")
+                LoadResult.Success
+
+            } catch (e: retrofit2.HttpException) {
+                val code = e.code()
+                val errorBody = e.response()?.errorBody()?.string().orEmpty()
+
+                Log.e("GitHubApi", "HTTP error $code: $errorBody", e)
+
+                LoadResult.Error(handleResponseCode(code, errorBody))
+
+            } catch (e: IOException) {
+                Log.e("GitHubApi", "Network error", e)
+                LoadResult.Error("Please check your internet connection")
+
             } catch (e: Exception) {
-                Log.d("857ll", e.message.toString())
-                return LoadResult.Error(e.message.toString())
+                Log.e("GitHubApi", "Unexpected error", e)
+                LoadResult.Error(e.message ?: "Unknown error occurred")
+            }
+        }
+
+        private fun handleResponseCode(code: Int, errorBody: String): String {
+            return when (code) {
+                401 -> "Unauthorized — invalid token"
+                403 -> "Access forbidden — check permissions"
+                404 -> "Endpoint not found"
+                in 500..599 -> "Server error ($code): please try again later"
+                else -> errorBody.ifBlank { "Unexpected error ($code)" }
             }
         }
     }
