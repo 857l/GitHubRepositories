@@ -6,11 +6,11 @@ import retrofit2.http.Query
 
 interface GitHubApiService {
 
-    @GET("/user/repos")
+    @GET("user/repos")
     suspend fun fetchRepositories(
         @Header("Authorization") token: String,
         @Query("sort") sort: String = "updated",
-        @Query("per_page") amount: Int = 10,
+        @Query("per_page") amount: Int = 30,
         @Query("affiliation") affiliation: String = "owner"
     ): List<RepositoryCloud>
 }
