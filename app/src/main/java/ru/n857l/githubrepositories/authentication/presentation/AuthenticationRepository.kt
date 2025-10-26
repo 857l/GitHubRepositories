@@ -9,7 +9,7 @@ import java.io.IOException
 
 interface AuthenticationRepository {
 
-    fun clear()
+    fun clearToken()
 
     fun token(): String
 
@@ -33,7 +33,7 @@ interface AuthenticationRepository {
             tokenCache.save(value)
         }
 
-        override fun clear() {
+        override fun clearToken() {
             tokenCache.clear()
         }
 

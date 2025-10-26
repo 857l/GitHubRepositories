@@ -162,7 +162,7 @@ private class FakeAuthenticationRepository : AuthenticationRepository {
 
     private var userInput: String = ""
 
-    override fun clear() {
+    override fun clearToken() {
         userInput = ""
     }
 
