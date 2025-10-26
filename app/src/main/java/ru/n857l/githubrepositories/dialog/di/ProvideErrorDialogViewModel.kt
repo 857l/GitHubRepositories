@@ -20,6 +20,9 @@ class ErrorDialogViewModule(
 
     override fun viewModel(): ErrorDialogViewModel {
 
-        return ErrorDialogViewModel(core.clearViewModel)
+        return ErrorDialogViewModel(
+            core.errorCache,
+            core.clearViewModel
+        )
     }
 }

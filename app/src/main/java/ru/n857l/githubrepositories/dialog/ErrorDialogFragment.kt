@@ -30,6 +30,8 @@ class ErrorDialogFragment : DialogFragment() {
 
         viewModel =
             (requireActivity().application as ProvideViewModel).makeViewModel(ErrorDialogViewModel::class.java)
+
+        binding.errorDescription.text = viewModel.error()
     }
 
     override fun onDestroyView() {
