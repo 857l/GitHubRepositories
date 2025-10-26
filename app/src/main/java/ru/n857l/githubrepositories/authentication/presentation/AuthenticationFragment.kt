@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import ru.n857l.githubrepositories.core.NavigateToErrorDialog
 import ru.n857l.githubrepositories.core.di.AbstractFragment
 import ru.n857l.githubrepositories.databinding.FragmentAuthenticationBinding
 import ru.n857l.githubrepositories.di.ProvideViewModel
@@ -20,7 +21,8 @@ class AuthenticationFragment :
             binding.singInButton,
             binding.progressBar
         )
-        uiState.navigate((requireActivity() as NavigateToRepositories))
+        uiState.navigate(requireActivity() as NavigateToRepositories)
+        uiState.showError(requireActivity() as NavigateToErrorDialog)
     }
 
     private val textWatcher = object : TextWatcher {

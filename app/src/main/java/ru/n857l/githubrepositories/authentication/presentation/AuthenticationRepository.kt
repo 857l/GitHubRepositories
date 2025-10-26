@@ -5,11 +5,12 @@ import ru.n857l.githubrepositories.authentication.presentation.data.LoadResult
 import ru.n857l.githubrepositories.cloud_datasource.GitHubApiService
 import ru.n857l.githubrepositories.core.cache.RepositoriesCache
 import ru.n857l.githubrepositories.core.cache.TokenCache
+import ru.n857l.githubrepositories.dialog.ErrorCache
 import java.io.IOException
 
 interface AuthenticationRepository {
 
-    fun clear()
+    fun clearToken()
 
     fun token(): String
 
@@ -22,6 +23,7 @@ interface AuthenticationRepository {
     class Base(
         private val tokenCache: TokenCache,
         private val repositoriesCache: RepositoriesCache,
+        private val errorCache: ErrorCache,
         private val service: GitHubApiService
     ) : AuthenticationRepository {
 
@@ -33,7 +35,7 @@ interface AuthenticationRepository {
             tokenCache.save(value)
         }
 
-        override fun clear() {
+        override fun clearToken() {
             tokenCache.clear()
         }
 
@@ -56,15 +58,17 @@ interface AuthenticationRepository {
                 val errorBody = e.response()?.errorBody()?.string().orEmpty()
 
                 Log.e("GitHubApi", "HTTP error $code: $errorBody", e)
-
+                errorCache.save(errorBody)
                 LoadResult.Error(handleResponseCode(code, errorBody))
 
             } catch (e: IOException) {
                 Log.e("GitHubApi", "Network error", e)
+                errorCache.save("Please check your internet connection")
                 LoadResult.Error("Please check your internet connection")
 
             } catch (e: Exception) {
                 Log.e("GitHubApi", "Unexpected error", e)
+                errorCache.save(e.message ?: "Unknown error occurred")
                 LoadResult.Error(e.message ?: "Unknown error occurred")
             }
         }

@@ -1,5 +1,6 @@
 package ru.n857l.githubrepositories.authentication.presentation
 
+import ru.n857l.githubrepositories.core.NavigateToErrorDialog
 import ru.n857l.githubrepositories.core.NavigateToFrame
 import ru.n857l.githubrepositories.errorrepositories.presentation.NavigateToErrorRepositories
 import ru.n857l.githubrepositories.repositories.presentation.NavigateToRepositories
@@ -20,6 +21,8 @@ interface AuthenticationUiState : Serializable {
     ) = Unit
 
     fun navigate(navigate: NavigateToFrame) = Unit
+
+    fun showError(navigate: NavigateToErrorDialog) = Unit
 
     abstract class Abstract(
         private val tokenInputUiState: InputUiState,
@@ -78,6 +81,14 @@ interface AuthenticationUiState : Serializable {
     object Load :
         Abstract(InputUiState.Correct, SignInUiState.NotEnabled, VisibilityUiState.Visible)
 
-    data class Error(private val message: String) :
+    data class Error(val message: String) :
         Abstract(InputUiState.Correct, SignInUiState.Enabled, VisibilityUiState.Gone)
+
+    data class ShowError(private val message: String) :
+        AuthenticationUiState,
+        Abstract(InputUiState.Correct, SignInUiState.Enabled, VisibilityUiState.Gone) {
+        override fun showError(navigate: NavigateToErrorDialog) {
+            navigate.showErrorDialog(message)
+        }
+    }
 }

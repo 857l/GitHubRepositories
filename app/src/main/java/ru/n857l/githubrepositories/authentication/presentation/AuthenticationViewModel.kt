@@ -3,9 +3,9 @@ package ru.n857l.githubrepositories.authentication.presentation
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
-import ru.n857l.githubrepositories.core.di.ClearViewModel
 import ru.n857l.githubrepositories.core.RunAsync
 import ru.n857l.githubrepositories.core.UiObservable
+import ru.n857l.githubrepositories.core.di.ClearViewModel
 import ru.n857l.githubrepositories.di.MyViewModel
 
 class AuthenticationViewModel(
@@ -46,7 +46,7 @@ class AuthenticationViewModel(
                     clear()
                     AuthenticationUiState.Success
                 } else
-                    AuthenticationUiState.Error(result.message())
+                    AuthenticationUiState.ShowError(result.message())
             }) {
                 observable.postUiState(it)
             }

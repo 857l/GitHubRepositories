@@ -52,6 +52,7 @@ class AuthenticationModule(
             repository = AuthenticationRepository.Base(
                 tokenCache = core.tokenCache,
                 repositoriesCache = core.repositoriesCache,
+                errorCache = core.errorCache,
                 service = service
             ),
             clearViewModel = core.clearViewModel,
