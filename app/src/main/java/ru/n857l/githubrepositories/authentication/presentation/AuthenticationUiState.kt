@@ -81,9 +81,6 @@ interface AuthenticationUiState : Serializable {
     object Load :
         Abstract(InputUiState.Correct, SignInUiState.NotEnabled, VisibilityUiState.Visible)
 
-    data class Error(val message: String) :
-        Abstract(InputUiState.Correct, SignInUiState.Enabled, VisibilityUiState.Gone)
-
     data class ShowError(private val message: String) :
         AuthenticationUiState,
         Abstract(InputUiState.Correct, SignInUiState.Enabled, VisibilityUiState.Gone) {
