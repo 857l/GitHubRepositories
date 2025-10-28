@@ -1,6 +1,5 @@
 package ru.n857l.githubrepositories.authentication.presentation
 
-import android.util.Log
 import ru.n857l.githubrepositories.authentication.presentation.data.LoadResult
 import ru.n857l.githubrepositories.cloud_datasource.GitHubApiService
 import ru.n857l.githubrepositories.core.cache.RepositoriesCache
@@ -50,24 +49,24 @@ interface AuthenticationRepository {
                 val result = service.fetchRepositories(token = tokenHeader)
                 repositoriesCache.save(result)
 
-                Log.d("GitHubApi", "Loaded ${result.size} repositories")
+                //Log.d("GitHubApi", "Loaded ${result.size} repositories")
                 LoadResult.Success
 
             } catch (e: retrofit2.HttpException) {
                 val code = e.code()
                 val errorBody = e.response()?.errorBody()?.string().orEmpty()
 
-                Log.e("GitHubApi", "HTTP error $code: $errorBody", e)
+                //Log.e("GitHubApi", "HTTP error $code: $errorBody", e)
                 errorCache.save(errorBody)
                 LoadResult.Error(handleResponseCode(code, errorBody))
 
             } catch (e: IOException) {
-                Log.e("GitHubApi", "Network error", e)
+                //Log.e("GitHubApi", "Network error", e)
                 errorCache.save("Please check your internet connection")
                 LoadResult.Error("Please check your internet connection")
 
             } catch (e: Exception) {
-                Log.e("GitHubApi", "Unexpected error", e)
+                //Log.e("GitHubApi", "Unexpected error", e)
                 errorCache.save(e.message ?: "Unknown error occurred")
                 LoadResult.Error(e.message ?: "Unknown error occurred")
             }
