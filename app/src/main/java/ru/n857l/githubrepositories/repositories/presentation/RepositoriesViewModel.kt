@@ -34,4 +34,8 @@ class RepositoriesViewModel(
         observable.register(observer)
 
     fun stopUpdates() = observable.unregister()
+
+    fun onItemClicked(item: RepositoryItem) {
+        observable.postUiState(RepositoriesUiState.Details)
+    }
 }

@@ -66,26 +66,24 @@ interface AuthenticationUiState : Serializable {
 
     object Success : AuthenticationUiState {
         override fun navigate(navigate: NavigateToFrame) {
-            if (navigate is NavigateToRepositories)
-                navigate.navigateToRepositories()
+            (navigate as NavigateToRepositories).navigateToRepositories()
         }
     }
 
     object EmptyRepos : AuthenticationUiState {
         override fun navigate(navigate: NavigateToFrame) {
-            if (navigate is NavigateToErrorRepositories)
-                navigate.navigateToErrorRepositories()
+            (navigate as NavigateToErrorRepositories).navigateToErrorRepositories()
         }
     }
 
     object Load :
         Abstract(InputUiState.Correct, SignInUiState.NotEnabled, VisibilityUiState.Visible)
 
-    data class ShowError(private val message: String) :
+    object ShowError :
         AuthenticationUiState,
         Abstract(InputUiState.Correct, SignInUiState.Enabled, VisibilityUiState.Gone) {
         override fun showError(navigate: NavigateToErrorDialog) {
-            navigate.showErrorDialog(message)
+            navigate.showErrorDialog()
         }
     }
 }
