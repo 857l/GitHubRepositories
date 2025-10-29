@@ -57,9 +57,7 @@ class RepositoriesItemViewHolder(
         )
         repositoryDescription.text = item.repositoryDescription
 
-        root.setOnClickListener {
-            clickListener.click(item)
-        }
+        root.setOnClickListener { clickListener.click(item) }
     }
 }
 
