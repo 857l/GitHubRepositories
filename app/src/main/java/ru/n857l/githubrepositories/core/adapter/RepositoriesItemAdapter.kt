@@ -2,7 +2,6 @@ package ru.n857l.githubrepositories.core.adapter
 
 import android.content.Context
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -14,7 +13,8 @@ import ru.n857l.githubrepositories.repositories.presentation.RepositoryItem
 import java.nio.charset.Charset
 
 class RepositoriesItemAdapter(
-    private val colorProvider: LanguageColorProvider
+    private val colorProvider: LanguageColorProvider,
+    private val clickListener: ClickListener
 ) : RecyclerView.Adapter<RepositoriesItemViewHolder>() {
 
     private val itemList = ArrayList<RepositoryItem>()
@@ -25,13 +25,13 @@ class RepositoriesItemAdapter(
             parent,
             false
         )
-        return RepositoriesItemViewHolder(binding)
+        return RepositoriesItemViewHolder(binding, colorProvider, clickListener)
     }
 
     override fun getItemCount() = itemList.size
 
     override fun onBindViewHolder(holder: RepositoriesItemViewHolder, position: Int) {
-        holder.bind(itemList[position], colorProvider)
+        holder.bind(itemList[position])
     }
 
     fun update(newList: List<RepositoryItem>) {
@@ -43,19 +43,21 @@ class RepositoriesItemAdapter(
     }
 }
 
-class RepositoriesItemViewHolder(private val binding: ItemRepositoryBinding) : ViewHolder(binding.root) {
+class RepositoriesItemViewHolder(
+    private val binding: ItemRepositoryBinding,
+    private val colorProvider: LanguageColorProvider,
+    private val clickListener: ClickListener
+) : ViewHolder(binding.root) {
 
-    fun bind(repositoryItem: RepositoryItem, colorProvider: LanguageColorProvider) = with(binding) {
-        repositoryName.text = repositoryItem.repositoryName
-        programmingLanguage.text = repositoryItem.programmingLanguage
+    fun bind(item: RepositoryItem) = with(binding) {
+        repositoryName.text = item.repositoryName
+        programmingLanguage.text = item.programmingLanguage
         programmingLanguage.setTextColor(
-            colorProvider.getColor(repositoryItem.programmingLanguage)
+            colorProvider.getColor(item.programmingLanguage)
         )
-        repositoryDescription.text = repositoryItem.repositoryDescription
+        repositoryDescription.text = item.repositoryDescription
 
-        root.setOnClickListener {
-            Log.d("857ll", root.toString())
-        }
+        root.setOnClickListener { clickListener.click(item) }
     }
 }
 
@@ -73,6 +75,10 @@ class DiffUtilCallback(
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
         oldList[oldItemPosition] == newList[newItemPosition]
+}
+
+fun interface ClickListener {
+    fun click(item: RepositoryItem)
 }
 
 class LanguageColorProvider(context: Context) {

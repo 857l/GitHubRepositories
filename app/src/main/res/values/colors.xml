@@ -3,6 +3,9 @@
     <color name="darkened_white">#8AFFFFFF</color>
     <color name="violet">#A37AEE</color>
     <color name="yellow">#F4E264</color>
+    <color name="star_color">#FAD876</color>
+    <color name="cyan">#9CFFF9</color>
+    <color name="light_green">#6ED370</color>
     <color name="blue">#58A6FF</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>

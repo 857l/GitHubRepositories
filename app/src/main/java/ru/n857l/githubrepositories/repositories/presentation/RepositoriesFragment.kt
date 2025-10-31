@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import ru.n857l.githubrepositories.R
+import ru.n857l.githubrepositories.core.adapter.ClickListener
 import ru.n857l.githubrepositories.core.adapter.LanguageColorProvider
 import ru.n857l.githubrepositories.core.adapter.RepositoriesItemAdapter
 import ru.n857l.githubrepositories.core.di.AbstractFragmentWithMenu
@@ -39,7 +40,13 @@ class RepositoriesFragment :
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = RepositoriesItemAdapter(LanguageColorProvider(requireContext()))
+        adapter = RepositoriesItemAdapter(
+            LanguageColorProvider(requireContext()),
+            clickListener = ClickListener { item ->
+                viewModel.onItemClicked(item)
+            }
+        )
+
         binding.repositoriesList.adapter = adapter
         binding.repositoriesList.addItemDecoration(addDivider())
 

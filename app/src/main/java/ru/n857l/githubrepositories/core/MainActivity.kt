@@ -9,6 +9,8 @@ import androidx.core.view.updatePadding
 import ru.n857l.githubrepositories.R
 import ru.n857l.githubrepositories.authentication.presentation.AuthenticationScreen
 import ru.n857l.githubrepositories.authentication.presentation.NavigateToAuthentication
+import ru.n857l.githubrepositories.details.DetailsScreen
+import ru.n857l.githubrepositories.details.NavigateToDetails
 import ru.n857l.githubrepositories.dialog.ErrorDialogScreen
 import ru.n857l.githubrepositories.errorrepositories.presentation.ErrorRepositoriesScreen
 import ru.n857l.githubrepositories.errorrepositories.presentation.NavigateToErrorRepositories
@@ -43,12 +45,13 @@ class MainActivity : AppCompatActivity(), Navigate, NavigateToErrorDialog {
 
     override fun navigate(screen: Screen) = screen.show(R.id.container, supportFragmentManager)
 
-    override fun showErrorDialog(message: String) {
+    override fun showErrorDialog() {
         navigate(ErrorDialogScreen)
     }
 }
 
-interface Navigate : NavigateToAuthentication, NavigateToRepositories, NavigateToErrorRepositories {
+interface Navigate : NavigateToAuthentication, NavigateToRepositories, NavigateToErrorRepositories,
+    NavigateToDetails {
 
     fun navigate(screen: Screen)
 
@@ -57,8 +60,10 @@ interface Navigate : NavigateToAuthentication, NavigateToRepositories, NavigateT
     override fun navigateToRepositories() = navigate(RepositoriesScreen)
 
     override fun navigateToErrorRepositories() = navigate(ErrorRepositoriesScreen)
+
+    override fun navigateToDetails() = navigate(DetailsScreen)
 }
 
 interface NavigateToErrorDialog {
-    fun showErrorDialog(message: String)
+    fun showErrorDialog()
 }

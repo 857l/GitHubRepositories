@@ -13,4 +13,8 @@
     <string name="no_repositories">No repositories at the moment</string>
     <string name="check_something">Check your something</string>
     <string name="error_image">Error image</string>
+    <string name="license">License</string>
+    <string name="stars">stars</string>
+    <string name="forks">forks</string>
+    <string name="read_me">READ.ME</string>
 </resources>

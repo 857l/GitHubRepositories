@@ -46,7 +46,7 @@ class AuthenticationViewModel(
                     clear()
                     AuthenticationUiState.Success
                 } else
-                    AuthenticationUiState.ShowError(result.message())
+                    AuthenticationUiState.ShowError
             }) {
                 observable.postUiState(it)
             }
