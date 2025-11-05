@@ -80,7 +80,7 @@ interface FakeRepositoriesRepository : RepositoriesRepository {
         private val repository: List<RepositoryItem>
     ) : FakeRepositoriesRepository {
 
-        override fun data(): List<RepositoryItem> = repository
+        override suspend fun data(): List<RepositoryItem> = repository
     }
 
     object Empty : Abstract(

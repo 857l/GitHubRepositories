@@ -1,17 +1,24 @@
 package ru.n857l.githubrepositories.repositories.presentation
 
 import ru.n857l.githubrepositories.core.NavigateToFrame
+import ru.n857l.githubrepositories.core.adapter.RepositoriesItemAdapter
 import ru.n857l.githubrepositories.details.NavigateToDetails
 import ru.n857l.githubrepositories.errorrepositories.presentation.NavigateToErrorRepositories
 import java.io.Serializable
 
 interface RepositoriesUiState : Serializable {
 
-    fun update() = Unit
+    fun update(adapter: RepositoriesItemAdapter) = Unit
 
     fun navigate(navigate: NavigateToFrame) = Unit
 
     object Empty : RepositoriesUiState
+
+    data class ShowList(private val list: List<RepositoryItem>) : RepositoriesUiState {
+        override fun update(adapter: RepositoriesItemAdapter) {
+            adapter.update(list)
+        }
+    }
 
     object EmptyRepositories : RepositoriesUiState {
         override fun navigate(navigate: NavigateToFrame) {

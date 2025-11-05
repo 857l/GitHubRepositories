@@ -19,12 +19,12 @@ import ru.n857l.githubrepositories.errorrepositories.presentation.NavigateToErro
 class RepositoriesFragment :
     AbstractFragmentWithMenu<FragmentRepositoriesBinding, RepositoriesViewModel>() {
 
+    private lateinit var adapter: RepositoriesItemAdapter
+
     private val update: (RepositoriesUiState) -> Unit = { uiState ->
-        uiState.update()
+        uiState.update(adapter)
         uiState.navigate(requireActivity() as NavigateToErrorRepositories)
     }
-
-    private lateinit var adapter: RepositoriesItemAdapter
 
     override fun bind(
         inflater: LayoutInflater,
@@ -64,7 +64,6 @@ class RepositoriesFragment :
     override fun onResume() {
         super.onResume()
         viewModel.startUpdates(observer = update)
-        adapter.update(viewModel.repositoriesList())
     }
 
     override fun onPause() {

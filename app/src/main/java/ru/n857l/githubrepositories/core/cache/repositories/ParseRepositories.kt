@@ -1,4 +1,4 @@
-package ru.n857l.githubrepositories.core.cache
+package ru.n857l.githubrepositories.core.cache.repositories
 
 import ru.n857l.githubrepositories.cloud_datasource.RepositoryCloud
 import ru.n857l.githubrepositories.repositories.presentation.RepositoryItem

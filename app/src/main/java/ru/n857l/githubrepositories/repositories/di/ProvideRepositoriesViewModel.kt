@@ -1,9 +1,9 @@
 package ru.n857l.githubrepositories.repositories.presentation.di
 
+import ru.n857l.githubrepositories.core.RunAsync
+import ru.n857l.githubrepositories.core.UiObservable
 import ru.n857l.githubrepositories.core.di.Core
 import ru.n857l.githubrepositories.core.di.Module
-import ru.n857l.githubrepositories.core.cache.ParseRepositories
-import ru.n857l.githubrepositories.core.UiObservable
 import ru.n857l.githubrepositories.di.AbstractProvideViewModel
 import ru.n857l.githubrepositories.di.ProvideViewModel
 import ru.n857l.githubrepositories.repositories.presentation.RepositoriesRepository
@@ -25,9 +25,10 @@ class RepositoriesModule(
     override fun viewModel() =
         RepositoriesViewModel(
             repository = RepositoriesRepository.Base(
-                ParseRepositories.Base().map(core.repositoriesCache.read())
+                dao = core.repositoriesCacheModule.dao(),
             ),
             clearViewModel = core.clearViewModel,
             observable = UiObservable.Base<RepositoriesUiState>(),
+            runAsync = RunAsync.Base()
         )
 }

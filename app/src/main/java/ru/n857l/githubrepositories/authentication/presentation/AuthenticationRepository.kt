@@ -2,8 +2,9 @@ package ru.n857l.githubrepositories.authentication.presentation
 
 import ru.n857l.githubrepositories.authentication.presentation.data.LoadResult
 import ru.n857l.githubrepositories.cloud_datasource.GitHubApiService
-import ru.n857l.githubrepositories.core.cache.RepositoriesCache
 import ru.n857l.githubrepositories.core.cache.TokenCache
+import ru.n857l.githubrepositories.core.cache.repositories.RepositoriesCache
+import ru.n857l.githubrepositories.core.cache.repositories.RepositoriesDao
 import ru.n857l.githubrepositories.dialog.ErrorCache
 import java.io.IOException
 
@@ -21,7 +22,7 @@ interface AuthenticationRepository {
 
     class Base(
         private val tokenCache: TokenCache,
-        private val repositoriesCache: RepositoriesCache,
+        private val dao: RepositoriesDao,
         private val errorCache: ErrorCache,
         private val service: GitHubApiService
     ) : AuthenticationRepository {
@@ -47,7 +48,22 @@ interface AuthenticationRepository {
             return try {
                 val tokenHeader = "Bearer ${tokenCache.read()}"
                 val result = service.fetchRepositories(token = tokenHeader)
-                repositoriesCache.save(result)
+                dao.clear()
+                val parsedResult: List<RepositoriesCache> =
+                    result.mapIndexed { index, data ->
+                        RepositoriesCache(
+                            index,
+                            data.name,
+                            data.htmlUrl,
+                            data.description,
+                            data.language,
+                            data.license?.name,
+                            data.forks,
+                            data.stars,
+                            data.watchers
+                        )
+                    }
+                dao.saveAll(parsedResult)
 
                 //Log.d("GitHubApi", "Loaded ${result.size} repositories")
                 LoadResult.Success
