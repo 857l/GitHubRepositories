@@ -17,8 +17,7 @@ class RepositoriesViewModel(
 
     private val viewModelScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
-    fun init(isFirstRun: Boolean = true) {
-
+    fun init() {
         runAsync.handleAsync(viewModelScope, {
             val data = repository.data()
             if (data.isEmpty()) {
