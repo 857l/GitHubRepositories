@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import ru.n857l.githubrepositories.R
-import ru.n857l.githubrepositories.core.adapter.ClickListener
 import ru.n857l.githubrepositories.core.adapter.LanguageColorProvider
 import ru.n857l.githubrepositories.core.adapter.RepositoriesItemAdapter
 import ru.n857l.githubrepositories.core.di.AbstractFragmentWithMenu
@@ -42,7 +41,7 @@ class RepositoriesFragment :
 
         adapter = RepositoriesItemAdapter(
             LanguageColorProvider(requireContext()),
-            clickListener = ClickListener { item ->
+            clickListener = { item ->
                 viewModel.onItemClicked(item)
             }
         )
@@ -50,7 +49,7 @@ class RepositoriesFragment :
         binding.repositoriesList.adapter = adapter
         binding.repositoriesList.addItemDecoration(addDivider())
 
-        viewModel.init(savedInstanceState == null)
+        viewModel.init()
     }
 
     private fun addDivider(): DividerItemDecoration {

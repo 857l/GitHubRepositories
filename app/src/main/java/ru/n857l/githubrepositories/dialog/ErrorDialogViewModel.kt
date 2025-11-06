@@ -1,5 +1,6 @@
 package ru.n857l.githubrepositories.dialog
 
+import ru.n857l.githubrepositories.core.cache.ErrorCache
 import ru.n857l.githubrepositories.core.di.ClearViewModel
 import ru.n857l.githubrepositories.di.MyViewModel
 

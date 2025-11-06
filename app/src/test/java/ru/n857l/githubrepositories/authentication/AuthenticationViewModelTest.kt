@@ -137,7 +137,7 @@ class AuthenticationViewModelTest {
 
         runAsync.returnResult()
         assertEquals(
-            AuthenticationUiState.ShowError("invalid token"),
+            AuthenticationUiState.ShowError,
             observable.postUiStateCalledList.last()
         )
         assertEquals(2, observable.postUiStateCalledList.size)
@@ -151,7 +151,7 @@ class AuthenticationViewModelTest {
         viewModel.startUpdates(observer = newFragment)
         assertEquals(2, observable.registerCalledCount)
         assertEquals(
-            AuthenticationUiState.ShowError("invalid token"),
+            AuthenticationUiState.ShowError,
             newFragment.statesList.first()
         )
         assertEquals(1, newFragment.statesList.size)
@@ -233,7 +233,7 @@ private class FakeUiObservableAuthentication : UiObservable<AuthenticationUiStat
 }
 
 @Suppress("UNCHECKED_CAST")
-private class FakeRunAsync : RunAsync {
+class FakeRunAsync : RunAsync {
 
     private var result: Any? = null
     private var ui: (Any) -> Unit = {}
