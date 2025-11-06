@@ -12,9 +12,9 @@ import retrofit2.Response
 import ru.n857l.githubrepositories.authentication.presentation.AuthenticationRepository
 import ru.n857l.githubrepositories.cloud_datasource.GitHubApiService
 import ru.n857l.githubrepositories.cloud_datasource.RepositoryCloud
+import ru.n857l.githubrepositories.core.cache.ErrorCache
 import ru.n857l.githubrepositories.core.cache.TokenCache
 import ru.n857l.githubrepositories.core.cache.repositories.RepositoriesCache
-import ru.n857l.githubrepositories.dialog.ErrorCache
 import java.io.IOException
 
 class AuthenticationRepositoryTest {

@@ -2,10 +2,10 @@ package ru.n857l.githubrepositories.authentication.presentation
 
 import ru.n857l.githubrepositories.authentication.presentation.data.LoadResult
 import ru.n857l.githubrepositories.cloud_datasource.GitHubApiService
+import ru.n857l.githubrepositories.core.cache.ErrorCache
 import ru.n857l.githubrepositories.core.cache.TokenCache
 import ru.n857l.githubrepositories.core.cache.repositories.RepositoriesCache
 import ru.n857l.githubrepositories.core.cache.repositories.RepositoriesDao
-import ru.n857l.githubrepositories.dialog.ErrorCache
 import java.io.IOException
 
 interface AuthenticationRepository {
