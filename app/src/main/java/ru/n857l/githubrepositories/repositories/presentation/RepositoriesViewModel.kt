@@ -21,7 +21,7 @@ class RepositoriesViewModel(
         runAsync.handleAsync(viewModelScope, {
             val data = repository.data()
             if (data.isEmpty()) {
-                clearViewModel.clear(RepositoriesViewModel::class.java)
+                clear()
                 RepositoriesUiState.EmptyRepositories
             } else {
                 RepositoriesUiState.ShowList(data)
