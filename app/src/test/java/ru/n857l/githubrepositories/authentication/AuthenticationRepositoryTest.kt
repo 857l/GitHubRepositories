@@ -15,25 +15,26 @@ import ru.n857l.githubrepositories.cloud_datasource.RepositoryCloud
 import ru.n857l.githubrepositories.core.cache.ErrorCache
 import ru.n857l.githubrepositories.core.cache.TokenCache
 import ru.n857l.githubrepositories.core.cache.repositories.RepositoriesCache
+import ru.n857l.githubrepositories.core.cache.repositories.RepositoriesDao
 import java.io.IOException
 
 class AuthenticationRepositoryTest {
 
     lateinit var repository: AuthenticationRepository
     lateinit var tokenCache: FakeTokenCache
-    lateinit var repositoriesCache: FakeRepositoriesCache
+    lateinit var dao: FakeRepositoriesDao
     lateinit var errorCache: FakeErrorCache
     lateinit var service: FakeGitHubApiService
 
     @Before
     fun setup() {
         tokenCache = FakeTokenCache()
-        repositoriesCache = FakeRepositoriesCache()
+        dao = FakeRepositoriesDao()
         errorCache = FakeErrorCache()
         service = FakeGitHubApiService()
         repository = AuthenticationRepository.Base(
             tokenCache = tokenCache,
-            repositoriesCache = repositoriesCache,
+            dao = dao,
             errorCache = errorCache,
             service = service
         )
@@ -46,7 +47,7 @@ class AuthenticationRepositoryTest {
         val result = repository.load()
 
         assertTrue(result.isSuccessful())
-        assertTrue(repositoriesCache.read().isNotEmpty())
+        assertTrue(dao.savedList.isNotEmpty())
         assertEquals("", errorCache.read())
     }
 
@@ -110,15 +111,19 @@ class AuthenticationRepositoryTest {
         }
     }
 
-    class FakeRepositoriesCache : RepositoriesCache {
-        private var repositoriesData: List<RepositoryCloud> = listOf()
-        override fun read(): List<RepositoryCloud> = repositoriesData
-        override fun save(data: List<RepositoryCloud>) {
-            repositoriesData = data
+    class FakeRepositoriesDao : RepositoriesDao {
+        var savedList = listOf<RepositoriesCache>()
+        var cleared = false
+
+        override suspend fun getAll(): List<RepositoriesCache> = savedList
+
+        override suspend fun saveAll(repos: List<RepositoriesCache>) {
+            savedList = repos
         }
 
-        override fun clear() {
-            repositoriesData = listOf()
+        override suspend fun clear() {
+            cleared = true
+            savedList = emptyList()
         }
     }
 

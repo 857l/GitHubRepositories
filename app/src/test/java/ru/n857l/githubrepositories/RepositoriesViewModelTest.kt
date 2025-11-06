@@ -1,12 +1,11 @@
 package ru.n857l.githubrepositories
 
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import ru.n857l.githubrepositories.authentication.FakeClearViewModel
-import ru.n857l.githubrepositories.core.RunAsync
+import ru.n857l.githubrepositories.authentication.FakeRunAsync
 import ru.n857l.githubrepositories.core.UiObservable
 import ru.n857l.githubrepositories.repositories.presentation.RepositoriesRepository
 import ru.n857l.githubrepositories.repositories.presentation.RepositoriesUiState
@@ -152,25 +151,5 @@ private class FakeUiObservableRepositories : UiObservable<RepositoriesUiState> {
             observerCached?.invoke(uiState)
             uiStateCached = null
         }
-    }
-}
-
-@Suppress("UNCHECKED_CAST")
-private class FakeRunAsync : RunAsync {
-
-    private var result: Any? = null
-    private var ui: (Any) -> Unit = {}
-
-    override fun <T : Any> handleAsync(
-        coroutineScope: CoroutineScope,
-        heavyOperation: suspend () -> T,
-        uiUpdate: (T) -> Unit
-    ) = runBlocking {
-        result = heavyOperation.invoke()
-        ui = uiUpdate as (Any) -> Unit
-    }
-
-    fun returnResult() {
-        ui.invoke(result!!)
     }
 }
