@@ -36,7 +36,8 @@
                 android:paddingEnd="8dp"
                 android:src="@drawable/link" />
 
-            <TextView
+            <ru.n857l.githubrepositories.views.text.CustomTextView
+                android:id="@+id/link"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -61,7 +62,7 @@
                 android:paddingEnd="8dp"
                 android:src="@drawable/license" />
 
-            <TextView
+            <ru.n857l.githubrepositories.views.text.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/license"
@@ -74,10 +75,10 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-            <TextView
+            <ru.n857l.githubrepositories.views.text.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:id="@+id/license"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textSize"
@@ -101,7 +102,8 @@
                     android:layout_gravity="center"
                     android:src="@drawable/star" />
 
-                <TextView
+                <ru.n857l.githubrepositories.views.text.CustomTextView
+                    android:id="@+id/stars"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="4dp"
@@ -110,7 +112,7 @@
                     android:textSize="@dimen/textSize"
                     tools:text="259" />
 
-                <TextView
+                <ru.n857l.githubrepositories.views.text.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/stars"
@@ -136,7 +138,8 @@
                     android:layout_gravity="center"
                     android:src="@drawable/forks" />
 
-                <TextView
+                <ru.n857l.githubrepositories.views.text.CustomTextView
+                    android:id="@+id/forks"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="4dp"
@@ -145,7 +148,7 @@
                     android:textSize="@dimen/textSize"
                     tools:text="30" />
 
-                <TextView
+                <ru.n857l.githubrepositories.views.text.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/forks"
@@ -171,7 +174,7 @@
                     android:layout_gravity="center"
                     android:src="@drawable/watchers" />
 
-                <TextView
+                <ru.n857l.githubrepositories.views.text.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="4dp"
@@ -180,10 +183,11 @@
                     android:textSize="@dimen/textSize"
                     tools:text="10" />
 
-                <TextView
+                <ru.n857l.githubrepositories.views.text.CustomTextView
+                    android:id="@+id/watchers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/stars"
+                    android:text="@string/watchers"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     android:textColor="@color/white"
                     android:textSize="@dimen/textSize" />
@@ -199,7 +203,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp">
 
-        <TextView
+        <ru.n857l.githubrepositories.views.text.CustomTextView
+            android:id="@+id/readme"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/read_me"

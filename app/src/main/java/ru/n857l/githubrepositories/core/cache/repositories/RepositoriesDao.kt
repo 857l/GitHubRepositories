@@ -15,4 +15,7 @@ interface RepositoriesDao {
 
     @Query("DELETE FROM repositories_table")
     suspend fun clear()
+
+    @Query("SELECT * FROM repositories_table WHERE name = :repoName LIMIT 1")
+    suspend fun getRepositoryByName(repoName: String): RepositoriesCache?
 }

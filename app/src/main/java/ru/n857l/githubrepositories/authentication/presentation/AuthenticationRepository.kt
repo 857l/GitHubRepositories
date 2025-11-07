@@ -50,9 +50,8 @@ interface AuthenticationRepository {
                 val result = service.fetchRepositories(token = tokenHeader)
                 dao.clear()
                 val parsedResult: List<RepositoriesCache> =
-                    result.mapIndexed { index, data ->
+                    result.map { data ->
                         RepositoriesCache(
-                            index,
                             data.name,
                             data.htmlUrl,
                             data.description,

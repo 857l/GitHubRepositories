@@ -40,7 +40,6 @@ class RoomTest {
         dao.saveAll(
             listOf(
                 RepositoriesCache(
-                    id = 1,
                     name = "Archive",
                     htmlUrl = "https://github.com/Daviex/Steins-Gate-Archive-Decompiler",
                     description = "...",
@@ -56,7 +55,6 @@ class RoomTest {
         var actual: List<RepositoriesCache> = dao.getAll()
         var expected: List<RepositoriesCache> = listOf(
             RepositoriesCache(
-                id = 1,
                 name = "Archive",
                 htmlUrl = "https://github.com/Daviex/Steins-Gate-Archive-Decompiler",
                 description = "...",
