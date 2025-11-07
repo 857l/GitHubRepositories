@@ -29,6 +29,7 @@ class RepositoriesModule(
             ),
             clearViewModel = core.clearViewModel,
             observable = UiObservable.Base<RepositoriesUiState>(),
-            runAsync = RunAsync.Base()
+            runAsync = RunAsync.Base(),
+            numberDetails = core.numberDetails
         )
 }

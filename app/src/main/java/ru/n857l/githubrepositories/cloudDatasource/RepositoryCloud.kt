@@ -1,4 +1,4 @@
-package ru.n857l.githubrepositories.cloud_datasource
+package ru.n857l.githubrepositories.cloudDatasource
 
 import com.google.gson.annotations.SerializedName
 
@@ -34,5 +34,10 @@ data class RepositoryCloud(
     data class Owner(
         @SerializedName("login")
         val name: String
+    )
+
+    data class Readme(
+        @SerializedName("content")
+        val content: String
     )
 }

@@ -17,7 +17,7 @@ interface RepositoriesCacheModule {
                 applicationContext,
                 RepositoriesDatabase::class.java,
                 applicationContext.getString(R.string.app_name)
-            ).build()
+            ).fallbackToDestructiveMigration().build()
         }
 
         override fun dao() = database.dao()

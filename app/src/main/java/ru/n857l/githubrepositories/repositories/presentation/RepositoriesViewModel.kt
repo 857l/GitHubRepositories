@@ -6,13 +6,15 @@ import kotlinx.coroutines.SupervisorJob
 import ru.n857l.githubrepositories.core.RunAsync
 import ru.n857l.githubrepositories.core.UiObservable
 import ru.n857l.githubrepositories.core.di.ClearViewModel
+import ru.n857l.githubrepositories.details.presentation.NumberDetails
 import ru.n857l.githubrepositories.di.MyViewModel
 
 class RepositoriesViewModel(
     private val repository: RepositoriesRepository,
     private val clearViewModel: ClearViewModel,
     private val observable: UiObservable<RepositoriesUiState>,
-    private val runAsync: RunAsync
+    private val runAsync: RunAsync,
+    private val numberDetails: NumberDetails.Save
 ) : MyViewModel {
 
     private val viewModelScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
@@ -41,6 +43,7 @@ class RepositoriesViewModel(
     fun stopUpdates() = observable.unregister()
 
     fun onItemClicked(item: RepositoryItem) {
+        numberDetails.save(item.repositoryName)
         observable.postUiState(RepositoriesUiState.Details)
     }
 }

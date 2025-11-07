@@ -1,7 +1,7 @@
 package ru.n857l.githubrepositories.authentication.presentation
 
 import ru.n857l.githubrepositories.authentication.presentation.data.LoadResult
-import ru.n857l.githubrepositories.cloud_datasource.GitHubApiService
+import ru.n857l.githubrepositories.cloudDatasource.GitHubApiService
 import ru.n857l.githubrepositories.core.cache.ErrorCache
 import ru.n857l.githubrepositories.core.cache.TokenCache
 import ru.n857l.githubrepositories.core.cache.repositories.RepositoriesCache
@@ -50,9 +50,8 @@ interface AuthenticationRepository {
                 val result = service.fetchRepositories(token = tokenHeader)
                 dao.clear()
                 val parsedResult: List<RepositoriesCache> =
-                    result.mapIndexed { index, data ->
+                    result.map { data ->
                         RepositoriesCache(
-                            index,
                             data.name,
                             data.htmlUrl,
                             data.description,

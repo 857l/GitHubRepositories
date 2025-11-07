@@ -1,7 +1,8 @@
-package ru.n857l.githubrepositories.cloud_datasource
+package ru.n857l.githubrepositories.cloudDatasource
 
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface GitHubApiService {
@@ -13,4 +14,11 @@ interface GitHubApiService {
         @Query("per_page") amount: Int = 30,
         @Query("affiliation") affiliation: String = "owner"
     ): List<RepositoryCloud>
+
+    @GET("/repos/{owner}/{repo}/readme")
+    suspend fun fetchReadme(
+        @Header("Authorization") token: String,
+        @Path("owner") ownerName: String,
+        @Path("repo") repoName: String
+    ): RepositoryCloud.Readme
 }

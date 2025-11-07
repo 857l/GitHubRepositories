@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import ru.n857l.githubrepositories.authentication.presentation.AuthenticationRepository
 import ru.n857l.githubrepositories.authentication.presentation.AuthenticationUiState
 import ru.n857l.githubrepositories.authentication.presentation.AuthenticationViewModel
-import ru.n857l.githubrepositories.cloud_datasource.GitHubApiService
+import ru.n857l.githubrepositories.cloudDatasource.GitHubApiService
 import ru.n857l.githubrepositories.core.RunAsync
 import ru.n857l.githubrepositories.core.UiObservable
 import ru.n857l.githubrepositories.core.di.Core

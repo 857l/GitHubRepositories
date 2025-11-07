@@ -1,4 +1,4 @@
-package ru.n857l.githubrepositories.dialog
+package ru.n857l.githubrepositories.dialog.presentation
 
 import ru.n857l.githubrepositories.core.cache.ErrorCache
 import ru.n857l.githubrepositories.core.di.ClearViewModel

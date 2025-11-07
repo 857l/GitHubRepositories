@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "repositories_table")
 data class RepositoriesCache(
-    @PrimaryKey @ColumnInfo(name = "id") val id: Int,
+    @PrimaryKey
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "html_url") val htmlUrl: String,
     @ColumnInfo(name = "description") val description: String?,
