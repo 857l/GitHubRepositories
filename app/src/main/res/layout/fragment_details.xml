@@ -175,6 +175,7 @@
                     android:src="@drawable/watchers" />
 
                 <ru.n857l.githubrepositories.views.text.CustomTextView
+                    android:id="@+id/watchers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="4dp"
@@ -184,7 +185,6 @@
                     tools:text="10" />
 
                 <ru.n857l.githubrepositories.views.text.CustomTextView
-                    android:id="@+id/watchers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/watchers"
