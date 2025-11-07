@@ -1,7 +1,7 @@
 package ru.n857l.githubrepositories.authentication.presentation
 
 import ru.n857l.githubrepositories.authentication.presentation.data.LoadResult
-import ru.n857l.githubrepositories.cloud_datasource.GitHubApiService
+import ru.n857l.githubrepositories.cloudDatasource.GitHubApiService
 import ru.n857l.githubrepositories.core.cache.ErrorCache
 import ru.n857l.githubrepositories.core.cache.TokenCache
 import ru.n857l.githubrepositories.core.cache.repositories.RepositoriesCache

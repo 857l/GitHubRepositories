@@ -10,8 +10,8 @@ import org.junit.Before
 import org.junit.Test
 import retrofit2.Response
 import ru.n857l.githubrepositories.authentication.presentation.AuthenticationRepository
-import ru.n857l.githubrepositories.cloud_datasource.GitHubApiService
-import ru.n857l.githubrepositories.cloud_datasource.RepositoryCloud
+import ru.n857l.githubrepositories.cloudDatasource.GitHubApiService
+import ru.n857l.githubrepositories.cloudDatasource.RepositoryCloud
 import ru.n857l.githubrepositories.core.cache.ErrorCache
 import ru.n857l.githubrepositories.core.cache.TokenCache
 import ru.n857l.githubrepositories.core.cache.repositories.RepositoriesCache
@@ -124,6 +124,10 @@ class AuthenticationRepositoryTest {
         override suspend fun clear() {
             cleared = true
             savedList = emptyList()
+        }
+
+        override suspend fun getRepositoryByName(repoName: String): RepositoriesCache? {
+            TODO("Not yet implemented")
         }
     }
 

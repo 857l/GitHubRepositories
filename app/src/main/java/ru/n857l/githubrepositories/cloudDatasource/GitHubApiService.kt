@@ -1,4 +1,4 @@
-package ru.n857l.githubrepositories.cloud_datasource
+package ru.n857l.githubrepositories.cloudDatasource
 
 import retrofit2.http.GET
 import retrofit2.http.Header
