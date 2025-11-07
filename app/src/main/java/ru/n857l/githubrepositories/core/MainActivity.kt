@@ -9,9 +9,9 @@ import androidx.core.view.updatePadding
 import ru.n857l.githubrepositories.R
 import ru.n857l.githubrepositories.authentication.presentation.AuthenticationScreen
 import ru.n857l.githubrepositories.authentication.presentation.NavigateToAuthentication
-import ru.n857l.githubrepositories.details.DetailsScreen
-import ru.n857l.githubrepositories.details.NavigateToDetails
-import ru.n857l.githubrepositories.dialog.ErrorDialogScreen
+import ru.n857l.githubrepositories.details.presentation.DetailsScreen
+import ru.n857l.githubrepositories.details.presentation.NavigateToDetails
+import ru.n857l.githubrepositories.dialog.presentation.ErrorDialogScreen
 import ru.n857l.githubrepositories.errorrepositories.presentation.ErrorRepositoriesScreen
 import ru.n857l.githubrepositories.errorrepositories.presentation.NavigateToErrorRepositories
 

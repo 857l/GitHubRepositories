@@ -4,9 +4,9 @@ import ru.n857l.githubrepositories.core.RunAsync
 import ru.n857l.githubrepositories.core.UiObservable
 import ru.n857l.githubrepositories.core.di.Core
 import ru.n857l.githubrepositories.core.di.Module
-import ru.n857l.githubrepositories.details.DetailsRepository
-import ru.n857l.githubrepositories.details.DetailsUiState
-import ru.n857l.githubrepositories.details.DetailsViewModel
+import ru.n857l.githubrepositories.details.presentation.DetailsRepository
+import ru.n857l.githubrepositories.details.presentation.DetailsUiState
+import ru.n857l.githubrepositories.details.presentation.DetailsViewModel
 import ru.n857l.githubrepositories.di.AbstractProvideViewModel
 import ru.n857l.githubrepositories.di.ProvideViewModel
 

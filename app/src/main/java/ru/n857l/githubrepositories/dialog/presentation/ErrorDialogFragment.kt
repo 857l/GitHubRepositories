@@ -1,4 +1,4 @@
-package ru.n857l.githubrepositories.dialog
+package ru.n857l.githubrepositories.dialog.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater

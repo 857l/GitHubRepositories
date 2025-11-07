@@ -4,7 +4,7 @@ import ru.n857l.githubrepositories.core.di.Core
 import ru.n857l.githubrepositories.core.di.Module
 import ru.n857l.githubrepositories.di.AbstractProvideViewModel
 import ru.n857l.githubrepositories.di.ProvideViewModel
-import ru.n857l.githubrepositories.dialog.ErrorDialogViewModel
+import ru.n857l.githubrepositories.dialog.presentation.ErrorDialogViewModel
 
 class ProvideErrorDialogViewModel(
     core: Core,

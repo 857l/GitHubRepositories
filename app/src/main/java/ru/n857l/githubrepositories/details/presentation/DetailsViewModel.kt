@@ -1,4 +1,4 @@
-package ru.n857l.githubrepositories.details
+package ru.n857l.githubrepositories.details.presentation
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

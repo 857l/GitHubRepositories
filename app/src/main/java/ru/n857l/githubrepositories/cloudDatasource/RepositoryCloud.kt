@@ -35,4 +35,9 @@ data class RepositoryCloud(
         @SerializedName("login")
         val name: String
     )
+
+    data class Readme(
+        @SerializedName("content")
+        val content: String
+    )
 }

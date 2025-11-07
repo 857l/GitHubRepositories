@@ -4,7 +4,7 @@ import android.content.Context
 import ru.n857l.githubrepositories.core.cache.ErrorCache
 import ru.n857l.githubrepositories.core.cache.TokenCache
 import ru.n857l.githubrepositories.core.cache.repositories.RepositoriesCacheModule
-import ru.n857l.githubrepositories.details.NumberDetails
+import ru.n857l.githubrepositories.details.presentation.NumberDetails
 
 class Core(context: Context, var clearViewModel: ClearViewModel) {
 
