@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey
 data class RepositoriesCache(
     @PrimaryKey
     @ColumnInfo(name = "name") val name: String,
+    @ColumnInfo(name = "owner") val owner: String,
     @ColumnInfo(name = "html_url") val htmlUrl: String,
     @ColumnInfo(name = "description") val description: String?,
     @ColumnInfo(name = "language") val language: String?,
@@ -15,4 +16,5 @@ data class RepositoriesCache(
     @ColumnInfo(name = "forks_count") val forks: Int,
     @ColumnInfo(name = "stargazers_count") val stars: Int,
     @ColumnInfo(name = "watchers_count") val watchers: Int,
+    @ColumnInfo(name = "readme") val readme: String
 )

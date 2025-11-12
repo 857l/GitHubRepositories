@@ -53,35 +53,31 @@ interface AuthenticationRepository {
                     result.map { data ->
                         RepositoriesCache(
                             data.name,
+                            data.owner.name,
                             data.htmlUrl,
                             data.description,
                             data.language,
                             data.license?.name,
                             data.forks,
                             data.stars,
-                            data.watchers
+                            data.watchers,
+                            ""
                         )
                     }
                 dao.saveAll(parsedResult)
-
-                //Log.d("GitHubApi", "Loaded ${result.size} repositories")
                 LoadResult.Success
 
             } catch (e: retrofit2.HttpException) {
                 val code = e.code()
                 val errorBody = e.response()?.errorBody()?.string().orEmpty()
-
-                //Log.e("GitHubApi", "HTTP error $code: $errorBody", e)
                 errorCache.save(errorBody)
                 LoadResult.Error(handleResponseCode(code, errorBody))
 
             } catch (e: IOException) {
-                //Log.e("GitHubApi", "Network error", e)
                 errorCache.save("Please check your internet connection")
                 LoadResult.Error("Please check your internet connection")
 
             } catch (e: Exception) {
-                //Log.e("GitHubApi", "Unexpected error", e)
                 errorCache.save(e.message ?: "Unknown error occurred")
                 LoadResult.Error(e.message ?: "Unknown error occurred")
             }

@@ -76,9 +76,9 @@
                 android:layout_weight="1" />
 
             <ru.n857l.githubrepositories.views.text.CustomTextView
+                android:id="@+id/license"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/license"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textSize"
@@ -198,25 +198,31 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <ru.n857l.githubrepositories.views.text.CustomTextView
-            android:id="@+id/readme"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/read_me"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textSize"
-            tools:text="Strings, Plurals, Images, Fonts, Files to access the corresponding resources from common code;
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp">
+
+            <ru.n857l.githubrepositories.views.text.CustomTextView
+                android:id="@+id/readme"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/read_me"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize"
+                tools:text="Strings, Plurals, Images, Fonts, Files to access the corresponding resources from common code;
 Colors with light/dark mode support;
 StringDesc for lifecycle-aware access to resources and unified localization on both platforms;
 Static iOS frameworks support;
 FatFrameworkWithResourcesTask Gradle task." />
 
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

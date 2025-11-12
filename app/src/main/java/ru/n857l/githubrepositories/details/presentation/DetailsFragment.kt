@@ -24,6 +24,8 @@ class DetailsFragment : AbstractFragmentWithMenu<FragmentDetailsBinding, Details
             binding.stars,
             binding.forks,
             binding.watchers,
+        )
+        uiState.updateReadme(
             binding.readme
         )
     }

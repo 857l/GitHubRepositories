@@ -25,7 +25,8 @@ class DetailsViewModel(
     fun init() {
         //observable.postUiState(DetailsUiState.Progress)
         runAsync.handleAsync(viewModelScope, {
-            val data = repository.data(numberDetails.read())
+            val repoName = numberDetails.read()
+            val data = repository.data(repoName)
             if (data != null) {
                 DetailsUiState.Show(
                     data.htmlUrl,
@@ -33,7 +34,23 @@ class DetailsViewModel(
                     data.stars.toString(),
                     data.forks.toString(),
                     data.watchers.toString(),
-                    "Readme"//TODO README
+                )
+            } else {
+                DetailsUiState.Empty
+            }
+        }) {
+            observable.postUiState(it)
+        }
+        loadReadme()
+    }
+
+    private fun loadReadme() {
+        runAsync.handleAsync(viewModelScope, {
+            val repoName = numberDetails.read()
+            val result = repository.load(repoName)
+            if (result.isSuccessful()) {
+                DetailsUiState.ShowReadme(
+                    repository.readme(repoName)
                 )
             } else {
                 DetailsUiState.Empty
