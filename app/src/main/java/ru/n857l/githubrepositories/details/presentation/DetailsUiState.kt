@@ -12,6 +12,9 @@ interface DetailsUiState : Serializable {
         startsTextView: UpdateTextView,
         forksTextView: UpdateTextView,
         watchersTextView: UpdateTextView,
+    ) = Unit
+
+    fun updateReadme(
         readmeTextView: UpdateTextView
     ) = Unit
 
@@ -23,7 +26,6 @@ interface DetailsUiState : Serializable {
         private val startsUiState: TextUiState,
         private val forksUiState: TextUiState,
         private val watchersUiState: TextUiState,
-        private val readmeUiState: TextUiState
     ) : DetailsUiState {
         override fun update(
             linkTextView: UpdateTextView,
@@ -31,14 +33,12 @@ interface DetailsUiState : Serializable {
             startsTextView: UpdateTextView,
             forksTextView: UpdateTextView,
             watchersTextView: UpdateTextView,
-            readmeTextView: UpdateTextView
         ) {
             linkTextView.update(linkUiState)
             licenseTextView.update(licenseUiState)
             startsTextView.update(startsUiState)
             forksTextView.update(forksUiState)
             watchersTextView.update(watchersUiState)
-            readmeTextView.update(readmeUiState)
         }
     }
 
@@ -48,13 +48,19 @@ interface DetailsUiState : Serializable {
         private val stars: String,
         private val forks: String,
         private val watchers: String,
-        private val readme: String
     ) : Abstract(
         TextUiState.Show(link),
         TextUiState.Show(license),
         TextUiState.Show(stars),
         TextUiState.Show(forks),
         TextUiState.Show(watchers),
-        TextUiState.Show(readme)
     )
+
+    data class ShowReadme(
+        private val readme: String
+    ) : DetailsUiState {
+        override fun updateReadme(readmeTextView: UpdateTextView) {
+            readmeTextView.update(readme)
+        }
+    }
 }

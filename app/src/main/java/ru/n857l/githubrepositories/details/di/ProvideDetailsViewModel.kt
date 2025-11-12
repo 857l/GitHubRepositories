@@ -26,7 +26,9 @@ class DetailsModule(
     override fun viewModel() =
         DetailsViewModel(
             repository = DetailsRepository.Base(
-                dao = core.repositoriesCacheModule.dao()
+                tokenCache = core.tokenCache,
+                dao = core.repositoriesCacheModule.dao(),
+                service = core.service
             ),
             clearViewModel = core.clearViewModel,
             observable = UiObservable.Base<DetailsUiState>(),
