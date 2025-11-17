@@ -1,5 +1,6 @@
 package ru.n857l.githubrepositories.core
 
+import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -19,10 +20,24 @@ interface Screen {
         protected open fun newFragment(): Fragment = fragment.getDeclaredConstructor().newInstance()
     }
 
-    abstract class Dialog(private val fragment: Class<out DialogFragment>) : Screen {
+    abstract class Add(private val fragmentClass: Class<out Fragment>) : Screen {
+        override fun show(containerId: Int, fragmentManager: FragmentManager) {
+            fragmentManager.beginTransaction()
+                .add(containerId, fragmentClass.getDeclaredConstructor().newInstance())
+                .addToBackStack(fragmentClass.name)
+                .commit()
+        }
+    }
+
+    abstract class Dialog(
+        private val fragment: Class<out DialogFragment>,
+        private val args: Bundle? = null
+    ) : Screen {
 
         override fun show(containerId: Int, fragmentManager: FragmentManager) {
-            newDialog().show(fragmentManager, fragment.simpleName)
+            val dialog = newDialog()
+            dialog.arguments = args
+            dialog.show(fragmentManager, fragment.simpleName)
         }
 
         protected open fun newDialog(): DialogFragment =

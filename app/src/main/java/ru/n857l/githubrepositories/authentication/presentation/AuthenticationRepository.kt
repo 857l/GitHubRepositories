@@ -2,7 +2,6 @@ package ru.n857l.githubrepositories.authentication.presentation
 
 import ru.n857l.githubrepositories.authentication.presentation.data.LoadResult
 import ru.n857l.githubrepositories.cloudDatasource.GitHubApiService
-import ru.n857l.githubrepositories.core.cache.ErrorCache
 import ru.n857l.githubrepositories.core.cache.TokenCache
 import ru.n857l.githubrepositories.core.cache.repositories.RepositoriesCache
 import ru.n857l.githubrepositories.core.cache.repositories.RepositoriesDao
@@ -23,7 +22,6 @@ interface AuthenticationRepository {
     class Base(
         private val tokenCache: TokenCache,
         private val dao: RepositoriesDao,
-        private val errorCache: ErrorCache,
         private val service: GitHubApiService
     ) : AuthenticationRepository {
 
@@ -70,15 +68,12 @@ interface AuthenticationRepository {
             } catch (e: retrofit2.HttpException) {
                 val code = e.code()
                 val errorBody = e.response()?.errorBody()?.string().orEmpty()
-                errorCache.save(errorBody)
                 LoadResult.Error(handleResponseCode(code, errorBody))
 
             } catch (e: IOException) {
-                errorCache.save("Please check your internet connection")
                 LoadResult.Error("Please check your internet connection")
 
             } catch (e: Exception) {
-                errorCache.save(e.message ?: "Unknown error occurred")
                 LoadResult.Error(e.message ?: "Unknown error occurred")
             }
         }

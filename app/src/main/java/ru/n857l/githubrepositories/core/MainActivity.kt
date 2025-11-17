@@ -45,8 +45,8 @@ class MainActivity : AppCompatActivity(), Navigate, NavigateToErrorDialog {
 
     override fun navigate(screen: Screen) = screen.show(R.id.container, supportFragmentManager)
 
-    override fun showErrorDialog() {
-        navigate(ErrorDialogScreen)
+    override fun showErrorDialog(message: String) {
+        navigate(ErrorDialogScreen.make(message))
     }
 }
 
@@ -65,5 +65,5 @@ interface Navigate : NavigateToAuthentication, NavigateToRepositories, NavigateT
 }
 
 interface NavigateToErrorDialog {
-    fun showErrorDialog()
+    fun showErrorDialog(message: String)
 }

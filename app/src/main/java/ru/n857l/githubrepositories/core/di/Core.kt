@@ -6,7 +6,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.n857l.githubrepositories.cloudDatasource.GitHubApiService
-import ru.n857l.githubrepositories.core.cache.ErrorCache
 import ru.n857l.githubrepositories.core.cache.TokenCache
 import ru.n857l.githubrepositories.core.cache.repositories.RepositoriesCacheModule
 import ru.n857l.githubrepositories.details.presentation.NumberDetails
@@ -17,7 +16,6 @@ class Core(context: Context, var clearViewModel: ClearViewModel) {
     var resourceProvider = ResourceProvider.Base(context)
     var repositoriesCacheModule = RepositoriesCacheModule.Base(context)
     var tokenCache = TokenCache.Base(resourceProvider)
-    var errorCache = ErrorCache.Base(resourceProvider)
     var numberDetails = NumberDetails.Base()
 
     private val client = OkHttpClient.Builder()
