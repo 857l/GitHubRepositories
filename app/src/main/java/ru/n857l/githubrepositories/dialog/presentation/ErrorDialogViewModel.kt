@@ -1,17 +1,13 @@
 package ru.n857l.githubrepositories.dialog.presentation
 
-import ru.n857l.githubrepositories.core.cache.ErrorCache
 import ru.n857l.githubrepositories.core.di.ClearViewModel
 import ru.n857l.githubrepositories.di.MyViewModel
 
 class ErrorDialogViewModel(
-    private val errorCache: ErrorCache,
     private val clearViewModel: ClearViewModel
 ) : MyViewModel {
 
     override fun clear() {
         clearViewModel.clear(ErrorDialogViewModel::class.java)
     }
-
-    fun error(): String = errorCache.read()
 }

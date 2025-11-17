@@ -79,11 +79,10 @@ interface AuthenticationUiState : Serializable {
     object Load :
         Abstract(InputUiState.Correct, SignInUiState.NotEnabled, VisibilityUiState.Visible)
 
-    object ShowError :
-        AuthenticationUiState,
+    data class ShowError(private val message: String) :
         Abstract(InputUiState.Correct, SignInUiState.Enabled, VisibilityUiState.Gone) {
         override fun showError(navigate: NavigateToErrorDialog) {
-            navigate.showErrorDialog()
+            navigate.showErrorDialog(message)
         }
     }
 }

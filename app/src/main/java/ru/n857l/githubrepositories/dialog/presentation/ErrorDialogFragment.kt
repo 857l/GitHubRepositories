@@ -31,7 +31,8 @@ class ErrorDialogFragment : DialogFragment() {
         viewModel =
             (requireActivity().application as ProvideViewModel).makeViewModel(ErrorDialogViewModel::class.java)
 
-        binding.errorDescription.text = viewModel.error()
+        val message = arguments?.getString("error_message") ?: "Unknown error"
+        binding.errorDescription.text = message
     }
 
     override fun onDestroyView() {

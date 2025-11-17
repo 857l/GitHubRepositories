@@ -12,7 +12,6 @@ import retrofit2.Response
 import ru.n857l.githubrepositories.authentication.presentation.AuthenticationRepository
 import ru.n857l.githubrepositories.cloudDatasource.GitHubApiService
 import ru.n857l.githubrepositories.cloudDatasource.RepositoryCloud
-import ru.n857l.githubrepositories.core.cache.ErrorCache
 import ru.n857l.githubrepositories.core.cache.TokenCache
 import ru.n857l.githubrepositories.core.cache.repositories.RepositoriesCache
 import ru.n857l.githubrepositories.core.cache.repositories.RepositoriesDao
@@ -20,6 +19,7 @@ import java.io.IOException
 
 class AuthenticationRepositoryTest {
 
+    //TODO fix tests
     lateinit var repository: AuthenticationRepository
     lateinit var tokenCache: FakeTokenCache
     lateinit var dao: FakeRepositoriesDao
@@ -35,7 +35,6 @@ class AuthenticationRepositoryTest {
         repository = AuthenticationRepository.Base(
             tokenCache = tokenCache,
             dao = dao,
-            errorCache = errorCache,
             service = service
         )
     }
@@ -131,19 +130,6 @@ class AuthenticationRepositoryTest {
         }
     }
 
-    class FakeErrorCache : ErrorCache {
-        private var cache = ""
-        override fun read(): String = cache
-        override fun save(data: String) {
-            cache = data
-        }
-
-        override fun clear() {
-            cache = ""
-        }
-    }
-
-
     class FakeGitHubApiService : GitHubApiService {
         private var shouldThrowHttp: Boolean = false
         private var httpCode: Int = 0
@@ -204,6 +190,14 @@ class AuthenticationRepositoryTest {
                     branch = "master"
                 )
             )
+        }
+
+        override suspend fun fetchReadme(
+            token: String,
+            ownerName: String,
+            repoName: String
+        ): RepositoryCloud.Readme {
+            TODO("Not yet implemented")
         }
     }
 }
