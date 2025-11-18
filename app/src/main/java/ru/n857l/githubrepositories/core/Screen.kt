@@ -12,6 +12,7 @@ interface Screen {
     abstract class Replace(private val fragment: Class<out Fragment>) : Screen {
 
         override fun show(containerId: Int, fragmentManager: FragmentManager) {
+            fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
             fragmentManager.beginTransaction()
                 .replace(containerId, newFragment())
                 .commit()
