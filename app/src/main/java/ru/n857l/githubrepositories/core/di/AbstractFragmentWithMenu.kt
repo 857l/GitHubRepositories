@@ -20,6 +20,7 @@ abstract class AbstractFragmentWithMenu<B : ViewBinding, V : MyViewModel> :
     }
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menu.clear()
         menuInflater.inflate(R.menu.logout_menu, menu)
     }
 
