@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
+import androidx.fragment.app.FragmentManager
 import ru.n857l.githubrepositories.R
 import ru.n857l.githubrepositories.authentication.presentation.AuthenticationScreen
 import ru.n857l.githubrepositories.authentication.presentation.NavigateToAuthentication
@@ -19,7 +20,7 @@ import ru.n857l.githubrepositories.repositories.presentation.NavigateToRepositor
 import ru.n857l.githubrepositories.repositories.presentation.RepositoriesScreen
 
 
-class MainActivity : AppCompatActivity(), Navigate, NavigateToErrorDialog {
+class MainActivity : AppCompatActivity(), Navigate {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,10 +49,15 @@ class MainActivity : AppCompatActivity(), Navigate, NavigateToErrorDialog {
     override fun showErrorDialog(message: String) {
         navigate(ErrorDialogScreen.make(message))
     }
+
+    override fun navigateClearingStack(screen: Screen) {
+        supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        navigate(screen)
+    }
 }
 
 interface Navigate : NavigateToAuthentication, NavigateToRepositories, NavigateToErrorRepositories,
-    NavigateToDetails {
+    NavigateToDetails, NavigateToErrorDialog, NavigateClearingStack {
 
     fun navigate(screen: Screen)
 
@@ -66,4 +72,8 @@ interface Navigate : NavigateToAuthentication, NavigateToRepositories, NavigateT
 
 interface NavigateToErrorDialog {
     fun showErrorDialog(message: String)
+}
+
+interface NavigateClearingStack {
+    fun navigateClearingStack(screen: Screen)
 }

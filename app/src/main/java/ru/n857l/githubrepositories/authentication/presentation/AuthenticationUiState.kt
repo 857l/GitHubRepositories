@@ -64,7 +64,7 @@ interface AuthenticationUiState : Serializable {
     object SuccessInput :
         Abstract(InputUiState.Correct, SignInUiState.Enabled, VisibilityUiState.Gone)
 
-    object Success : AuthenticationUiState {
+    object Success : Abstract(InputUiState.Correct, SignInUiState.Enabled, VisibilityUiState.Gone) {
         override fun navigate(navigate: NavigateToFrame) {
             (navigate as NavigateToRepositories).navigateToRepositories()
         }
