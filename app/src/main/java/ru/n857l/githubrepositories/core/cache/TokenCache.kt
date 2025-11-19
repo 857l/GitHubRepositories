@@ -3,7 +3,6 @@ package ru.n857l.githubrepositories.core.cache
 import ru.n857l.githubrepositories.core.di.Mutable
 import ru.n857l.githubrepositories.core.di.PreferencesProvider
 
-//TODO create a unified cache
 interface TokenCache : Mutable<String> {
 
     class Base(
