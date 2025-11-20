@@ -137,7 +137,7 @@ class AuthenticationViewModelTest {
 
         runAsync.returnResult()
         assertEquals(
-            AuthenticationUiState.ShowError,
+            AuthenticationUiState.ShowError("invalid token"),
             observable.postUiStateCalledList.last()
         )
         assertEquals(2, observable.postUiStateCalledList.size)
@@ -151,7 +151,7 @@ class AuthenticationViewModelTest {
         viewModel.startUpdates(observer = newFragment)
         assertEquals(2, observable.registerCalledCount)
         assertEquals(
-            AuthenticationUiState.ShowError,
+            AuthenticationUiState.ShowError("invalid token"),
             newFragment.statesList.first()
         )
         assertEquals(1, newFragment.statesList.size)

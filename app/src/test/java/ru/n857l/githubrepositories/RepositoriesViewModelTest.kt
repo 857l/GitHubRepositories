@@ -7,6 +7,7 @@ import org.junit.Test
 import ru.n857l.githubrepositories.authentication.FakeClearViewModel
 import ru.n857l.githubrepositories.authentication.FakeRunAsync
 import ru.n857l.githubrepositories.core.UiObservable
+import ru.n857l.githubrepositories.details.presentation.NumberDetails
 import ru.n857l.githubrepositories.repositories.presentation.RepositoriesRepository
 import ru.n857l.githubrepositories.repositories.presentation.RepositoriesUiState
 import ru.n857l.githubrepositories.repositories.presentation.RepositoriesViewModel
@@ -19,12 +20,14 @@ class RepositoriesViewModelTest {
     private lateinit var clearViewModel: FakeClearViewModel
     private lateinit var observable: FakeUiObservableRepositories
     private lateinit var runAsync: FakeRunAsync
+    private lateinit var numberDetails: NumberDetails.Mutable
 
     @Before
     fun setup() {
         clearViewModel = FakeClearViewModel()
         observable = FakeUiObservableRepositories()
         runAsync = FakeRunAsync()
+        numberDetails = NumberDetails.Base()
     }
 
     @Test
@@ -36,6 +39,7 @@ class RepositoriesViewModelTest {
             clearViewModel = clearViewModel,
             observable = observable,
             runAsync = runAsync,
+            numberDetails = numberDetails
         )
 
         viewModel.init()
@@ -78,7 +82,9 @@ class RepositoriesViewModelTest {
             repository = repository,
             clearViewModel = clearViewModel,
             observable = observable,
-            runAsync = runAsync
+            runAsync = runAsync,
+            numberDetails = numberDetails
+
         )
 
         viewModel.init()
