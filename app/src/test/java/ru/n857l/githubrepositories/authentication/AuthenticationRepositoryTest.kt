@@ -19,18 +19,15 @@ import java.io.IOException
 
 class AuthenticationRepositoryTest {
 
-    //TODO fix tests
     lateinit var repository: AuthenticationRepository
     lateinit var tokenCache: FakeTokenCache
     lateinit var dao: FakeRepositoriesDao
-    lateinit var errorCache: FakeErrorCache
     lateinit var service: FakeGitHubApiService
 
     @Before
     fun setup() {
         tokenCache = FakeTokenCache()
         dao = FakeRepositoriesDao()
-        errorCache = FakeErrorCache()
         service = FakeGitHubApiService()
         repository = AuthenticationRepository.Base(
             tokenCache = tokenCache,
@@ -40,18 +37,18 @@ class AuthenticationRepositoryTest {
     }
 
     @Test
-    fun case1() = runBlocking {
+    fun success() = runBlocking {
         repository.saveUserInput("VALID_TOKEN")
 
         val result = repository.load()
 
         assertTrue(result.isSuccessful())
+        assertTrue(dao.cleared)
         assertTrue(dao.savedList.isNotEmpty())
-        assertEquals("", errorCache.read())
     }
 
     @Test
-    fun case2() = runBlocking {
+    fun unauthorized() = runBlocking {
         repository.saveUserInput("INVALID_TOKEN")
 
         service.throwHttpError(401, "Unauthorized")
@@ -59,11 +56,13 @@ class AuthenticationRepositoryTest {
 
         assertFalse(result.isSuccessful())
         assertEquals("Unauthorized — invalid token", result.message())
-        assertEquals("Unauthorized", errorCache.read())
+
+        assertFalse(dao.cleared)
+        assertTrue(dao.savedList.isEmpty())
     }
 
     @Test
-    fun case3() = runBlocking {
+    fun forbidden() = runBlocking {
         repository.saveUserInput("VALID_TOKEN")
 
         service.throwHttpError(403, "Forbidden")
@@ -71,11 +70,13 @@ class AuthenticationRepositoryTest {
 
         assertFalse(result.isSuccessful())
         assertEquals("Access forbidden — check permissions", result.message())
-        assertEquals("Forbidden", errorCache.read())
+
+        assertFalse(dao.cleared)
+        assertTrue(dao.savedList.isEmpty())
     }
 
     @Test
-    fun case4() = runBlocking {
+    fun network_error() = runBlocking {
         repository.saveUserInput("VALID_TOKEN")
 
         service.throwNetworkError()
@@ -83,11 +84,13 @@ class AuthenticationRepositoryTest {
 
         assertFalse(result.isSuccessful())
         assertEquals("Please check your internet connection", result.message())
-        assertEquals("Please check your internet connection", errorCache.read())
+
+        assertFalse(dao.cleared)
+        assertTrue(dao.savedList.isEmpty())
     }
 
     @Test
-    fun case5() = runBlocking {
+    fun unexpected_error() = runBlocking {
         repository.saveUserInput("VALID_TOKEN")
 
         service.throwUnexpectedError("UnexpectedError")
@@ -95,7 +98,9 @@ class AuthenticationRepositoryTest {
 
         assertFalse(result.isSuccessful())
         assertEquals("UnexpectedError", result.message())
-        assertEquals("UnexpectedError", errorCache.read())
+
+        assertFalse(dao.cleared)
+        assertTrue(dao.savedList.isEmpty())
     }
 
     class FakeTokenCache : TokenCache {
@@ -111,24 +116,43 @@ class AuthenticationRepositoryTest {
     }
 
     class FakeRepositoriesDao : RepositoriesDao {
-        var savedList = listOf<RepositoriesCache>()
+
+        var savedList = mutableListOf<RepositoriesCache>()
         var cleared = false
 
         override suspend fun getAll(): List<RepositoriesCache> = savedList
 
         override suspend fun saveAll(repos: List<RepositoriesCache>) {
-            savedList = repos
+            savedList.clear()
+            savedList.addAll(repos)
         }
 
         override suspend fun clear() {
             cleared = true
-            savedList = emptyList()
+            savedList.clear()
         }
 
         override suspend fun getRepositoryByName(repoName: String): RepositoriesCache? {
-            TODO("Not yet implemented")
+            return savedList.firstOrNull { it.name == repoName }
+        }
+
+        override suspend fun getOwnerByName(repoName: String): String? {
+            return savedList.firstOrNull { it.name == repoName }?.owner
+        }
+
+        override suspend fun getReadmeByName(repoName: String): String {
+            return savedList.firstOrNull { it.name == repoName }?.readme ?: ""
+        }
+
+        override suspend fun updateReadme(repoName: String, readme: String) {
+            val index = savedList.indexOfFirst { it.name == repoName }
+            if (index != -1) {
+                val old = savedList[index]
+                savedList[index] = old.copy(readme = readme)
+            }
         }
     }
+
 
     class FakeGitHubApiService : GitHubApiService {
         private var shouldThrowHttp: Boolean = false
@@ -197,7 +221,23 @@ class AuthenticationRepositoryTest {
             ownerName: String,
             repoName: String
         ): RepositoryCloud.Readme {
-            TODO("Not yet implemented")
+            if (shouldThrowHttp)
+                throw retrofit2.HttpException(
+                    Response.error<String>(
+                        httpCode,
+                        httpMessage.toResponseBody("application/json".toMediaTypeOrNull())
+                    )
+                )
+
+            if (shouldThrowNetwork)
+                throw IOException("Network failed")
+
+            if (shouldThrowUnexpected)
+                throw RuntimeException(unexpectedMessage)
+
+            return RepositoryCloud.Readme(
+                content = "README CONTENT",
+            )
         }
     }
 }
