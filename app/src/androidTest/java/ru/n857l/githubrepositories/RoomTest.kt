@@ -7,6 +7,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,6 +21,19 @@ class RoomTest {
 
     private lateinit var dao: RepositoriesDao
     private lateinit var database: RepositoriesDatabase
+
+    private val repo = RepositoriesCache(
+        name = "Archive",
+        owner = "John Titor",
+        htmlUrl = "https://github.com/Daviex/Steins-Gate-Archive-Decompiler",
+        description = "...",
+        language = "SERN",
+        license = "IBN 5100",
+        forks = 10,
+        stars = 2,
+        watchers = 34,
+        readme = "El Psy Congroo"
+    )
 
     @Before
     fun setup() {
@@ -36,40 +51,36 @@ class RoomTest {
     }
 
     @Test
-    fun test() = runBlocking {
-        dao.saveAll(
-            listOf(
-                RepositoriesCache(
-                    name = "Archive",
-                    htmlUrl = "https://github.com/Daviex/Steins-Gate-Archive-Decompiler",
-                    description = "...",
-                    language = "SERN",
-                    license = "IBN 5100",
-                    forks = 10,
-                    stars = 2,
-                    watchers = 34,
-                )
-            )
-        )
+    fun testRoomDao() = runBlocking {
+        dao.saveAll(listOf(repo))
 
-        var actual: List<RepositoriesCache> = dao.getAll()
-        var expected: List<RepositoriesCache> = listOf(
-            RepositoriesCache(
-                name = "Archive",
-                htmlUrl = "https://github.com/Daviex/Steins-Gate-Archive-Decompiler",
-                description = "...",
-                language = "SERN",
-                license = "IBN 5100",
-                forks = 10,
-                stars = 2,
-                watchers = 34,
-            )
-        )
-        assertEquals(actual, expected)
+        var actualList = dao.getAll()
+        assertEquals(actualList, listOf(repo))
+
+        var actualRepo = dao.getRepositoryByName("Unknown")
+        assertNull(actualRepo)
+
+        actualRepo = dao.getRepositoryByName("Archive")
+        assertEquals(repo, actualRepo)
+
+        var actualOwner = dao.getOwnerByName("Unknown")
+        assertNull(actualOwner)
+
+        actualOwner = dao.getOwnerByName("Archive")
+        assertEquals("John Titor", actualOwner)
+
+        var actualReadme = dao.getReadmeByName("Unknown")
+        assertNull(actualReadme)
+
+        actualReadme = dao.getReadmeByName("Archive")
+        assertEquals("El Psy Congroo", actualReadme)
+
+        dao.updateReadme("Archive", "UPDATED_README")
+        actualReadme = dao.getReadmeByName("Archive")
+        assertEquals("UPDATED_README", actualReadme)
 
         dao.clear()
-        actual = dao.getAll()
-        expected = listOf()
-        assertEquals(actual, expected)
+        actualList = dao.getAll()
+        assertTrue(actualList.isEmpty())
     }
 }
