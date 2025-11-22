@@ -25,9 +25,8 @@ class DetailsFragment : AbstractFragmentWithMenu<FragmentDetailsBinding, Details
             binding.forks,
             binding.watchers,
         )
-        uiState.updateReadme(
-            binding.readme
-        )
+        uiState.updateProgressBar(binding.progressBar)
+        uiState.updateReadme(binding.readme)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

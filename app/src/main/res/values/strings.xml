@@ -19,4 +19,5 @@
     <string name="read_me">READ.ME</string>
     <string name="viewers">viewers</string>
     <string name="watchers">watchers</string>
+    <string name="error">Error</string>
 </resources>
