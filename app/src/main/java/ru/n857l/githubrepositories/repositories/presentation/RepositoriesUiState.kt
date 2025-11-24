@@ -3,7 +3,7 @@ package ru.n857l.githubrepositories.repositories.presentation
 import ru.n857l.githubrepositories.core.NavigateToFrame
 import ru.n857l.githubrepositories.core.adapter.RepositoriesItemAdapter
 import ru.n857l.githubrepositories.details.presentation.NavigateToDetails
-import ru.n857l.githubrepositories.errorrepositories.presentation.NavigateToErrorRepositories
+import ru.n857l.githubrepositories.error.presentation.NavigateToErrorRepositories
 import java.io.Serializable
 
 interface RepositoriesUiState : Serializable {

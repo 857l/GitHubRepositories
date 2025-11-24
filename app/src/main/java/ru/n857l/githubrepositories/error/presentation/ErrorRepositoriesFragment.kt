@@ -1,4 +1,4 @@
-package ru.n857l.githubrepositories.errorrepositories.presentation
+package ru.n857l.githubrepositories.error.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater

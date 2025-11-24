@@ -12,6 +12,7 @@ import ru.n857l.githubrepositories.databinding.FragmentAuthenticationBinding
 import ru.n857l.githubrepositories.di.ProvideViewModel
 import ru.n857l.githubrepositories.repositories.presentation.NavigateToRepositories
 
+//TODO if not first auth dont load
 class AuthenticationFragment :
     AbstractFragment<FragmentAuthenticationBinding, AuthenticationViewModel>() {
 

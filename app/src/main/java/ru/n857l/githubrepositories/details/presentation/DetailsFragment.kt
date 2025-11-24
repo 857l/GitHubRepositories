@@ -9,6 +9,7 @@ import ru.n857l.githubrepositories.core.di.AbstractFragmentWithMenu
 import ru.n857l.githubrepositories.databinding.FragmentDetailsBinding
 import ru.n857l.githubrepositories.di.ProvideViewModel
 
+//TODO textView not clickable
 class DetailsFragment : AbstractFragmentWithMenu<FragmentDetailsBinding, DetailsViewModel>() {
 
     override fun bind(

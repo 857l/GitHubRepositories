@@ -13,8 +13,8 @@ import ru.n857l.githubrepositories.authentication.presentation.NavigateToAuthent
 import ru.n857l.githubrepositories.details.presentation.DetailsScreen
 import ru.n857l.githubrepositories.details.presentation.NavigateToDetails
 import ru.n857l.githubrepositories.dialog.presentation.ErrorDialogScreen
-import ru.n857l.githubrepositories.errorrepositories.presentation.ErrorRepositoriesScreen
-import ru.n857l.githubrepositories.errorrepositories.presentation.NavigateToErrorRepositories
+import ru.n857l.githubrepositories.error.presentation.ErrorRepositoriesScreen
+import ru.n857l.githubrepositories.error.presentation.NavigateToErrorRepositories
 
 import ru.n857l.githubrepositories.repositories.presentation.NavigateToRepositories
 import ru.n857l.githubrepositories.repositories.presentation.RepositoriesScreen
