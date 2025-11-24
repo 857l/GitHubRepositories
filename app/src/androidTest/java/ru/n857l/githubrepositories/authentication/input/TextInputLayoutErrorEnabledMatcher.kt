@@ -1,4 +1,4 @@
-package ru.n857l.githubrepositories.input
+package ru.n857l.githubrepositories.authentication.input
 
 import android.view.View
 import androidx.test.espresso.matcher.BoundedMatcher

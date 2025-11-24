@@ -25,7 +25,7 @@ class DetailsFragment : AbstractFragmentWithMenu<FragmentDetailsBinding, Details
             binding.forks,
             binding.watchers,
         )
-        uiState.updateProgressBar(binding.progressBar)
+        uiState.updateProgressBar(binding.progressReadme)
         uiState.updateReadme(binding.readme)
     }
 
