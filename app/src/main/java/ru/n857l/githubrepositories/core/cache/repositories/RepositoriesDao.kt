@@ -27,4 +27,10 @@ interface RepositoriesDao {
 
     @Query("UPDATE repositories_table SET readme = :readme WHERE name = :repoName")
     suspend fun updateReadme(repoName: String, readme: String)
+
+    @Query("SELECT token FROM token_table LIMIT 1")
+    fun readLastUsedToken(): String?
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun saveLastUsedToken(token: TokenEntity)
 }

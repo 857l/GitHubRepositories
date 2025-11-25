@@ -19,4 +19,6 @@
     <string name="read_me">READ.ME</string>
     <string name="viewers">viewers</string>
     <string name="watchers">watchers</string>
+    <string name="error">Error</string>
+    <string name="no_repositories_at_the_moment">No repositories at the moment</string>
 </resources>

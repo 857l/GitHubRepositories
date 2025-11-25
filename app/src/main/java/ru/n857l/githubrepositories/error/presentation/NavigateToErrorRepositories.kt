@@ -1,4 +1,4 @@
-package ru.n857l.githubrepositories.errorrepositories.presentation
+package ru.n857l.githubrepositories.error.presentation
 
 import ru.n857l.githubrepositories.core.NavigateToFrame
 

@@ -8,7 +8,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withParent
 import org.hamcrest.Matcher
 import ru.n857l.githubrepositories.ProgressUi
 import ru.n857l.githubrepositories.R
-import ru.n857l.githubrepositories.input.InputUi
+import ru.n857l.githubrepositories.authentication.input.InputUi
 
 class AuthenticationPage {
 

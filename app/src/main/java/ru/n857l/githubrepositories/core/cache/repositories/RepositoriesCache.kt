@@ -18,3 +18,9 @@ data class RepositoriesCache(
     @ColumnInfo(name = "watchers_count") val watchers: Int,
     @ColumnInfo(name = "readme") val readme: String
 )
+
+@Entity(tableName = "token_table")
+data class TokenEntity(
+    @PrimaryKey
+    @ColumnInfo(name = "token") val token: String
+)

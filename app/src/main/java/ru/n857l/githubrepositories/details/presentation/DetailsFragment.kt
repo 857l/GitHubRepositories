@@ -9,6 +9,7 @@ import ru.n857l.githubrepositories.core.di.AbstractFragmentWithMenu
 import ru.n857l.githubrepositories.databinding.FragmentDetailsBinding
 import ru.n857l.githubrepositories.di.ProvideViewModel
 
+//TODO textView not clickable
 class DetailsFragment : AbstractFragmentWithMenu<FragmentDetailsBinding, DetailsViewModel>() {
 
     override fun bind(
@@ -25,9 +26,8 @@ class DetailsFragment : AbstractFragmentWithMenu<FragmentDetailsBinding, Details
             binding.forks,
             binding.watchers,
         )
-        uiState.updateReadme(
-            binding.readme
-        )
+        uiState.updateProgressBar(binding.progressReadme)
+        uiState.updateReadme(binding.readme)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

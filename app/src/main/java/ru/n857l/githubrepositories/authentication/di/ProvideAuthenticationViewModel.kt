@@ -1,4 +1,4 @@
-package ru.n857l.githubrepositories.authentication.presentation.di
+package ru.n857l.githubrepositories.authentication.di
 
 import ru.n857l.githubrepositories.authentication.presentation.AuthenticationRepository
 import ru.n857l.githubrepositories.authentication.presentation.AuthenticationUiState
@@ -23,9 +23,6 @@ class AuthenticationModule(
 ) : Module<AuthenticationViewModel> {
 
     override fun viewModel(): AuthenticationViewModel {
-
-
-
         return AuthenticationViewModel(
             repository = AuthenticationRepository.Base(
                 tokenCache = core.tokenCache,

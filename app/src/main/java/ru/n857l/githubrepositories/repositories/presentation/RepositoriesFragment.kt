@@ -13,7 +13,7 @@ import ru.n857l.githubrepositories.core.adapter.RepositoriesItemAdapter
 import ru.n857l.githubrepositories.core.di.AbstractFragmentWithMenu
 import ru.n857l.githubrepositories.databinding.FragmentRepositoriesBinding
 import ru.n857l.githubrepositories.di.ProvideViewModel
-import ru.n857l.githubrepositories.errorrepositories.presentation.NavigateToErrorRepositories
+import ru.n857l.githubrepositories.error.presentation.NavigateToErrorRepositories
 
 class RepositoriesFragment :
     AbstractFragmentWithMenu<FragmentRepositoriesBinding, RepositoriesViewModel>() {

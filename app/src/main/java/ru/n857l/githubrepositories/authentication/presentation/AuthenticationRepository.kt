@@ -5,6 +5,7 @@ import ru.n857l.githubrepositories.cloudDatasource.GitHubApiService
 import ru.n857l.githubrepositories.core.cache.TokenCache
 import ru.n857l.githubrepositories.core.cache.repositories.RepositoriesCache
 import ru.n857l.githubrepositories.core.cache.repositories.RepositoriesDao
+import ru.n857l.githubrepositories.core.cache.repositories.TokenEntity
 import java.io.IOException
 
 interface AuthenticationRepository {
@@ -44,10 +45,18 @@ interface AuthenticationRepository {
 
         override suspend fun load(): LoadResult {
             return try {
-                val tokenHeader = "Bearer ${tokenCache.read()}"
+
+                val newToken = tokenCache.read()
+                val oldToken = dao.readLastUsedToken() ?: ""
+
+                if (newToken == oldToken && dao.getAll().isNotEmpty()) {
+                    return LoadResult.Success
+                }
+
+                val tokenHeader = "Bearer $newToken"
                 val result = service.fetchRepositories(token = tokenHeader)
                 dao.clear()
-                val parsedResult: List<RepositoriesCache> =
+                dao.saveAll(
                     result.map { data ->
                         RepositoriesCache(
                             data.name,
@@ -61,8 +70,13 @@ interface AuthenticationRepository {
                             data.watchers,
                             ""
                         )
-                    }
-                dao.saveAll(parsedResult)
+                    })
+
+                dao.saveLastUsedToken(
+                    TokenEntity(
+                        newToken
+                    )
+                )
                 LoadResult.Success
 
             } catch (e: retrofit2.HttpException) {

@@ -6,7 +6,7 @@ import java.io.Serializable
 
 interface VisibilityUiState : Serializable {
 
-    fun update(updateVisibility: UpdateVisibility)
+    fun update(updateVisibility: UpdateVisibility) = Unit
 
     abstract class Abstract(
         private val visible: Int
@@ -16,6 +16,8 @@ interface VisibilityUiState : Serializable {
             updateVisibility.update(visible)
         }
     }
+
+    object Empty : VisibilityUiState
 
     object Visible : Abstract(View.VISIBLE)
 

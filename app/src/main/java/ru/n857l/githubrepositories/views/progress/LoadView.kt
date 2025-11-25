@@ -10,7 +10,7 @@ import ru.n857l.githubrepositories.views.visibility.VisibilityUiState
 
 class LoadView : ProgressBar, UpdateVisibility {
 
-    private lateinit var state: VisibilityUiState
+    private var state: VisibilityUiState = VisibilityUiState.Empty
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)

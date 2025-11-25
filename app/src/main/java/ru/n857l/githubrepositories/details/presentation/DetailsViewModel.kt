@@ -23,7 +23,6 @@ class DetailsViewModel(
     private val viewModelScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
     fun init() {
-        //observable.postUiState(DetailsUiState.Progress)
         runAsync.handleAsync(viewModelScope, {
             val repoName = numberDetails.read()
             val data = repository.data(repoName)

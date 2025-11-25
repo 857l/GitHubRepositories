@@ -2,7 +2,7 @@ package ru.n857l.githubrepositories.authentication.presentation
 
 import ru.n857l.githubrepositories.core.NavigateToErrorDialog
 import ru.n857l.githubrepositories.core.NavigateToFrame
-import ru.n857l.githubrepositories.errorrepositories.presentation.NavigateToErrorRepositories
+import ru.n857l.githubrepositories.error.presentation.NavigateToErrorRepositories
 import ru.n857l.githubrepositories.repositories.presentation.NavigateToRepositories
 import ru.n857l.githubrepositories.views.input.InputUiState
 import ru.n857l.githubrepositories.views.input.UpdateInput
