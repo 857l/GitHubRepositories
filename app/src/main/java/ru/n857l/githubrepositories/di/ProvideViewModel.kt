@@ -1,9 +1,10 @@
 package ru.n857l.githubrepositories.di
 
-import ru.n857l.githubrepositories.authentication.presentation.di.ProvideAuthenticationViewModel
+import ru.n857l.githubrepositories.authentication.di.ProvideAuthenticationViewModel
 import ru.n857l.githubrepositories.core.di.Core
 import ru.n857l.githubrepositories.details.di.ProvideDetailsViewModel
 import ru.n857l.githubrepositories.dialog.di.ProvideErrorDialogViewModel
+import ru.n857l.githubrepositories.error.di.ProvideErrorRepositoriesViewModel
 import ru.n857l.githubrepositories.repositories.presentation.di.ProvideRepositoriesViewModel
 
 interface ProvideViewModel {
@@ -17,6 +18,7 @@ interface ProvideViewModel {
         init {
             chain = Error()
             chain = ProvideAuthenticationViewModel(core, chain)
+            chain = ProvideErrorRepositoriesViewModel(core, chain)
             chain = ProvideRepositoriesViewModel(core, chain)
             chain = ProvideErrorDialogViewModel(core, chain)
             chain = ProvideDetailsViewModel(core, chain)
